@@ -1,0 +1,286 @@
+ \documentclass[10pt]{article}
+\usepackage{amsmath, amssymb,graphicx,tikz,wasysym,youngtab,comment}
+
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{textcomp}
+\usepackage{mdwlist}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{amsmath, array, graphicx}
+\usepackage{tikz}
+\usepackage{todonotes}
+\usepackage{pgfplots}
+\usepackage{fontawesome}
+\usepackage{enumitem, multicol}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage[makeroom]{cancel}
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{alltt}
+\usepackage{pdfpages}
+%\usepackage[dvips]{graphics}
+\textheight9in
+\textwidth17cm
+\oddsidemargin0cm
+\evensidemargin0cm
+\setlength{\topmargin}{-0.8in}
+
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\dx}{\, dx}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\pp}{\mathbf{p}}
+%\newcommand{\null}{\mathrm{null}}
+\newcommand{\row}{\mathrm{row}}
+\newcommand{\col}{\mathrm{col}}
+\newcommand{\nul}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\nullity}{\mathrm{nullity}}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\pagestyle{empty}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{N}{@{}m{0pt}@{}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}m{#1}}
+\newcommand{\babble}[1]{\marginpar{\flushleft\scriptsize\textsf{#1}}}
+
+\oddsidemargin=0in
+\textwidth=5.75in
+\topmargin=-0.5in
+\textheight=9in
+\renewcommand{\marginparwidth}{81pt}
+
+\begin{document}
+\begin{center}
+\textbf{MATH 364} \\
+\textbf{Problem Set 5} \\
+\textbf{Khanh Tra (Fay) Nguyen Tran}
+\end{center}
+
+\begin{enumerate}
+
+%%%%%Problem 1
+\item {\bf The Appetizer:}
+Recall from a previous problem set that monominoes are $1\times 1$ blocks and dominoes are $2 \times 1$ (typo??) blocks.\\
+\textbf{Adam left his infinite set of black monominoes and black dominoes in his unlocked office overnight.  Dave snuck in and spray painted the dominoes.  Now Adam has an infinite number of black, red, blue,
+orange, green, and white dominoes. How many different ways can a $1\times n$ board be tiled with this colorful collection of monominoes and dominoes?}\\
+{\footnotesize \it Hint: Use a recurrence.  This is {\bf not} an exponential generating function problem}
+
+Now we have black monominoes and six color choices for each domino ($M$ for monomino, $BD$ for black domino, $RD$ for red domino, $BlD$ for blue domino, $OD$ for orange domino, $GD$ for green domino, $WD$ for white domino).
+
+Let $B_n$ with $n \in \mathbb{N}$ be the number of tilings of a $1 \times n$ board.
+
+With an empty board ($1 \times 0$), there is 1 way of tiling by doing nothing. $B_0 = 1$.
+
+With a $1 \times 1$ board, there is only one way of tiling by placing one monomino. $B_1 = 1$.
+
+With a $1 \times n$ board with $n \in \mathbb{N}, n \geq 2$, we consider two starting scenarios: starting the tiling with a monomino ($1 \times 1$) or a domino ($1 \times 2$). 
+ 
+If we start with a monomino, we need to consider how to tile the $n - 1$ squares left. The number of tilings of $1 \times (n - 1)$ squares is equal to $B_{n-1}$ (the number of tilings of a $1 \times (n-1)$ board). Therefore, the number of tilings a $1 \times n$ board starting with a monomino is $1 \times B_{n-1} = B_{n-1}$.
+
+If we start with a domino, we need to consider how to tile the $n - 2$ squares left. The number of tilings of $1 \times (n - 2)$ squares is equal to $B_{n-2}$ (the number of tilings of a $1 \times (n-2)$ board). Currently, we have 6 choices for the color of the domino, thanks to Dave. Therefore, the number of tilings of a $1 \times n$ board starting with a domino is $6 \times B_{n-2} = 6B_{n-2}$, with $B_0 = 1, B_1=1$.
+
+  The number of tilings of a $1 \times n$ board with $n \in \mathbb{N}, n \geq 2$ is $6B_{n-2} + B_{n-1}$.
+
+  $$B_n=6B_{n-2} + B_{n-1}$$
+  
+\vskip 1cm
+
+%%%%%Problem 2
+\item
+\begin{enumerate}
+\item
+\textbf{Use exponential generating functions to determine the number of ways that Dave can spray paint each square of a $1\times n$ board one of red, white, or blue so that an even number of squares are colored white.}
+
+On the $1 \times n$ board, Dave can only paint the $1\times 1$ square. Therefore, there are $n$ squares on this board Dave can paint with different colors.
+
+Since the order of colors of squares painted matters, we use an exponential generating function to count the number of ways to paint the $1 \times n$ board with three colors.
+
+We first consider the exponential generating function for the number of squares in the $1 \times n$ board that Dave can spray the color white. This number should start from $0$ and increase by $2$ since it should be even. We represent these choices as the exponents of our variable $x$:
+
+$$1 + \frac{x^2}{2!}+\frac{x^4}{4!} + \frac{x^6}{6!} +\ldots=\sum\limits^{\infty}_{n=0}\frac{x^{2n}}{(2n)!}=\frac{e^x+e^{-x}}{2}$$
+
+We then consider the exponential generating function for the number of squares in the $1 \times n$ board that Dave can spray the color red or blue. This number should start from $0$ and increase by $1$. We represent these choices as the exponents of our variable $x$:
+
+$$1 + \frac{x^1}{1!} + \frac{x^2}{2!}+ \frac{x^3}{3!}+\frac{x^4}{4!}  +\ldots=\sum\limits^{\infty}_{n=0}\frac{x^n}{n!}=e^x$$
+
+Therefore, we have the exponential generating function of the number of ways that Dave can spray paint each square of a $1\times n$ board one of red, white, or blue so that an even number of squares are colored white is
+
+\begin{align*}
+    &\left(1 + \frac{x^2}{2!}+\frac{x^4}{4!} + \frac{x^6}{6!} +\ldots\right)\left(1 + \frac{x^1}{1!} + \frac{x^2}{2!}+ \frac{x^3}{3!}+\frac{x^4}{4!}  +\ldots\right)\left(1 + \frac{x^1}{1!} + \frac{x^2}{2!}+ \frac{x^3}{3!}+\frac{x^4}{4!}  +\ldots\right) \\
+    &=\frac{e^x+e^{-x}}{2} \times e^{2x}=\frac{e^{3x}+e^{x}}{2}\\
+    &=\frac{1}{2} \times \left[\sum\limits_{n=0}^{\infty}\frac{(3x)^n}{n!} + \frac{x^n}{n!}\right]\\
+    &=\sum\limits_{n=0}^{\infty}\frac{1}{2}\left(3^n+1\right)\frac{x^n}{n!}
+\end{align*}
+
+The number of ways that Dave can spray paint each square of a $1\times n$ board one of red, white, or blue so that an even number of squares are colored white ($a_n$) is the coefficient of $\frac{x^n}{n!}$ in the exponential generating function is $\frac{3^n+1}{2}$.
+
+\item
+\textbf{How many ways can Dave spray paint each square of a $2\times n$ board one of red, white, or blue so that an even number of squares are colored white?}\\
+{\footnotesize \it Hint: If you think about this the right way, you should actually be able to replace the $2$ with any fixed positive integer $k$ and still easily get the answer.}
+
+On the $2 \times n$ board, Dave can paint the $1\times 1$ square with colors. On the board, there are $2n$ $1\times 1$ squares. So the number of ways Dave can spray paint each square of a $2\times n$ board one of red, white, or blue so that an even number of squares are colored white is equal to the number of ways Dave can spray paint each square of a $1\times 2n$ board one of red, white, or blue so that an even number of squares are colored white.
+
+Let $N=2n$. From a), we have the number of ways that Dave can spray paint each square of a $1\times N$ board one of red, white, or blue so that an even number of squares are colored white is $\frac{3^N+1}{2}=\frac{3^{2n}+1}{2}$.
+
+\end{enumerate}
+
+\vskip 1cm
+
+%%%%%Problem 3
+\item
+\textbf{Find a closed formula for the number of $n$-digit integers that have an even number of each {\bf even} digit (0,2,4,6,8), with no restriction for the odd digits (1,3,5,7,9).}
+
+Since we need to create $n$-digit integers, we have to make sure that the first digit is different from $0$. Obviously, the order of the digits in the $n-digit$ integers does matter, so we use the exponential generating function. We start by considering the $n$-digit sequences that can start with $0$.
+
+We first consider the exponential generating function for the number of each even digit $(0,2,4,6,8)$ in this sequence. This number should start from $0$ and increase by $2$ since it should be even. We represent these choices as the exponents of our variable $x$. Then we have the exponential generating function
+
+$$1 + \frac{x^2}{2!}+\frac{x^4}{4!} + \frac{x^6}{6!} +\ldots=\sum\limits^{\infty}_{n=0}\frac{x^{2n}}{(2n)!}=\frac{e^x+e^{-x}}{2}$$
+
+We then consider the exponential generating function for the number of each odd digit $(1,3,5,7,9)$ in this sequence. This number should start from $0$ and increase by $1$. We represent these choices as the exponents of our variable $x$:
+
+$$1 + \frac{x^1}{1!} + \frac{x^2}{2!}+ \frac{x^3}{3!}+\frac{x^4}{4!}  +\ldots=\sum\limits^{\infty}_{n=0}\frac{x^n}{n!}=e^x$$
+
+Therefore, we have the exponential generating function of $n$-digit sequences with an even number of each even digit is
+
+\begin{align*}
+    &\left(1 + \frac{x^2}{2!}+\frac{x^4}{4!} + \frac{x^6}{6!} +\ldots\right)^5\left(1 + \frac{x^1}{1!} + \frac{x^2}{2!}+ \frac{x^3}{3!}+\frac{x^4}{4!}  +\ldots\right)^5 \\
+    &=\frac{(e^x+e^{-x})^5}{2^5} \times e^{5x}\\
+    &= \frac{1}{32} \left( \binom{5}{0}e^{5x} + \binom{5}{1}e^{3x} + \binom{5}{2}e^{x} + \binom{5}{3}e^{-x} + \binom{5}{4}e^{-3x} + \binom{5}{5}e^{-5x} \right) \times e^{5x} \\
+    &= \frac{1}{32} \left( e^{5x} + 5e^{3x} + 10e^{x} + 10e^{-x} + 5e^{-3x} + e^{-5x} \right) \times e^{5x} \\
+    &= \frac{1}{32} \left( e^{10x} + 5e^{8x} + 10e^{6x} + 10e^{4x} + 5e^{2x} + 1 \right)\quad \text{(We ignore $+1$ when we convert this into series)}\\
+    &= \frac{1}{32} \left[\sum\limits_{n=0}^{\infty}\frac{(10x)^n}{n!} + 5\frac{(8x)^n}{n!}+10\frac{(6x)^n}{n!}+10\frac{(4x)^n}{n!}+5\frac{(2x)^n}{n!}\right]\\
+    &=\sum\limits_{n=0}^{\infty}\frac{1}{32} \left(10^n+ 5\times 8^n+10 \times 6^n+10\times 4^n+5\times 2^n\right)\frac{x^n}{n!}
+\end{align*}
+
+The number of $n$-digit sequences that have an even number of each even digit ($a_n$) is the coefficient of $\frac{x^n}{n!}$ in the exponential generating function, which is $\frac{1}{32} \left(10^n+ 5\times 8^n+10 \times 6^n+10\times 4^n+5\times 2^n\right)$.
+
+Now, we consider the $n$-digit sequences that start with $0$ that have an even number of each even digit. Since the first digit is already $0$, we only need to care about the remaining $n-1$ digits. We already have $1$ digit $0$, so we must have an odd number of digits $0$ among the remaining $n-1$ digits. The exponential generating function for the number of digit $0$ among the remaining $n-1$ digits is
+
+$$\frac{x^1}{1!}+\frac{x^3}{3!} + \frac{x^5}{5!} +\ldots=\sum\limits^{\infty}_{n=0}\frac{x^{2n}}{(2n)!}=\frac{e^x-e^{-x}}{2}$$
+
+We have the exponential generating function of the number of $n-1$-digit sequences that have an even number of each even digit except for $0$ and an odd number of $0$ digits is
+
+\begin{align*}
+    &\left(1 + \frac{x^2}{2!}+\frac{x^4}{4!} + \frac{x^6}{6!} +\ldots\right)^4\left(\frac{x^1}{1!}+\frac{x^3}{3!} + \frac{x^5}{5!} +\ldots\right)\left(1 + \frac{x^1}{1!} + \frac{x^2}{2!}+ \frac{x^3}{3!}+\frac{x^4}{4!}  +\ldots\right)^5 \\
+    &=\frac{(e^x+e^{-x})^4}{2^4} \times \frac{(e^x-e^{-x})}{2} \times e^{5x}\\
+    &= \frac{1}{32} \left( \binom{4}{0}e^{4x} + \binom{4}{1}e^{2x} + \binom{4}{2}e^{0} + \binom{4}{3}e^{-2x} + \binom{4}{4}e^{-4x} \right) \times \left(e^x-e^{-x}\right) \times e^{5x} \\
+    &= \frac{1}{32} \left( e^{4x} + 4e^{2x} + 6 + 4e^{-2x} + e^{-4x} \right) \times (e^{6x} - e^{4x}) \\
+    &= \frac{1}{32} \left( e^{10x} + 4e^{8x} + 6e^{6x} + 4e^{4x} + e^{2x} - e^{8x}-4e^{6x}-6e^{4x}-4e^{2x}-1\right)\\
+    &= \frac{1}{32} \left( e^{10x} + 3e^{8x} + 2e^{6x} - 2e^{4x} - 3e^{2x}-1\right) \quad \text{(We ignore $-1$ when we convert this into series)}\\
+    &= \frac{1}{32} \left[\sum\limits_{n=0}^{\infty}\frac{(10x)^n}{n!} + 3\frac{(8x)^n}{n!}+2\frac{(6x)^n}{n!}-2\frac{(4x)^n}{n!}-3\frac{(2x)^n}{n!}\right]\\
+    &=\sum\limits_{n=0}^{\infty}\frac{1}{32} \left(10^n+ 3\times 8^n+2\times 6^n-2\times 4^n - 3 \times 2^n\right)\frac{x^n}{n!}
+\end{align*}
+
+The number of $(n-1)$-digit sequences that start with a $0$ and have an even number of each even digit except for $0$ and an odd number of the digit $0$ is the coefficient of $\frac{x^{n-1}}{(n-1)!}$ in the exponential generating function, which is $\frac{1}{32} \left(10^{n-1}+ 3\times 8^{n-1}+2\times 6^{n-1}-2\times 4^{n-1} - 3 \times 2^{n-1}\right)$. This is also the number of $n$-digit sequences that start with $0$ and have an even number of each even digit ($b_n$) when $n \geq 2$. With $n=1$, we have $b_1= 0$ since there is no sequence sastisfies this case.
+
+Let $S_n$ be the number of $n$-digit integers that have an even number of each even digit. With $n = 1$, we have $S_1 = a_1 - b_1 = a_1=5$. With $n \geq 2$, we have $S_n=a_n - b_n$. The closed formula of this number is:
+
+\begin{align*}
+    S_n=a_n-b_n &= \frac{1}{32} \left(10^n+ 5\times 8^n+10 \times 6^n+10\times 4^n+5\times 2^n\right) - \frac{1}{32} \left(\frac{10^n}{10}+ 3\times \frac{8^n}{8}+2\times \frac{6^n}{6}-2\times \frac{4^n}{4} - 3 \times \frac{2^n}{2}\right) \\
+    &=\frac{1}{32} \left(\frac{9\times 10^n}{10} + \frac{37\times8^n}{8}+\frac{29\times6^n}{3}+\frac{21\times 4^n}{2} + \frac{13\times 2^n}{2}\right) \quad (n \geq 2)
+\end{align*}
+\vskip 1cm
+
+
+%%%%%Problem 4
+\item 
+\textbf{For $n\geq 0$, a Walmsley path of length $n$ is a lattice path from $(0,0)$ to $(n,n)$ using UP $(0,1)$,
+RIGHT $(1,0)$, and DIAGONAL $(1,1)$ steps which does not go above the line $y= x$.}
+
+\textbf{Denote the number of Walmsley paths of length $n$ by $w_n$.  The sequence $\left\{w_n\right\}$ is called the Walmsley numbers.}
+\begin{enumerate}
+\item
+\textbf{Find all Walmsley paths of length $n$ for $n=0,1,2,3$.  You may write them as sequences of $U,R,D$.}
+
+Walmsley paths of length which does not go above the line $y=x$ or $x \geq y$:
+\begin{enumerate}
+    \item $n=0$: ($1$ path by staying at the same position)
+    \item $n=1$: $D$, $RU$ ($2$ paths)
+    \item $n=2$: $DD$, $DRU$,$RUD$, $RURU$, $RRUU$, $RDU$ ($6$ paths) 
+    \item$n=3$: $DDD$,$DDRU$,$DRUD$,$RUDD$,$DRDU$,$RDDU$,$RDUD$,$DRRUU$,$RDRUU$,$RRDUU$,$RRUDU$,\\$RRUUD$,$DRURU$,$RDURU$,$RUDRU$,$RURDU$,$RURUD$,$RRRUUU$,$RRURUU$,$RRUURU$,\\$RURRUU$,$RURURU$ ($22$ paths)
+\end{enumerate}
+\item
+\textbf{Show that for all $n\geq 1$, the Walmsley numbers satisfy the recurrence}
+
+$$w_n = w_{n-1} +\sum\limits_{k=1}^n w_{k-1}w_{n-k}$$
+
+\begin{proof}
+    We have $w_n$ is the number of lattice paths from $(0,0)$ to $(n,n)$ by going up, right, and diagonal steps which do not go above the line $y=x$.
+
+    To reach $(n,n)$ following this rule, we can first go to the $(n-1,n-1)$, then take one diagonal step to go straight to $(n,n)$. There are exactly $w_{n-1} \times 1=w_{n-1}$ Walmsley paths that end with a diagonal step.
+
+    We then consider the Walmsley paths to $(n,n)$ that do not end with a diagonal step. Since we must make sure that these paths will never go over the line $y=x$, these paths must end with an up step that goes from $(n,n-1)$ to $(n,n)$. 
+
+    Let $(n-k,n-k)$ be the most recent point where a Walmsley path touches the diagonal line $y=x$ before reaching $(n,n)$ ($1 \leq k \leq n$). There are $w_{n-k}$ Walmsley ways to go from $(0,0)$ to $(n-k,n-k)$. 
+    
+    When we go from $(n-k,n-k)$ to $(n,n)$, we need to find the ways that never reach the line $y=x$. To make sure it doesn't touch the diagonal immediately while following the rule, the next step from $(n-k,n-k)$ must be a right step to $(n-k+1, n-k)$. We already mentioned that the last step for this path should be a step up from $(n, n-1)$ to $(n,n)$. From $(n-k+1, n-k)$ to $(n, n-1)$ , we can take maximum of $k-1$ right steps and maximum of $k-1$ up steps. We can also go diagonally. Therefore, the number of Walmsley ways we can go from $(n-k+1, n-k)$ to $(n, n-1)$ is equal to the number of Walmsley ways we can go from $(0, 0)$ to $(k-1, k-1)$ or $w_{k-1}$.
+
+    Since $1 \leq k \leq n$, we have the total number of Walmsley paths to $(n,n)$ that do not end with a diagonal step is $\sum\limits^{n}_{k=1}w_{k-1}w_{n-k}$. 
+
+    In conclusion, the total number of Walmsley paths from $(0,0)$ to $(n,n)$ is
+
+    $$w_n = w_{n-1}+\sum\limits^{n}_{k=1}w_{k-1}w_{n-k}.$$
+    
+\end{proof}
+\end{enumerate}
+
+
+%%%%%Problem 5
+\item (This is more of a quickie - 5 pts)\\
+\textbf{Prove that $C_n$ actually satisfies the first-order recurrence $$C_n = \left(\frac{4n-2}{n+1}\right)C_{n-1}.$$}
+\begin{proof}
+    $C_n$ is the number of lattice paths from $(0,0)$ to $(n,n)$ by going up and right and do not go above $y=x$.
+
+    We have: $C_n = \frac{1}{n+1}\binom{2n}{n}$. We also have $C_0 = 1$ and $C_1=1$. 
+
+    With $n=1$, we have:
+
+    $$\left(\frac{4\times 1 -2}{1+1}\right) C_0 = 1 \times 1 = 1 =C_1$$
+
+    So this formula is correct with $n=1$.
+
+    Assume the first-order recurrence holds for $n=k$. With $n = k, k \geq 1$, we have:
+    $$C_n = \left(\frac{4n-2}{n+1}\right)C_{n-1}$$
+    or 
+    $$C_k = \left(\frac{4k-2}{k+1}\right)C_{k-1}= \left(\frac{4k-2}{k+1}\right)\frac{1}{k}\binom{2(k-1)}{k-1}=\frac{2(2k-1)!}{(k+1)!(k-1)!}$$
+
+    Now, we consider the case where $n=k+1$. We have:
+    
+    \begin{align*}
+        C_n &= C_{k+1} =   \frac{1}{k+2}\binom{2(k+1)}{k+1}=\frac{(2k+2)!}{(k+2)!(k+1)!}\\
+    \end{align*}
+
+    We then substitute $C_k$ into the formula $\left(\frac{4n-2}{n+1}\right)C_{n-1}=\left(\frac{4(k+1)-2}{(k+1)+1}\right)C_{k}$. We have:
+
+    \begin{align*}
+        \frac{4(k+1)-2}{k+1+1}C_{k} &=  \frac{4k+2}{k+2}\times\frac{2(2k-1)!}{(k+1)!(k-1)!}\\
+        &=  4(2k+1)\times\frac{(2k-1)!}{(k+2)!(k-1)!}\\
+        &=(2k+2)2k(2k+1)\frac{(2k-2)!}{(k+2)!(k-1)!}\times \frac{1}{k(k+1)}\\
+        &=\frac{(2k+2)!}{(k+2)!(k+1)!}
+    \end{align*}
+
+    Therefore, we have $C_{k+1} = \frac{4(k+1)-2}{(k+1)+1}C_{k}$ or the recurrence $C_n = \left(\frac{4n-2}{n+1}\right)C_{n-1}$ holds for all $n \in \mathbb{N^*}$.
+
+    Hence, we can conclude that with $n \in \mathbb{N*}$, $C_n$ satisfies the first-order recurrence $C_n = \left(\frac{4n-2}{n+1}\right)C_{n-1}.$
+\end{proof}
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,237 @@
+ \documentclass[10pt]{article}
+\usepackage{amsmath, amssymb,graphicx,tikz,wasysym,youngtab,comment}
+
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{textcomp}
+\usepackage{mdwlist}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{amsmath, array, graphicx}
+\usepackage{tikz}
+\usepackage{todonotes}
+\usepackage{pgfplots}
+\usepackage{fontawesome}
+\usepackage{enumitem, multicol}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage[makeroom]{cancel}
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{alltt}
+\usepackage{pdfpages}
+\textheight9in
+\textwidth17cm
+\oddsidemargin0cm
+\evensidemargin0cm
+\setlength{\topmargin}{-0.8in}
+
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\pp}{\mathbf{p}}
+\pagestyle{empty}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{N}{@{}m{0pt}@{}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}m{#1}}
+\newcommand{\babble}[1]{\marginpar{\flushleft\scriptsize\textsf{#1}}}
+
+\oddsidemargin=0in
+\textwidth=5.75in
+\topmargin=-0.5in
+\textheight=9in
+\renewcommand{\marginparwidth}{81pt}
+
+\begin{document}
+\begin{center}
+\textbf{PROBLEM SET \#2}\\
+Khanh Tra (Fay) Nguyen Tran
+\end{center}
+
+\begin{enumerate}
+
+\item
+\begin{enumerate}
+\item
+\textbf{How many ways are there to distribute three different pizzas and nine identical cookies to four hungry Oles?}
+
+The number of ways we can distribute 9 identical cookies to four hungry Oles is $\binom{9+4 - 1}{9}=\binom{12}{9}=220$ (the "Stars and bars" method). 
+
+For each distinguishable pizza, we have four options for assigning it to one of the Oles. Therefore, the number of ways we can distribute 3 different pizzas to four hungry Oles is $4^3=64$.
+
+Therefore, the number of ways to distribute three different pizzas and nine identical cookies to four hungry Oles is $220 \times 64 = 14080$.
+
+\item
+\textbf{What if we don't allow any student to receive more than one pizza?}
+
+For the first unique pizza, we have four options for assigning it to one of the Oles. For the second one, we need to exclude the Ole who already received the pizza, so we only have three options left. Therefore, for the last pizza, we only have two options left to give this pizza to the last lucky Ole. Therefore, the number of ways we can distribute 3 different pizzas to four hungry Oles so that no student receives more than one pizza is $4 \times 3 \times 2 = 24$. The number of ways we can distribute 9 identical cookies to four hungry Oles: $\binom{9+4 - 1}{9}=\binom{12}{9}=220$ (the "Stars and bars" method). 
+
+The number of ways to distribute three different pizzas and nine identical cookies to four hungry Oles is $220 \times 24 = 5280$.
+
+\item
+\textbf{What if each student receives a total of three food items?}
+
+The total of food items (9 cookies and 3 pizzas) is enough to distribute evenly among four Oles. We start by first distributing 3 different pizzas to the 4 Oles. As mentioned in (a), there are 64 ways to distribute 3 different pizzas to four hungry Oles.
+
+After this step, the $i^{th}$ ($1 \leq i \leq 4$) Ole already has $k_i$ pizzas $(0 \leq k_i \leq 3)$, and we need to distribute $3 - k_i$ identical cookies to this Ole and make sure that the number of cookies we have is sufficient to do this. Since the cookies are identical, we don't need to care about which cookie will be distributed to which student. And we are sure that we have enough cookies to do that ($\sum\limits_{i=1}^{4}(3-k_i) = 12 -3 = 9$). Thus, there is only one way to distribute 9 identical cookies to the students based on the number of food items they already have, so each of them will have three items in total at the end.
+
+Therefore, the number of ways to distribute three different pizzas and nine identical cookies to four hungry Oles so that everyone receives a total of three food items is $64 \times 1 = 64$.
+ 
+\end{enumerate}
+
+\vskip 15 pt
+
+\item
+\textbf{How many ways can you arrange the 26 letters of the alphabet so that no two vowels (AEIOU) appear consecutively?}\\
+
+To create a sequence of 26 letters that no two vowels appear consecutively, we need to first arrange 21 consonants into a line. There are $21!$ ways to arrange 21 consonants into 21 positions. Then we insert a blank before and after each consonant:
+
+$$[\_]X[\_]X[\_]X\ldots[\_]X[\_]X[\_]$$
+
+where $X$ is a consonant and $[\_]$ is the slot. There are 22 slots. To make sure that there are no two vowels appear consecutively, we need to put each vowel into a slot next to a consonant in the sequence above.
+
+We need to first choose 5 out of 22 slots for 5 vowels. There are $\binom{22}{5}$ ways to do this. After we are able to choose the slots, we need to decide on where to put which vowel. For the first slot chosen, we have 5 options (5 vowels). For the second slot chosen, we only have 4 options left to put the vowel because we need to exclude the previously located vowel. Following this pattern, we have a total of $5!$ ways to permute five vowels and put them into the chosen slots. Therefore, we have a total of $\binom{22}{5} \times 5! = \frac{22!}{17!}$ ways to insert 5 vowels into the sequence of 21 consonants, making sure that every vowel is not next to another vowel.
+
+Therefore, the number of  ways we can arrange the 26 letters of the alphabet so that no two vowels (AEIOU) appear consecutively is $21! \times \frac{22!}{17!}$.
+
+\vskip 15 pt
+
+\item
+\textbf{How many ways are there to make a collection of 6 cards from a standard US 52-card deck so that the collection contains at least one heart ($\heartsuit$), at least one spade ($\spadesuit$), at least one club ($\clubsuit$), and at least one diamond ($\diamondsuit$)?}
+
+A standard card deck has 13 $\heartsuit$ cards, 13 $\clubsuit$ cards, 13 $\spadesuit$ cards, and 13 $\diamondsuit$ cards.
+
+There are $\binom{52}{6}$ ways to choose 6 distinct cards from the standard US 52-card deck. 
+
+Let $A_1$ be the set of collections of 6 cards from the standard card deck that do not have a heart ($\heartsuit$). There are $\binom{39}{6}$ ways to choose 6 distinct cards from the cards of the deck excluding the $\heartsuit$ cards.  
+
+Let $A_2$ be the set of collections of 6 cards from the standard card deck that do not have a spade ($\spadesuit$). There are $\binom{39}{6}$ ways to choose 6 distinct cards from the cards of the deck excluding the $\spadesuit$ cards. 
+
+Let $A_3$ be the set of collections of 6 cards from the standard card deck that do not have a club ($\clubsuit$). There are $\binom{39}{6}$ ways to choose 6 distinct cards from the cards of the deck excluding the $\clubsuit$ cards. 
+
+Let $A_4$ be the set of collections of 6 cards from the standard card deck that do not have a diamond ($\diamondsuit$). There are $\binom{39}{6}$ ways to choose 6 distinct cards from the cards of the deck excluding the $\diamondsuit$ cards. 
+
+Therefore, we have $|A_1| =|A_2| =|A_3|=|A_4|=\binom{39}{6}$. 
+
+When we consider the intersection of two $A_i, A_j$ sets ($A_i \cap A_j$), we consider choosing 6 cards from the card deck, excluding the cards with the two corresponding suits. So we need to choose 6 cards from the $52 - 13 \times 2 = 26$ cards. Therefore, $|A_i \cap A_j| = \binom{26}{6}$ with every $(i,j)$ that $1 \leq i < j \leq 4$.
+
+When we consider the intersection of three $A_i, A_j, \textit{and } A_k$ sets ($A_i \cap A_j \cap A_k$), we consider choosing 6 cards from the card deck that  excludes the cards with three corresponding suits. So we need to choose 6 cards from the $52 - 13 \times 3 = 13$ cards. Therefore, $|A_i \cap A_j \cap A_k| = \binom{13}{6}$ with every $(i,j, k)$ that $1 \leq i < j < k \leq 4$.
+
+When we consider the intersection of four sets ($A_1 \cap A_2 \cap A_3 \cap A_4$), we end up having no choices to select since we exclude all the suits. Therefore, $|A_1 \cap A_2 \cap A_3 \cap A_4| = 0$.
+
+According to the Inclusion-Exclusion Principle, we have: 
+
+$|A_1 \cup A_2 \cup A_3 \cup A_4| = (|A_1| + |A_2| + |A_3| + |A_4|) - (|A_1 \cap A_2| + \ldots + |A_3 \cap A_4|) + (|A_1 \cap A_2 \cap A_3| + \ldots + |A_2 \cap A_3 \cap A_4|) - |A_1 \cap A_2 \cap A_3 \cap A_4| =\binom{4}{1}\times \binom{39}{6} - \binom{4}{2} \times \binom{26}{6} + \binom{4}{3} \times \binom{13}{6}$ 
+
+Therefore, the number of ways to make a collection of 6 cards from a standard US 52-card deck so that the collection contains at least one card for each suit is $\binom{52}{6} - |A_1 \cup A_2 \cup A_3 \cup A_4| = \binom{52}{6} - (\binom{4}{1}\times \binom{39}{6} - \binom{4}{2} \times \binom{26}{6} + \binom{4}{3} \times \binom{13}{6}) = 8682544$.
+\vskip 15 pt
+
+
+
+\item
+\textbf{How many ways can you arrange the 26 letters of the alphabet so that none of the words MATH, RUNS, FROM, or JOE appear?}\\
+
+The number of ways to arrange the 26 letters of the alphabet in 26 positions: $26!$.
+
+Let $A_1$ be the set of arrangements of 26 letters so that the word MATH appears. We will consider the word MATH as a block with the other 22 letters. Thus, we will have 23 blocks to arrange. Therefore, $|A_1| = 23!$.
+
+Let $A_2$ be the set of arrangements of 26 letters so that the word RUNS appears. We will consider the word RUNS as a block with the other 22 letters. Thus, we will have 23 blocks to arrange. Therefore, $|A_2| = 23!$.
+
+Let $A_3$ be the set of arrangements of 26 letters so that the word FROM appears. We will consider the word FROM as a block with the other 22 letters. Thus, we will have 23 blocks to arrange. Therefore, $|A_3| = 23!$.
+
+Let $A_4$ be the set of arrangements of 26 letters so that the word JOE appears. We will consider the word JOE as a block with the other 23 letters. Thus, we will have 24 blocks to arrange. Therefore, $|A_4| = 24!$.
+
+We definitely cannot have two words FROM and JOE appear in the same arrangement since we can only use a letter once for each arrangement. We also cannot have two words FROM and RUNS appear in the same arrangement. Therefore, $|A_3 \cap A_4| = |A_2 \cap A_3| = |A_1 \cap A_3 \cap A_4| = |A_1 \cap A_2 \cap A_3| = |A_2 \cap A_3 \cap A_4| = |A_1 \cap A_2 \cap A_3 \cap A_4| = 0$.
+
+If we want both FROM and MATH in the arrangement, MATH should be put right next to FROM, and M is overlapped. We will consider FROMATH as a block with 19 other letters. Therefore, $|A_1 \cap A_3| = 20!$.
+
+When we want both MATH and RUNS in the arrangement, we will consider these two words as two blocks with the other 18 letters. Therefore, $|A_1 \cap A_2| = 20!$.
+
+When we want both MATH and JOE or both RUNS and JOE in the arrangement, we will consider these two words as two blocks with the other 19 letters. Therefore, $|A_1 \cap A_4| = |A_2 \cap A_4| = 21!$.
+
+When we want to have MATH, RUNS, and JOE in the arrangement, we will consider these three words as three blocks with the other 15 letters. Therefore, $|A_1 \cap A_2 \cap A_4| = 18!$.
+
+Therefore, we have $|A_1 \cup A_2 \cup A_3 \cup A_4| = (|A_1| + |A_2| + |A_3| + |A_4|) - (|A_1 \cap A_2| + \ldots + |A_3 \cap A_4|) + (|A_1 \cap A_2 \cap A_3| + \ldots + |A_2 \cap A_3 \cap A_4|) - |A_1 \cap A_2 \cap A_3 \cap A_4| = 23! + 23! + 23! + 24! - (20! + 20! + 21! + 21!) + 18! = 23! \times 3 + 24! - 20! \times 2 - 21! \times 2 + 18!$. 
+
+Therefore, the number of ways to arrange the 26 letters of the alphabet so that none of the words MATH, RUNS, FROM, or JOE appear: $26! - |A_1 \cup A_2 \cup A_3 \cup A_4| = 26! - (23! \times 3 + 24! - 20! \times 2 - 21! \times 2 + 18!)$.
+
+\vskip 15 pt
+
+\item
+\textbf{Our group of Oles has grown. Now, 10 Oles entered the Caf and left their nearly identical backpacks outside. When they leave, how many ways can they randomly take a backpack so that at least three students get their own backpack back?}
+
+The number of ways 10 Oles picked up the backpacks randomly: $10!$.
+
+The number of ways 10 Oles randomly picked up the backpacks so that no students get their own backpack is the derangement with all numbers $i \in \{1, ..., 10 \}$ does not end up in its corresponding position: $D_{10} = 10! \times \sum \limits_{k=0}^{10}\frac{(-1)^k}{k!} = 1334961$.
+
+To find the number of ways 10 Oles randomly picked up the backpacks so that there is only one student who gets their own backpack, we will need to choose a lucky Ole from these students. There are $\binom{10}{1} = 10$ ways to do this. Then for each student that picks up the backpack correctly, the number of ways the other 9 unlucky Oles randomly picked up the backpacks and no one gets their own backpack is the derangement with all numbers $i \in \{1, ..., 9 \}$ does not end up in the $i^{th}$ position: $D_{9} = 9! \times \sum \limits_{k=0}^{9}\frac{(-1)^k}{k!} = 133496$. Therefore, the number of ways 10 Oles randomly picked up the backpacks so that only one student gets their own backpack is $133496 \times 10 = 1334960$.
+
+To find the number of ways 10 Oles randomly picked up the backpacks so that there are only two students who get their own backpacks, we will need to choose two lucky Oles from these students. There are $\binom{10}{2} = 45$ ways to do this. Then for each pair of students that pick up the backpacks correctly, the number of ways the other 8 unlucky Oles randomly picked up the backpacks and no one gets their own backpack is the derangement with all numbers $i \in \{1, ..., 8 \}$ does not end up in the $i^{th}$ position: $D_{8} = 8! \times \sum \limits_{k=0}^{8}\frac{(-1)^k}{k!} = 14833$. Therefore, the number of ways 10 Oles randomly picked up the backpacks so that only two students get their own backpacks is $14833 \times 45 = 667485$.
+
+Therefore, the number of ways 10 Oles randomly picked up the backpacks so that at least three students get their own backpacks: $10! - D_{10} - \binom{10}{1} \times D_9 - \binom{10}{2} \times D_8 = 291394$.
+
+\vskip 15 pt
+
+\item
+\textbf{Determine the number of ways to place six non-attacking rooks on the chessboard below, where an X represents a forbidden position.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+&&&&&X\\
+\hline
+&&&&X&\\
+\hline
+&&&X&&\\
+\hline
+&&X&&&\\
+\hline
+&X&&&&\\
+\hline
+X&&&&&\\
+\hline
+\end{tabular}
+\end{center}
+
+We need to first index the rows and columns of the chessboard. We start indexing 0 for the bottom row, then 1 for the row above, and following this pattern up to 5. We start indexing 0 for the leftmost column, then 1 for the column next to it,..., and following this pattern up to 5.
+
+The coordinates of the forbidden positions are: $(0,0), (1,1), (2,2), (3,3), (4,4),$ and $(5,5)$.
+
+A rook can attack another rook that is on the same row or column with the former one. Therefore, each row can only have one rook and each column can only have one rook. 
+
+We start by putting one and only one rook on each row. Then for each rook, we need to decide on the column where we put it on. For the rook on the $i^{th}$ row, we cannot put it on the $i^{th}$ column since the $(i,i)$ square is always forbidden. Therefore, we can only consider the other columns besides the $i^{th}$ column. From this, we have the number of ways to place six non-attacking rooks on the chessboard, where an X represents a forbidden position, is the number of ways to place six rooks on the columns so that the index of the column is not equal to the index of the rook's row, and no two rooks are placed on the same column. This is also the number of derangements of $1, 2, \ldots, 6$ that for every $i \in \{1,2, \ldots, 6\}$, $i$ does not end up in the $i^{th}$  position ($D_6$).
+
+Therefore, the number of ways to place six non-attacking rooks on the chessboard below, where an X represents a forbidden position: $D_6 = 6! \times \sum\limits_{k=0}^{6}\frac{(-1)^k}{k!} = 265$.
+
+\vskip 15 pt
+
+\item
+\textbf{Use a combinatorial argument to derive the following identity:} 
+$$n! \, = \, \displaystyle\sum\limits_{k=0}^{n} \binom{n}{k}D_{n-k}.$$
+
+To prove this identity, we use the scenario where the group of $n$ Oles leave their nearly identical backpack outside of the Cage and then pick them up when they leave the Cage. 
+
+There are $n!$ ways that these $n$ students pick up the backpacks randomly (the first student leaving has $n$ options of backpacks to pick up, the second student leaving has $n-1$ options of backpacks to pick up, $\ldots$, the last student leaving has 1 option of backpack to pick up). These include all of the scenarios when $k$ of students pick up their backpack correctly and $0 \leq k \leq n$. 
+
+We have $\sum \limits_{k=0}^{n} \binom{n}{k}D_{n-k} = \binom{n}{0}D_n + \binom{n}{1}D_{n-1} + \binom{n}{2}D_{n-2} + \ldots + \binom{n}{n-1}D_{1} + \ldots \binom{n}{n}D_{0}$.
+
+For $\binom{n}{0}D_n = D_n$, it is the number of ways all Oles pick up the backpacks so that no one picks up their backpacks correctly. For $\binom{n}{n}D_0 = D_0 = 1$, it is the number of ways all Oles pick up the backpacks that everyone picks up their backpacks correctly, which is exactly one way.
+
+We consider the case where there are exactly $k$ Oles who pick up their backpacks correctly. We first need to choose $k$ lucky students from these $n$ Oles who pick up their backpacks correctly. There are $\binom{n}{k}$ ways to do that. Then, we have $(n-k)$ Oles left that are so unlucky that they cannot pick up their own backpack. The number of derangements for $n-k$ or the number of ways these $n-k$ students pick up backpacks randomly so that no one picks up the correct one is $D_{n-k}$. Therefore, the number of ways all Oles pick up the backpacks that only $k$ Oles are able to pick up their backpacks correctly: $\binom{n}{k} \times D_{n-k}$.
+
+Therefore, $\sum \limits_{k=0}^{n} \binom{n}{k}D_{n-k}$ is the total of the number of occurrences when $k$ Oles pick up their backpacks correctly, $0 \leq k \leq n$. Therefore, $n! = \sum \limits_{k=0}^{n} \binom{n}{k}D_{n-k}$.
+
+\end{enumerate}
+
+
+\end{document}

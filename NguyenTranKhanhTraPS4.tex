@@ -1,0 +1,439 @@
+ \documentclass[10pt]{article}
+\usepackage{amsmath, amssymb,graphicx,tikz,wasysym,youngtab,comment}
+
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{textcomp}
+\usepackage{mdwlist}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{amsmath, array, graphicx}
+\usepackage{tikz}
+\usepackage{todonotes}
+\usepackage{pgfplots}
+\usepackage{fontawesome}
+\usepackage{enumitem, multicol}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage[makeroom]{cancel}
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{alltt}
+\usepackage{pdfpages}
+%\usepackage[dvips]{graphics}
+\textheight9in
+\textwidth17cm
+\oddsidemargin0cm
+\evensidemargin0cm
+\setlength{\topmargin}{-0.8in}
+
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\dx}{\, dx}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\pp}{\mathbf{p}}
+%\newcommand{\null}{\mathrm{null}}
+\newcommand{\row}{\mathrm{row}}
+\newcommand{\col}{\mathrm{col}}
+\newcommand{\nul}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\nullity}{\mathrm{nullity}}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\pagestyle{empty}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{N}{@{}m{0pt}@{}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}m{#1}}
+\newcommand{\babble}[1]{\marginpar{\flushleft\scriptsize\textsf{#1}}}
+
+\oddsidemargin=0in
+\textwidth=5.75in
+\topmargin=-0.5in
+\textheight=9in
+\renewcommand{\marginparwidth}{81pt}
+
+\begin{document}
+\begin{center}
+\textbf{PROBLEM SET \#4}\\
+Khanh Tra (Fay) Nguyen Tran
+\end{center}
+
+\begin{enumerate}
+
+%%%%%Problem 1
+\item
+\begin{enumerate}
+\item
+\textbf{For $n=1, 2, 3, 4$, explicitly compute
+$$\sum\limits_{k=0}^n\binom{n}{k}\binom{n+1}{k}.$$
+Based on your answers, stare at Pascal's triangle and make a conjecture.}
+
+We have Pascal's triangle:
+
+$$1$$
+$$1 \quad 1$$
+$$1\quad 2\quad 1$$
+$$1\quad 3\quad 3\quad 1$$
+$$1\quad 4\quad 6\quad 4\quad 1$$
+$$1\quad 5 \quad 10\quad 10 \quad 5\quad 1$$
+$$1\quad 6 \quad 15\quad 20 \quad 15\quad 6 \quad 1$$
+$$1\quad 7 \quad 21\quad 35 \quad 35\quad 21 \quad 7 \quad 1$$
+$$1\quad 8 \quad 28 \quad 56 \quad 70 \quad 56 \quad 28 \quad 8 \quad 1$$
+$$1\quad 9 \quad 36 \quad 84 \quad 126 \quad 126 \quad 84 \quad 36 \quad 9 \quad 1$$
+For $n = 1$, we have:
+
+\begin{align*}
+    \sum\limits_{k=0}^1\binom{1}{k}\binom{2}{k} &= \binom{1}{0} \times \binom{2}{0} + \binom{1}{1} \times \binom{2}{1} \\  
+    &= 1 \times 1 + 1 \times 2\\
+    &= 3 \\
+    &= \binom{3}{1} =  \binom{3}{2} \\
+    &= \binom{2 \times 1 + 1}{1 + 1} 
+\end{align*}
+
+For $n = 2$, we have:
+
+\begin{align*}
+    \sum\limits_{k=0}^2\binom{2}{k}\binom{3}{k} &= \binom{2}{0} \times \binom{3}{0} + \binom{2}{1} \times \binom{3}{1} + \binom{2}{2} \times \binom{3}{2}\\
+    &= 1 \times 1 + 2 \times 3 + 1 \times 3\\
+    &= 10 \\
+    &= \binom{5}{2} =  \binom{5}{3} \\
+    &= \binom{2 \times 2 + 1}{2 + 1} 
+\end{align*}
+
+For $n = 3$, we have:
+
+\begin{align*}
+    \sum\limits_{k=0}^3\binom{3}{k}\binom{4}{k} &= \binom{3}{0} \times \binom{4}{0} + \binom{3}{1} \times \binom{4}{1} + \binom{3}{2} \times \binom{4}{2} + \binom{3}{3} \times \binom{4}{3}\\
+    &= 1 \times 1 + 3 \times 4 +  3 \times 6 + 1 \times 4\\
+    &= 35 \\
+    &= \binom{7}{3} =  \binom{7}{4} \\
+    &= \binom{2 \times 3 + 1}{3 + 1}
+\end{align*}
+For $n = 4$, we have:
+
+\begin{align*}
+    \sum\limits_{k=0}^4\binom{4}{k}\binom{5}{k} &= \binom{4}{0} \times \binom{5}{0} + \binom{4}{1} \times \binom{5}{1} + \binom{4}{2} \times \binom{5}{2} + \binom{4}{3} \times \binom{5}{3} +  \binom{4}{4} \times \binom{5}{4}\\
+    &= 1 \times 1 + 4 \times 5 +  6 \times 10 + 4 \times 10 + 1 \times 5\\
+    &= 126 \\
+    &= \binom{9}{4} =  \binom{9}{5} \\
+    &= \binom{2 \times 4 + 1}{4 + 1}
+\end{align*}
+
+From these results, we have the conjecture:
+
+$$\sum\limits_{k=0}^n\binom{n}{k}\binom{n+1}{k} = \binom{2n + 1}{n + 1} =\binom{2n + 1}{n}$$
+
+\item \textbf{Prove your conjecture combinatorially.}
+
+\begin{proof}
+From Connor's lemma (Day 2 Note), we have: 
+
+$$\sum\limits_{k=0}^n\binom{n}{k}\binom{n+1}{k} = \sum\limits_{k=0}^n\binom{n}{k}\binom{n+1}{n+1-k}$$
+
+Therefore, we can prove that 
+
+$$\sum\limits_{k=0}^n\binom{n}{k}\binom{n+1}{n+1-k}=\binom{2n + 1}{n+1}$$ 
+
+We start with a group of $2n + 1$ Oles, consisting of $n$ Computer Science majors and $n+1$ History majors. This group does not have any person who double major in History and Computer Science (these two subgroups are disjoint). We want to choose $n + 1$ different Oles from this group to give away donuts. There are two ways to do this:
+
+\begin{enumerate*}
+    \item We let this group (all $2n+1$ Oles) sit in a room. Then we choose randomly $n+1$ students from these people. There are $\binom{2n+1}{n+1}$ ways to do this.
+    \item We split the group into two subgroups: one for the CS students and one for the History students. We can choose a group of $k$ students from the CS group first ($0 \leq k \leq n$), then choose the rest $n + 1 - k$ students from the History group later, making sure that we have $n+1$ students to give away donuts. There are $\binom{n}{k}$ ways we can randomly choose $n$  different students from the CS group, and there are $\binom{n+1}{n+1-k}$ ways to randomly choose $n + 1 -k$ students from the History group. Thus, for each number $k$ ($0 \leq k \leq n)$, there are $\binom{n}{k} \times \binom{n+1}{n+1-k}$ ways to choose $n+1$ students from these two groups so we have $k$ CS majors and $n+1-k$ History majors. Since the number can go from 0 (0 CS major and $n+1$ History majors) to $n+1$ ($n+1$ CS major and 0 History majors), we have the total number of ways to choose $n+1$ students from these two groups following this method is $\sum\limits_{k=0}^n\binom{n}{k}\binom{n+1}{n+1-k}$.
+
+\end{enumerate*}
+
+We are sure that we always have the same number of ways to choose $n+1$ students using any of these two methods. Therefore, we can conclude that:
+
+$$\sum\limits_{k=0}^n\binom{n}{k}\binom{n+1}{k}=\sum\limits_{k=0}^n\binom{n}{k}\binom{n+1}{n+1-k}=\binom{2n + 1}{n+1}$$ 
+
+\end{proof}
+\end{enumerate}
+\vskip 1cm
+
+%%%%%Problem 2
+\item\label{sum}
+\textbf{Provide a combinatorial proof of % \babble{$\leftarrow$ For this and the next problem, the quality of writing and detail will be assessed in addition to the combinatorial ideas.}
+$$\sum_{k=0}^n\binom{n}{k}^2 = \binom{2n}{n}.$$}
+
+\begin{proof}
+From Connor's lemma (Day 2 Note), we have: 
+
+$$\sum\limits_{k=0}^n\binom{n}{k}^2 = \sum\limits_{k=0}^n\binom{n}{k} \times \binom{n}{k} = \sum\limits_{k=0}^n\binom{n}{k} \times \binom{n}{n-k}$$
+
+Therefore, we can prove that 
+
+$$\sum\limits_{k=0}^n\binom{n}{k}\binom{n}{n-k}=\binom{2 \times n}{n}$$ 
+
+We start with a group of $2n$ Oles, consisting of $n$ Computer Science majors and $n$ History majors. This group does not have any person who double major in History and Computer Science (these two subgroups are disjoint). We want to choose $n$ different Oles from this group to go on a field trip to Indiana. There are two ways to do this:
+
+\begin{enumerate*}
+    \item We let this group (all $2n$ Oles) sit in a room. Then we choose randomly $n$ students from these people. There are $\binom{2n}{n}$ ways to do this.
+    \item We split the group into two subgroups: one for the CS students and one for the History students. We can choose a group of $k$ students from the CS group first ($0 \leq k \leq n$), then choose the rest $n  - k$ students from the History group later, making sure at the end, we have $n$ students to go on the field trip. There are $\binom{n}{k}$ ways we can randomly choose $n$  different students from the CS group, and there are $\binom{n}{n-k}$ ways to randomly choose $n -k$ students from the History group. Thus, for each number $k$ ($0 \leq k \leq n)$, there are $\binom{n}{k} \times \binom{n}{n-k}$ ways to choose $n$ students from these two groups so we have $k$ CS majors and $n-k$ History majors. Since the number can go from 0 (0 CS major and $n$ History majors) to $n$ ($n$ CS major and 0 History majors), we have the total number of ways to choose $n$ students from these two groups following this method is $\sum\limits_{k=0}^n\binom{n}{k}\binom{n}{n-k}$.
+\end{enumerate*}
+
+We are sure that we always have the same number of ways to choose $n$ students using any of these two methods. Therefore, we can conclude that:
+
+$$\sum\limits_{k=0}^n\binom{n}{k}^2=\sum\limits_{k=0}^n\binom{n}{k}\binom{n}{n-k}=\binom{2 \times n}{n}$$ 
+\end{proof}
+
+\vskip 1cm
+
+%%%%%Problem 3
+\item\label{sum}
+\textbf{Provide a combinatorial proof of
+$$\binom{n+1}{k+1} = \binom{0}{k}+ \binom{1}{k}+\ldots+ \binom{n-1}{k}+ \binom{n}{k}.$$}
+
+We start by having a box containing $n+1$ Macbooks, each of them is assigned an integer as a unique ID. The ID ranges from 0 to $n$. We have $k+1$ Oles who need to check out one Macbook for their study purpose. We need to choose $k+1$ devices from the box to give one to each of these Oles. There are two methods to do this:
+    \begin{enumerate*}
+        \item We simply choose randomly $k+1$ Macbooks from the box. Obviously, there are $\binom{n+1}{k+1}$ ways to do this.
+ 
+        \item We categorize our selection of $k+1$ Macbooks by the largest ID chosen. Let the maximum ID of each selection be $i$. Since $i$ is the largest ID we picked and we need $k+1$ total Macbooks, the remaining $k$ Macbooks must be chosen from the devices with strictly smaller IDs (from 0 to $i-1$). So there are $i$ devices to choose $k$ Macbooks from and there are $\binom{i}{k}$ ways to do this with every $0 \leq i \leq n$. Therefore, the total number of ways to choose randomly $k$ Macbooks from the box following this method is $\sum\limits_{i=0}^n\binom{i}{k} = \binom{0}{k} + \binom{1}{k} + \binom{2}{k} + \ldots + \binom{n-1}{k} + \binom{n}{k}$
+    \end{enumerate*}
+
+    We are sure that we always have the same number of ways to choose $k+1$ Macbooks from a total of $n+1$ using any of these two methods. Therefore, we can conclude that:
+
+$$\binom{n+1}{k+1} = \binom{0}{k}+ \binom{1}{k}+\ldots+ \binom{n-1}{k}+ \binom{n}{k}.$$
+
+\vskip 1cm
+
+
+%%%%%Problem 4
+\item
+\begin{enumerate}
+\item 
+\textbf{Use algebra to find constants $c_1, c_2, c_3$ such that, for all $m\geq0$,
+$$c_1\binom{m}{1}+c_2\binom{m}{2}+c_3\binom{m}{3}=m^3$$}
+
+\begin{align*}
+    c_1\binom{m}{1}+c_2\binom{m}{2}+c_3\binom{m}{3}&= c_1\times \frac{m!}{(m-1)!\times 1!}+c_2\times \frac{m!}{(m-2)!\times 2!}+c_3\times \frac{m!}{(m-3)!\times 3!}\\
+    &= c_1\times m +c_2\times \frac{m(m-1)}{2}+c_3\times \frac{m(m-1)(m-2)}{6} \\
+    &= c_1\times m +\frac{m^2c_2}{2} - \frac{mc_2}{2} + \frac{m^3c_3}{6} - \frac{m^2c_3}{2} + \frac{mc_3}{3}\\
+    &= m \times (c_1-\frac{c_2}{2}+\frac{c_3}{3}) + m^2(\frac{c_2}{2} - \frac{c_3}{2}) + \frac{m^3c_3}{6}\\
+    &= m^3
+\end{align*}
+
+Since this equation is correct for all $m \geq 0$ and $c_1, c_2, c_3$ are constants, we have:
+
+\begin{align*}
+    \frac{m^3c_3}{6} &= m^3 \\
+    \frac{c_3}{6} &= 1 \\
+    c_3  &= 6
+\end{align*}
+
+\begin{align*}
+    m^2(\frac{c_2}{2} - \frac{c_3}{2}) &= 0 \times m^2\\
+    \frac{c_2}{2} - \frac{c_3}{2} &= 0 \\
+    \frac{c_2}{2} &= \frac{c_3}{2} \\
+    c_2 &= c_3 = 6 \\
+\end{align*}
+
+\begin{align*}
+    m \times (c_1-\frac{c_2}{2}+\frac{c_3}{3}) &= 0 \times m\\
+    c_1-\frac{c_2}{2}+\frac{c_3}{3} &= 0 \\
+    c_1-3+2 &=0 \\
+    c_1 &= 1 \\
+\end{align*}
+
+Therefore, we have: $\binom{m}{1}+6\binom{m}{2}+6\binom{m}{3}=m^3$ with all $m \geq 0$.
+
+\vskip .5cm
+
+\item
+\textbf{Using binomials, find a closed formula for $1^3+2^3+\ldots+n^3$ (in terms of $n$).}
+
+From a), we have $\binom{n}{1}+6\binom{n}{2}+6\binom{n}{3}=n^3$ with every $n \geq 0$.
+
+Therefore, we have:
+\begin{align*}
+    1^3+2^3+\ldots+n^3 &= \left[\binom{1}{1}+6\binom{1}{2}+6\binom{1}{3}\right] + \left[\binom{2}{1}+6\binom{2}{2}+6\binom{2}{3}\right] + \ldots + \left[\binom{n}{1}+6\binom{n}{2}+6\binom{n}{3}\right] \\
+    &= \sum\limits_{k=1}^n \left[\binom{k}{1}+6\binom{k}{2}+6\binom{k}{3}\right]\\
+    &= \sum\limits_{k=1}^n\binom{k}{1}+6\sum\limits_{k=1}^n\binom{k}{2}+6\sum\limits_{k=1}^n\binom{k}{3} \\
+\end{align*}
+
+We have: 
+
+\begin{align*}
+    \sum\limits_{k=1}^n\binom{k}{1} &= \binom{1}{1} + \binom{2}{1} + \binom{3}{1} + \ldots + \binom{n}{1}  \\
+    &= \frac{1!}{1!\times 0!} + \frac{2!}{1! \times 1!} + \ldots + \frac{n!}{1! \times (n-1)!} \\
+    &= \frac{1!}{1!\times 0!} + \frac{2!}{1! \times 1!} + \ldots + \frac{n!}{1! \times (n-1)!} \\
+    &= 1+ 2 + 3 + \ldots + n \\
+    &= \frac{n \times (n+1)}{2} \\
+\end{align*}
+
+We have: $\binom{n}{k} + \binom{n}{k + 1} =\binom{n+1}{k + 1}$. Then, we have $\binom{n}{k} =\binom{n+1}{k + 1} - \binom{n}{k + 1}$
+\begin{align*}
+    \sum\limits_{k=1}^n\binom{k}{2} &= \binom{1}{2} + \binom{2}{2} + \binom{3}{2} + \ldots + \binom{n-1}{2} + \binom{n}{2}  \\
+    &= 0 + \left(  \binom{3}{3} - \binom{2}{3} \right) + \left(  \binom{4}{3} - \binom{3}{3} \right) + \left(  \binom{5}{3} - \binom{4}{3}\right) + \ldots \\+ \left(  \binom{n}{3} - \binom{n-1}{3} \right) + \left(  \binom{n+1}{3} - \binom{n}{3} \right)\\
+    &= \binom{n+1}{3} - \binom{2}{3} \\
+    &= \binom{n+1}{3} \\
+    &= \frac{(n+1)!}{6(n-2)!}\\
+    &= \frac{(n+1)n(n-1)}{6}\\
+    &= \frac{(n+1)n(n-1)}{6}
+\end{align*}
+
+\begin{align*}
+    \sum\limits_{k=1}^n\binom{k}{3} &= \binom{1}{3} + \binom{2}{3} + \binom{3}{3} + \ldots + \binom{n-1}{3} + \binom{n}{3}  \\
+    &= 0 + 0 +\left(  \binom{4}{4} - \binom{3}{4} \right) + \left(  \binom{5}{4} - \binom{4}{4} \right) + \left(  \binom{5}{4} - \binom{5}{4}\right) + \ldots \\+ \left(  \binom{n}{4} - \binom{n-1}{4} \right) + \left(  \binom{n+1}{4} - \binom{n}{4} \right)\\
+    &= \binom{n+1}{4} - \binom{3}{4} \\
+    &= \binom{n+1}{4} \\
+    &= \frac{(n+1)!}{24(n-3)!}\\
+    &= \frac{(n+1)n(n-1)(n-2)}{24}
+\end{align*}
+
+
+We then substitute the result we have to the sum above:
+
+\begin{align*}
+    1^3+2^3+\ldots+n^3 &= \frac{n \times (n+1)}{2} + 6 \times \frac{(n+1)n(n-1)}{6} + 6 \times \frac{(n+1)n(n-1)(n-2)}{24} \\
+    &= \frac{n \times (n+1)}{2} + (n+1)n(n-1) + \frac{(n+1)n(n-1)(n-2)}{4} \\
+    &= \frac{n^2+n}{2} + n^3 - n + \frac{n^4 - 2n^3 -n^2 + 2n}{4} \\
+     &= \frac{n^4+2n^3+n^2}{4} 
+\end{align*}
+\end{enumerate}
+
+
+\vskip 1cm
+
+\item
+\begin{enumerate}
+\item
+\textbf{Suppose $a_n$ is the number of ways to write $n$ as the sum of three positive integers (where order matters).  Explain why $\frac{x^3}{(1-x)^3}$ is the generating function for $\left\{a_n\right\}$.\\ 
+{\footnotesize {\bf For example:} $a_4=3$ since $4\,=\,1+1+2\,=\,1+2+1\,=\,2+1+1$.}}
+
+For every $n \in \mathbb{N}^*$, $a_n$ is the number of ways to find $b_1, b_2, b_3 \in \mathbb{N}^*$ such that $b_1 + b_2 +b_3 = n$. 
+
+Since $b_1, b_2, b_3 \in \mathbb{N}^*$, we have $1 \leq b_1, b_2, b_3$. 
+
+We first consider the generating function for the first integer $b_1$.
+This integer can start from 1 and increase by 1. We represent these choices as the exponents of our variable $x$. The generating function for the first integer is the sum of all these possibilities:
+
+\begin{align*}
+f_{b_1} &= x^1 + x^2 + x^3 + \ldots  \\
+    &= x(x^0 + x^1 + x^2 + \ldots ) \\
+    &= \frac{x}{1-x} \\
+\end{align*}
+
+We then consider the generating functions for the second and third integers $b_2$ and $b_3$. These integers can start from 1 and increase by 1. We represent these choices as the exponents of our variable $x$. We have the generating functions:
+
+\begin{align*}
+f_{b_2} &= x^1 + x^2 + x^3 + \ldots  \\
+    &= x(x^0 + x^1 + x^2 + \ldots ) \\
+    &= \frac{x}{1-x} \\
+f_{b_3} &= x^1 + x^2 + x^3 + \ldots  \\
+    &= x(x^0 + x^1 + x^2 + \ldots ) \\
+    &= \frac{x}{1-x} 
+\end{align*}
+
+From these, we have the generating function for $\{a_n\}$ by multiplying the generating functions together, because multiplying terms from each series adds their exponents ($x^{b_1} \times x^{b_2}\times x^{b_3} = x^{b_1 + b_2 + b_3}$), which effectively counts every valid combination of 3 integers that sum to $n$: 
+
+$$f_{b_1} \times f_{b_2} \times f_{b_3} = \frac{x^3}{(1-x)^3}$$.
+
+\vskip .5cm
+
+\item
+\textbf{Using a generating function similar to the one in (a), find the number of ways to write 2012 as the sum of $k$ positive integers (where $k$ is fixed and order matters).}
+
+For every $n \in \mathbb{N}^*$, $a_n$ is the number of ways to find $b_1, b_2, b_3, \ldots, b_k \in \mathbb{N}^*$ such that $b_1 + b_2 +b_3 + \ldots + b_k= n$. 
+
+Since $b_1, b_2, b_3, \ldots, b_k \in \mathbb{N}^*$, we have $1 \leq b_1, b_2, b_3, \ldots, b_k$. 
+
+We first consider the generating function for the first integer $b_1$.
+This integer can start from 1 and increase by 1. We represent these choices as the exponents of our variable $x$. The generating function for the first integer is the sum of all these possibilities:
+
+\begin{align*}
+f_{b_1} &= x^1 + x^2 + x^3 + \ldots  \\
+    &= x(x^0 + x^1 + x^2 + \ldots ) \\
+    &= \frac{x}{1-x} \\
+\end{align*}
+
+This is applied for every other integer $b_2, b_3, \ldots, b_k$. Therefore, for each integer, the generating function for it is similar to $f_{b_i} = \frac{x}{1-x}$.
+
+From these, we have the generating function for $\{a_n\}$ by multiplying the generating functions together, because multiplying terms from each series adds their exponents ($x^{b_1} \times x^{b_2} \times \ldots \times x^{b_k} = x^{b_1 + b_2 + \ldots + b_k}$), which effectively counts every valid combination of $k$ integers that sum to $n$: 
+
+$$f_{b_1} \times f_{b_2} \times \ldots \times f_{b_k} = \underbrace{\frac{x}{1-x} \times \frac{x}{1-x} \times \frac{x}{1-x} \times \ldots \frac{x}{1-x}}_\text{k times} = \frac{x^k}{(1-x)^k} = \left( \frac{x}{1-x} \right)^k$$
+
+
+We have:
+\begin{align*}
+(1-x)^{-k}&=\sum_{i=0}^{\infty}(-1)^{i}\binom{k+i-1}{i}x^i(-1)^{i}\\
+&=\sum_{i=0}^{\infty}\binom{k+i-1}{i}(-1)^{2i}x^i\\
+&=\sum_{i=0}^{\infty}\binom{k+i-1}{i}x^i\\
+\frac{x^k}{(1-x)^k} &= x^k \times \sum_{i=0}^{\infty}\binom{k+i-1}{i}x^{i} \\
+&= \sum_{i=0}^{\infty}\binom{k+i-1}{i}x^{i+k} 
+\end{align*}
+
+If we want to find $a_{2012}$, we need to find the coefficient of $x^{2012}$ of this generating function or $i + k = 2012$. Substitute this into the coefficient formula, we have: $a_{2012} = \binom{k + i - 1}{k+1-k}  = \binom{2011}{2012-k}$.
+
+\vskip .5cm
+
+\item
+\textbf{Use your result from (b) to find the number of ways to write 2012 as the sum of one or more positive integers, where order matters.  Simplify as much as possible - your final answer should not need to include any binomial coefficients.}
+
+We have $1 \leq k \leq 2012$ since we need to write 2012 as a sum of positive integers. Therefore, the number of ways to write 2012 as the sum of one or more positive integers, where order matters:
+
+Using the formula $2^n = \sum\limits_{i=0}^n\binom{n}{i}$, we have:
+
+\begin{align*}
+\sum\limits_{k=1}^{2012}\binom{2011}{2012-k} &= \binom{2011}{2011} + \binom{2011}{2010} + \binom{2011}{2009} + \ldots + \binom{2011}{1} + \binom{2011}{0} \\
+&= 2^{2011}
+\end{align*}
+\end{enumerate}
+\vskip 1cm
+
+\item  
+\textbf{Let $a_n$ be the number of $n$-letter multi-sets that can be made out of the letters $\left\{  S,T,O,L,A,F \right\}$ where each of the letters occurs at least once, the $S$ appears at least twice, and the $O$ appears an odd number of times.  With explanation, find the generating function for $\left\{a_n\right\}$.}
+
+For every $n \in \mathbb{N}$, $a_n$ is the number of ways to construct the $n$-letter multi-sets that can be made out of the letters $\left\{  S,T,O,L,A,F \right\}$ where each of the letters occurs at least once, the $S$ appears at least twice, and the $O$ appears an odd number of times. Since order does not matter, we find the generating function for $\{a\}$ based on the generating function of each letter in the set $\left\{  S,T,O,L,A,F \right\}$.
+
+We first consider the generating function for the number of letters $S$ appearing in the muti-sets. This number should start from 2 and increase by 1. We represent these choices as the exponents of our variable $x$. Using the geometric series, the generating function for the letter $S$ is the sum of all the possibilities:
+
+\begin{align*}
+f_{S} &= x^2 + x^3 + x^4 + \ldots  \\
+    &= x^2(x^0 + x^1 + x^2 + \ldots ) \\
+    &= \frac{x^2}{1-x} \\
+\end{align*}
+
+We then consider the generating function for the number of letters $O$ appearing in the muti-sets.
+This number should start from 1 and increase by 2 since we want the number to always be an odd number. We represent these choices as the exponents of our variable $x$. Using the geometric series, the generating function for the letter $O$ is the sum of all these possibilities:
+
+\begin{align*}
+f_O &= x^1 + x^3 + x^5 + \ldots  \\
+    &= x(x^0 + x^2 + x^4 + \ldots ) \\
+    &= \frac{x}{1-x^2} \\
+\end{align*}
+
+We finally consider the generating function for the number of each of the remaining letters appearing in the muti-sets.
+Each number should start from 1 and increase by 1. We represent these choices as the exponents of our variable $x$. Using the geometric series, the generating function for each of the letters in $\left\{  S,T,O,L,A,F \right\}$ is the sum of all these possibilities:
+
+\begin{align*}
+f_{c \in \{T,L,A,F\}} &= x^1 + x^2 + x^3 +\ldots  \\
+    &= x(x^0 + x^1 + x^2 +\ldots) \\
+    &=  \frac{x}{1-x}\\
+\end{align*}
+
+To find $a_n$ or the number of ways to construct the $n$-letter multi-sets that can be made out of the letters $\left\{  S,T,O,L,A,F \right\}$ following the rules, we multiply the individual generating functions of each letter together, because multiplying terms from each series adds their exponents ($x^{S} \times x^{T} \times x^{O} \times x^{L} \times x^{A} \times x^{F}  = x^{S + T + O + L + A+ F}$), which effectively counts every valid combination of numbers of each letter that sum to $n$. From these, we have the generating function for $\{a_n\}$ is:
+
+\begin{align*}
+f_{S} \times f_{O} \times f_L \times f_T \times f_A \times f_F &= \frac{x^2}{1-x} \times \frac{x}{1-x^2} \times  \frac{x}{1-x} \times  \frac{x}{1-x} \times  \frac{x}{1-x} \times  \frac{x}{1-x}\\
+&= \frac{x^7}{(1-x)^5 \times (1-x)\times (1+x)} \\
+&= \frac{x^7}{(1-x)^6\times (1+x)} \\
+\end{align*}
+
+\end{enumerate}
+
+
+\end{document}

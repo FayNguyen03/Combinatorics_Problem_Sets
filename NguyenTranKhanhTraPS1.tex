@@ -1,0 +1,373 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath, amssymb,graphicx,tikz,wasysym,youngtab,comment}
+
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{textcomp}
+\usepackage{mdwlist}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{amsmath, array, graphicx}
+\usepackage{tikz}
+\usepackage{todonotes}
+\usepackage{pgfplots}
+\usepackage{fontawesome}
+\usepackage{enumitem, multicol}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage[makeroom]{cancel}
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{alltt}
+\usepackage{pdfpages}
+%\usepackage[dvips]{graphics}
+\textheight9in
+\textwidth17cm
+\oddsidemargin0cm
+\evensidemargin0cm
+\setlength{\topmargin}{-0.8in}
+
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\dx}{\, dx}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\pp}{\mathbf{p}}
+%\newcommand{\null}{\mathrm{null}}
+\newcommand{\row}{\mathrm{row}}
+\newcommand{\col}{\mathrm{col}}
+\newcommand{\nul}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\nullity}{\mathrm{nullity}}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\pagestyle{empty}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{N}{@{}m{0pt}@{}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}m{#1}}
+\newcommand{\babble}[1]{\marginpar{\flushleft\scriptsize\textsf{#1}}}
+
+\oddsidemargin=0in
+\textwidth=5.75in
+\topmargin=-0.5in
+\textheight=9in
+\renewcommand{\marginparwidth}{81pt}
+
+\begin{document}
+\begin{center}
+\textbf{PROBLEM SET \#1}\\
+Khanh Tra (Fay) Nguyen Tran
+\end{center}
+
+\begin{enumerate}
+
+
+\item
+
+\begin{enumerate}
+\item
+\textbf{How many 7-letter sequences can you make from the letters M, A, T, and H (with repeated letters allowed) that do not contain the word MATH in consecutive positions?  For example, MATTTHH is allowed, but H{\bf MATH}HM is not allowed.}
+
+    With four letters M, A, T, and H, we can create a total of $4^7 =16384$ 7-letter sequences with repeated letters allowed (with each letter in the sequence, there are 4 options to choose from).
+
+    We then consider number of sequences of all the cases when the word MATH is in consecutive positions and X is the empty placeholder:
+
+\begin{enumerate}
+    \item MATHXXX: for each character X, we have 4 options (M, A, T, or H) so there are $4 \times 4 \times 4 = 64$ sequences that satisfy this pattern
+    \item XMATHXX: for each character X, we have 4 options (M, A, T, or H) so there are $4 \times 4 \times 4 = 64$ sequences that satisfy this pattern
+    \item XXMATHX: for each character X, we have 4 options (M, A, T, or H) so there are $4 \times 4 \times 4 = 64$ sequences that satisfy this pattern
+    \item XXXMATH: for each character X, we have 4 options (M, A, T, or H) so there are $4 \times 4 \times 4 = 64$ sequences that satisfy this pattern
+\end{enumerate} 
+
+2 MATH can't appear in a 7-letter sequence. Therefore, these four cases are mutually exclusive (no overlaps).
+
+Therefore, the number of 7-letter sequences we can make from the letters M, A, T, and H, and do not include the MATH word, is $4^7 - 4^3 \times 4 = 4^4 \times (4^3 - 1) = 16128$ sequences.
+
+\item
+\textbf{Explain briefly why the problem might be more difficult if we were to consider $n$-letter sequences for $n>7$.}
+
+The problem becomes more difficult for $n > 7$ because we must consider the scenario of the word MATH appearing more than once in the same sequence. If $n=8$, we could have the sequence MATHMATH. If we added the possibilities for MATH starting at position 1 and MATH starting at position 5, we would count the sequence MATHMATH twice (once for each position). To solve this for larger $n$, we can no longer sum the positions ($4 \times 4^{n-4}$), but we also have to deal with overlaps, which is much more complicated computationally.
+
+\vskip 1cm
+\end{enumerate}
+
+
+\item
+\textbf{One day in graduate school I got really bored and wrote down every number between 1 and 10,000.  How many times did I write the digit 3?}
+
+Since Prof. wrote numbers from 1 to 10000, digit 3 can only appear at the ones, tens, hundreds, or thousands positions. We will not consider the digit 3 appears at the ten thousands positions since the smallest number that has 3 at the ten thousand position is $30000 >  10000$.
+
+\begin{enumerate}
+    \item Ones position: The smallest number that has digit 3 at the ones position is 3. The largest number that has digit 3 at the ones position is 9993. Each pair of consecutive numbers that both have digit 3 at the ones position will have a difference of 10 (3 and 13, 93 and 103, etc.) Therefore, there are $\frac{9993 - 3}{10} + 1 = 1000$ numbers that have digit 3 at the ones position. We can conclude that there are 1000 digit 3's at this position.
+    
+    \item Tens position: For every 100 consecutive numbers in the range 1 - 10000, there will be 10 numbers that have digit 3 at the tens position ($30 \rightarrow 39, 130 \rightarrow 139, ..., 9930 \rightarrow 9939$). We only consider the numbers that start these intervals (30, 130, 230, ..., 9930). For these numbers, each pair of consecutive numbers will have a difference of 100, so there are a total of $(\frac{9930 - 30}{100} + 1) \times 10 = 1000$ numbers that have digit 3 at the tens position. We can conclude that there are 1000 digit 3's at this position.
+    
+    \item Hundreds position: For every 1000 consecutive numbers in the range 1 - 10000, there will be 100 numbers that have digit 3 at the hundreds position ($300 \rightarrow 399, 1300 \rightarrow 1399, ..., 9300 \rightarrow 9399$). We only consider the numbers that start these intervals (300, 1300, 2300, ..., 9300). For these numbers, each pair of consecutive numbers will have a difference of 1000, so there are a total of $(\frac{9300 - 300}{1000} + 1) \times 100 = 1000$ numbers that have digit 3 at the hundreds position. We can conclude that there are 1000 digit 3's at this position.
+    
+    \item Thousands position: From 1 to 10000, the numbers that have digit 3 at the thousands positions are from 3000 to 3999. So there are $\frac{3999 - 3000}{1} + 1 = 1000$ numbers that have digit 3 at the thousands position. Therefore, there are 1000 digit 3's at this position.
+\end{enumerate}
+
+In conclusion, there are $1000 + 1000 + 1000 + 1000 = 4000$ digit 3's when we wrote numbers from 1 to 10000. 
+\vskip 1cm
+
+\item
+\textbf{How many 4-digit numbers do not have two consecutive 9's?  Prove your answer is correct.}
+\vskip 1cm
+\begin{proof}
+    There are $9 \times 10 \times 10 \times 10 = 9000$ 4-digit numbers from 1000 to 9999.
+
+    We first find the number of 4-digit numbers that has two consecutive 9's. We consider these cases:
+
+\begin{enumerate}
+    \item 99XX: The first X should be any digit from 0 to 8 (9 is excluded since we will consider the case 999X later) and the second X can be any digit from 0 to 9. There are $9 \times 10 = 90$ 4-digit numbers that satisfy this pattern.
+    \item X99X: The first X should be any digit from 1 to 8 (9 is excluded since we will consider the case 999X later) and the second X can be any digit from 0 to 8 (9 is excluded since we will consider the case X999 later). There are $8 \times 9 = 72$ 4-digit numbers that satisfy this pattern.
+    \item XX99: The first X should be any digit from 1 to 9 and the second X can be any digit from 0 to 8 (9 is excluded since we will consider the case X999 later). There are $9 \times 9 = 81$ 4-digit numbers that satisfy this pattern.
+    \item 999X: The X digit should be any digit from 0 to 8 (9 is excluded since we will consider the case 9999 later). There are $9$ 4-digit numbers that satisfy this pattern.
+    \item X999: The X digit should be any digit from 1 to 8 (9 is excluded since we will consider the case 9999 later). There are $8$ 4-digit numbers that satisfy this pattern.
+    \item 9999: There is only one 4-digit numbers that satisfy this pattern.
+\end{enumerate}
+
+Therefore, there are a total of $90 + 81 + 72 + 8 + 9 + 1 = 261$ 4-digit numbers that have two consecutive 9's. The number of 4-digit numbers that do not have two consecutive 9's is $9000 - 261 = 8739$.
+     
+\end{proof}
+\item
+\textbf{Consider a staircase-shaped chessboard with $n$ steps (the figure below is when $n=4$, which we did in class).  In how many ways can we place a gold rook and a black rook on the board so they are not attacking each other?}
+
+\Huge{$$\yng(1,2,3,4)$$}
+
+\small
+
+We index the top row of the chessboard as 0, the adjacent one is 1, going down that way, and the bottom row is $n - 1$. 
+
+We index the leftmost column of the chessboard as 0, the adjacent one is 1, going right following that rule, and the rightmost column is $n - 1$. We can see that the largest index of a column on the $i^{th}$
+row will be $i=j$.
+
+In the staircase-shaped chessboard, the $i^{th}$ row will have $i + 1$ squares. Therefore, for n rows, we have a total of $1 + 2 + ... + n = \frac{n\times(n+1)}{2}$ squares in this type of chessboard.
+
+In the staircase-shaped chessboard, the $j^{th}$ column will have $n - j$ squares.
+
+If we place the gold rook on a square that lies on the row $i^{th}$, we will have to avoid placing the black rook on $i + 1$ cells that lie on that row. For example, if we place the golden rook on a square that lies on the first row, we only need to avoid placing the black rook on the square (0,0) itself. However, if we place the golden rook on a square on $3^{rd}$ row, we will have to avoid placing the black rook on $3 + 1 = 4$  squares on the $3^{rd}$ row.
+
+If we place the gold rook on a square that lies on the $j^{th}$ column, we will have to avoid placing the black rook on the $n - j$ square that lies on that column. For example, if we place the golden rook on a square that lies on the $3^{rd}$ column, we only need to avoid placing the black rook on the square (3, 3) itself. However, if we place the golden rook on a square on the $0^ {th}$ column, we will have to avoid placing the black rook on $4 - 0 = 4$  squares on the $0^{th}$ column.
+
+Therefore, we can first place the golden rook on any square on the chessboard. Then we use the index of the row $i^{th}$ and column $j^{th}$ of the square to calculate how many squares they need to avoid placing the black on it by summing the number of squares we need to avoid, which is $i + 1 + n - j$. However, since the square that the golden rook is located on will be considered twice, we will need to deduct 1 from this sum. Therefore, the number of squares to avoid will be $i + n - j$. Finally, we deduct this from the total number of square and for each square $(i,j)$ that we place the golden rook, we have $\frac{n\times(n+1)}{2} - (i + n - j) = \frac{n\times(n-1)}{2} - i + j$ ways to place the black rook.
+
+The number of ways we can place a gold rook and a black rook, so that they are not attacking each other:
+
+\begin{equation*}\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{i} \frac{n\times(n-1)}{2} - i + j = \sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{i} \frac{n\times(n-1)}{2} - \sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{i}i + \sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{i}j \tag{1}\end{equation*}
+
+We have:
+
+\begin{equation*}\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{i} \frac{n\times(n-1)}{2} = \frac{n\times(n+1)}{2} \times \frac{n\times(n-1)}{2} \tag{2} \end{equation*}
+
+This is when we iterate through every square on the chessboard, and there are $\frac{n\times(n+1)}{2}$ squares on the chessboard.
+
+\begin{equation*}\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{i} i = \sum\limits_{i=0}^{n-1} i \times (i + 1) =  \sum\limits_{i=0}^{n-1}i^2 + \sum\limits_{i=0}^{n-1}i = \sum\limits_{i=0}^{n-1}i^2 + \frac{n \times (n-1)}{2}\tag{3}\end{equation*}
+
+\begin{equation*}\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{i} j = \sum\limits_{i=0}^{n-1} (0 + 1 + 2 + ... + i)=  \sum\limits_{i=0}^{n-1} \frac{(i + 1) \times i}{2} = \frac{1}{2} \times (\sum\limits_{i=0}^{n-1} i^2 + \sum\limits_{i=0}^{n-1} i) = \frac{1}{2} \times (\sum\limits_{i=0}^{n-1} i^2 + \frac{(n-1)\times n}{2}) \tag{4} \end{equation*}
+
+Let $S = \sum\limits_{i=0}^{n-1} i^2$. We have:
+$\sum\limits_{i=0}^{n-1} ((i + 1)^ 3 - i^3) = \sum\limits_{i=0}^{n-1} (3i^2 + 3i + 1) = 3S + 3 \times \frac{(n-1) \times n}{2} + n$. We also have $\sum\limits_{i=0}^{n-1} ((i + 1)^ 3 - i^3) = 1^3 - 0^3 + 2^3 - 1^3 + ... + (n - 1)^3 - (n-2)^3 + n^3 - (n - 1)^3 = n^3$. Therefore, we have:
+
+\begin{equation*}
+    3S + 3 \times \frac{(n-1) \times n}{2} + n = n^3
+\end{equation*}
+\begin{equation*}
+    3S = n^3 - 3 \times \frac{(n-1) \times n}{2} - n = \frac{2n^3 - 3n^2 + n}{2} 
+\end{equation*}
+\begin{equation*}
+    S = \sum\limits_{i=0}^{n-1} i^2 =\frac{2n^3 - 3n^2 + n}{6} \tag{5}
+\end{equation*}
+
+From (1), (2), (3), (4), and (5), we have the formula to calculate the number of ways to place a golden rook and a black rook on a stair-cased chessboard in a way that they are not attacking each other:
+
+\begin{equation*}
+\begin{aligned}
+\sum\limits_{i=0}^{n-1}\sum\limits_{j=0}^{i} \frac{n\times(n-1)}{2} - i + j &= \frac{n\times(n+1)}{2} \times \frac{n\times(n-1)}{2} - \frac{1}{2} \times  (\sum\limits_{i=0}^{n-1}i^2 + \frac{n \times (n-1)}{2}) \\ &= \frac{n^4 - n^2}{4} - \frac{1}{2} \times (\frac{2n^3 - 3n^2 + n}{6} + \frac{n^2 - n}{2}) \\ &= \frac{3n^4 - 2n^3 - 3n^2 + 2n}{12} \\ &= \frac{n(n+1)(n-1)(3n-2)}{12}
+\end{aligned}
+\end{equation*}
+
+\vskip .5cm
+
+\normalsize
+\item
+A tiling of a $1\times n$ board with $1\times 1$ tiles (called monominoes) and $1\times 2$ tiles (called dominoes) is a way of placing monominoes and dominoes on the board so that no two tiles overlap and each square of the board is covered by a tile.
+\begin{enumerate}
+\item
+\textbf{Use brute force to calculate the number of tilings when $n=0,1,2,3,4,5$.}
+
+Possible tilings for (M for monomino, D for domino):
+\begin{enumerate}
+    \item $n = 0$:  (1 tiling)
+    \item $n = 1$: M (1 tiling) 
+    \item $n = 2$: MM, D (2 tilings)
+    \item $n = 3$: MMM, MD, DM (3 tilings)
+    \item $n = 4$: MMMM, MMD, MDM, DMM, DD (5 tilings)
+    \item $n = 5$: MMMMM, MMMD, MMDM, MDMM, DMMM, MDD, DMD, DDM (8 tilings)
+\end{enumerate}
+
+\item
+\textbf{Conjecture how $B_n$, the number of tilings of a $1\times n$ board, is related to another familiar sequence.}
+
+$B_0 = 1, B_1 = 1, B_n = B_{n-1} + B_{n-2} (\forall n \in \mathbb{N}, n \geq 2)$
+
+This is the Fibonacci sequence.
+
+\item
+\textbf{Prove your conjecture from the previous part.}
+\begin{proof}
+    Let $B_i$ with $i \in \mathbb{N}$ be the number of tilings of a $1 \times i$ board.
+
+ With an empty board ($1 \times 0$), there is 1 way of tiling by doing nothing. $B_0 = 1$.
+
+ With a $1 \times 1$ board, there is only one way of tiling by placing one monomino. $B_1 = 1$.
+
+ With a $1 \times n$ board with $n \in \mathbb{N}, n \geq 2$, we consider two starting scenarios: starting with a monomino ($1 \times 1$) or a domino ($1 \times 2$). 
+ 
+ If we start with a monomino, we need to consider how to tile the $n - 1$ squares left. The number of tilings of $1 \times (n - 1)$ squares is equal to $B_{n-1}$ (the number of tilings of a $1 \times (n-1)$ board). Therefore, the number of tilings a $1 \times n$ board starting with a monomino is $1 \times B_{n-1} = B_{n-1}$.
+
+  If we start with a domino, we need to consider how to tile the $n - 2$ squares left. The number of tilings of $1 \times (n - 2)$ squares is equal to $B_{n-2}$ (the number of tilings of a $1 \times (n-2)$ board). Therefore, the number of tilings of a $1 \times n$ board starting with a domino is $1 \times B_{n-2} = B_{n-2}$.
+
+  The number of tilings of a $1 \times n$ board with $n \in \mathbb{N}, n \geq 2$ is $B_{n-2} + B_{n-1}$.
+\end{proof}
+ 
+\item
+\textbf{Now that you have proved your conjecture, use it to find the number of tilings of a $1\times 12$ board that use at least two dominoes.}\babble{$\leftarrow$ HINT for (d): How many tilings \textit{do not} use at least two dominoes?}
+
+Fibonacci sequence: $F_0=1,F_1=1,F_2=2,F_3=3,F_4=5,F_5=8,F_6=13,F_7=21,F_8=34, F_9=55,F_{10}=89,F_{11}=144, F_{12}=233$
+
+The number of tilings of a $1\times 12$ board is 233.
+
+For tilings that do not use at least two dominoes, it must tile the board all using 12 monominoes or 1 domino and 10 monominoes. For the first case (all monominoes), there is only one tiling. For the case with 1 domino and 10 monominoes, there are $\binom{11}{1}=11$ ways to put the domino on the board. Therefore, there are $11 + 1 = 12$ tilings that do not need at least two dominoes. The number of tilings of a $1 \times 12$ board that use at least two dominoes is $233 - 12 = 221$.
+\end{enumerate}
+
+\vskip 1cm
+
+
+\item
+\begin{enumerate}
+\item
+\textbf{Prove that the number of lattice paths from $(0,0)$ to $(m,n)$ is $\binom{n+m}{m}$.  (See in-class worksheet from Day 2 for description)}
+
+To traverse from $(0,0)$ to $(m,n)$ only going up (North) or right (East) for one unit each step, we need to take $m$ steps right and $n$ steps up, so the total number of steps is $m + n$. Among these $m+n$ steps, we must choose $m$ steps that we will go right, and the rest will be going up. Therefore, the number of lattice paths $(0,0)$ to $(m,n)$ is $\binom{m+n}{m}\binom{n}{n}=\binom{m+n}{m}=\binom{m+n}{n}$.
+\item
+\textbf{How many lattice paths from $(0,0)$ to $(13,9)$ do not pass through $(8,7)$?}
+There are $\binom{13+9}{13} = 497420$ lattice paths from $(0,0)$ to $(13,9)$. 
+
+To find the number of lattice paths from $(0,0)$ to $(m,n)$ that pass through $(a, b)$ ($a \leq m, b \leq n$), we must first calculate the number of lattice paths from $(0,0)$ to $(a,b)$, which is $\binom{a+b}{a}$. When we reach $(a,b)$, we define the number of lattice paths from $(a,b)$ to $(m,n)$, which is $\binom{(m + n - a - b)}{m - a}$ (since we need to go up for $m -a$ steps and go right for $n - b$ times. When we reach $(a,b)$ by using a lattice path from $(0,0)$ to $(a,b)$, there are $\binom{(m + n - a - b)}{m - a}$ ways to travel to $(m,n)$. Therefore, the total number of lattice paths from $(0,0)$ to $(m,n)$ that pass through $(a, b)$ ($a \leq m, b \leq n$) is $\binom{a+b}{a} \times 
+\binom{m + n - a - b}{m - a}$.
+
+The number of lattice paths from $(0,0)$ to $(13, 9)$ that pass through $(8, 7)$ is $\binom{15}{8} \times \binom{7}{5} = 135135$.
+
+Therefore, the number of lattice paths from $(0,0)$ to $(13, 9)$ that do not pass through $(8, 7)$ is $497420 - 135135 = 362285$.
+
+\item
+\textbf{How many lattice paths from $(0,0)$ to $(13,9)$ do not pass through either $(8,7)$ or $(11,5)$?}
+
+The number of lattice paths from $(0,0)$ to $(13, 9)$ that pass through $(8, 7)$ is $\binom{15}{8} \times \binom{7}{5} = 135135$.
+
+The number of lattice paths from $(0,0)$ to $(13, 9)$ that pass through $(11,5)$ is $\binom{16}{5} \times \binom{6}{4} = 65520$.
+
+There are no lattice paths that go from $(0,0)$ to $(13,9)$ that can pass through both $(8,7)$ and $(11, 5)$ since we cannot go either down or left. 
+
+Therefore, the number of lattice paths from $(0,0)$ to $(13, 9)$ that do not pass through either $(8, 7)$ or $(11, 5)$ is $497420 - 135135 - 65520 = 296765$.
+
+\end{enumerate}
+
+\vskip 1cm
+
+\item
+\begin{enumerate}
+\item
+\textbf{How many ways can we write all of the numbers $1,2,\ldots,15$ in the boxes below such that there is one number in every box and the numbers in each column are strictly increasing from top to bottom?}
+
+We first count the number of boxes on each column from left to right. The first column has 6 boxes, the second column has 4 boxes, the third column has 3 boxes, and the fourth and fifth columns each have 1 box.
+
+Initially, we have 15 numbers to choose from. For the first column with 6 boxes, we need to choose 6 distinct numbers from the available numbers (not written in any boxes yet), then write them on the column in a strictly ascending order (no duplicates). We have $15 - 6 = 9$ numbers left to write on the other columns. We then choose 4 distinct numbers from the 9 available numbers (not written in any boxes yet), then write them on the column in a strictly ascending order (no duplicates). Then we follow the 
+
+The number of ways we can write all of the numbers $1,2,\ldots,15$ in the boxes below is $\binom{15}{6} \times \binom{9}{4} \times \binom{5}{3} \times \binom{2}{1} \times \binom{1}{1}=\frac{15!}{6! \times 4! \times 3!}$.
+
+\item
+\textbf{Repeat part (a), but with the list $1,1,1,1,2,3,\ldots,12$.}
+
+There are four 1's and 11 numbers from 2 to 12. Since the order in a column is strictly ascending, all the 1's must be on the first row. One column will not have 1, and the rest will have 1.
+
+- If the first column does not have 1, there are $\binom{11}{6}$ ways to choose 6 numbers that have strictly ascending order to put in this column. Then, for the second column, there are $\binom{5}{3}$ ways to choose 3 numbers that have strictly ascending order and are larger than 1. For the third column, there are $\binom{2}{2}$ ways to choose 2 numbers that have strictly ascending order and are larger than 1. In this scenario, there are $\binom{11}{6} \times \binom{5}{3} \times \binom{2}{2} = 4620$ ways to write the list $1,1,1,1,2,3,\ldots,12$ in every box.
+
+- If the second column does not have 1, there are $\binom{11}{4}$ ways to choose 4 numbers that have strictly ascending order to put in this column. Then, for the first column, besides the first box with 1, there are $\binom{7}{5}$ ways to choose 5 numbers that have strictly ascending order and are larger than 1. For the third column, besides the first box with 1, there are $\binom{2}{2}$ ways to choose 2 numbers that have strictly ascending order and are larger than 1. In this scenario, there are $\binom{11}{4} \times \binom{7}{5} \times \binom{2}{2} = 6930$ ways to write the list $1,1,1,1,2,3,\ldots,12$ in every box.
+
+- If the third column does not have 1, there are $\binom{11}{3}$ ways to choose 3 numbers that have strictly ascending order to put in this column. Then, for the first column, besides the first box with 1, there are $\binom{8}{5}$ ways to choose 5 numbers that have strictly ascending order and are larger than 1. For the second column, besides the first box with 1, there are $\binom{3}{3}$ ways to choose 3 numbers that have strictly ascending order and are larger than 1. In this scenario, there are $\binom{11}{3} \times \binom{8}{5} \times \binom{3}{3} = 9240$ ways to write the list $1,1,1,1,2,3,\ldots,12$ in every box.
+
+- If either the fourth or the fifth column does not have 1, there are $\binom{11}{1}$ ways to choose 1 number to put in this column. Then, for the first column, besides the first box with 1, there are $\binom{10}{5}$ ways to choose 5 numbers that have strictly ascending order and are larger than 1. For the second column, besides the first box with 1, there are $\binom{5}{3}$ ways to choose 3 numbers that have strictly ascending order and are larger than 1.  For the third column, besides the first box with 1, there are $\binom{2}{2}$ ways to choose 2 numbers that have strictly ascending order and are larger than 1. In each scenario ($4^{th}$ or $5^{th}$), there are $\binom{11}{1} \times \binom{10}{5} \times \binom{5}{3} \times \binom{2}{2} \times 2 = 27720$ ways to write the list $1,1,1,1,2,3,\ldots,12$ in every box. Total: $27720 \times 2 = 55440$.
+
+The number of ways can we write all of the numbers $1,1,1,1,2,3,\ldots,12$ in the boxes
+below such that there is one number in every box and the numbers in each
+column is strictly increasing from top to bottom: $4620 + 6930 + 9240 + 55440= 76230$.
+
+
+\Huge$$
+\yng(5,3,3,2,1,1)
+$$
+
+\normalsize
+
+\end{enumerate}
+\vskip 1cm
+
+\item
+Enumeration University offers 46 different academic majors (just like St.~Olaf!).  Sadly, the economy has hit EU pretty hard and the current sophomore class only has 23 students (all of whom are about to declare their majors).
+\begin{enumerate}
+\item
+\textbf{In how many ways can the 23 sophomores declare their majors?}
+
+For each sophomore, they can choose one major out of 46 majors offered by Enumeration University. Therefore, there are $46^{23}$ ways the 23 sophomores can declare their majors.
+\item
+\textbf{In order to keep the professors busy, the 23 sophomores have decided that no two of them will declare the same major. How many ways are there for them to declare now?}
+
+There are $\binom{46}{23}$ ways to choose 23 unique majors from 46 majors offered. Then, for 23 students, there are $23!$ ways for 23 students to choose a unique major from the selected majors (the first student can choose 1 from 23 majors, the second student can choose 1 from 22 majors, ...). Therefore, there are $\binom{46}{23} \times 23! = \frac{46!}{23! \times 23!} \times 23! = \frac{46!}{23!}$. 
+\item
+\textbf{The college only cares about how many majors each department gets (and not who the students are).  Thus, from the college's perspective, how many ways can the sophomores declare majors if}
+\begin{enumerate}
+\item
+\textbf{the 23 sophomores are still sticking to their pledge from part (b)?}
+
+Since the college only cares about how many majors each department gets, and no two of the 23 students will declare the same major, we will only need to care about how to choose 23 unique majors from the total of 46 and ignore the process of the students choosing the major. Therefore, the number of ways the sophomores can declare majors if they still stick to their pledge from part (b) is $\binom{46}{23}$.
+\item
+\textbf{the 23 sophomores are free to declare whichever major they want?}
+
+Since the college does not distinguish between the students (only the counts per major matter), we place the indistinguishable 23 sophomores into the 46 majors, while they can choose their major freely. The number of ways we can do this is $\binom{23 + 46 - 1}{23} = \binom{68}{23}$. 
+\end{enumerate}
+
+
+\end{enumerate}
+\vskip 1cm
+
+
+\item
+\textbf{A ferris wheel has 5 indistinguishable carriages and each carriage has a single row of 4 seats.  Twenty eager Oles want to go on the ferris wheel.  How many ways can the Oles be seated on the ride?}
+
+We can fit 4 students in each carriage. There are $\binom{20}{4} \times \binom{16}{4} \times \binom{12}{4} \times \binom{8}{4} \times \binom{4}{4} = \frac{20!}{4!\times 4! \times 4! \times 4! \times 4!}$ ways to divide 20 students into 5 carriages.
+
+In each carriage, there are $4!$ ways to seat 4 students. Therefore, there are $4! \times 4! \times 4! \times 4! \times 4!$ ways to seat twenty students in their respective carriage. 
+
+There are $\frac{20!}{4!\times 4! \times 4! \times 4! \times 4!} \times (4! \times 4! \times 4! \times 4! \times 4!) = 20!$ ways to seat 20 Oles into 5 carriages in a linear order (in the scenario we have Carriage 1, Carriage 2, ...)
+
+Since these indistinguishable carriages are on a ferris wheel with a circular symmetric structure, for any single arrangement, 5 rotations of the wheel result in the identical relative seating plan. Therefore, the number of ways to seat 20 Oles into 5 indistinguishable carriages is $\frac{20!}{5}$.
+
+\end{enumerate}
+\end{document}
+
+

@@ -1,0 +1,307 @@
+ \documentclass[10pt]{article}
+\usepackage{amsmath, amssymb,graphicx,tikz,wasysym,youngtab,comment}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{textcomp}
+\usepackage{mdwlist}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{amsmath, array, graphicx}
+\usepackage{tikz}
+\usepackage{todonotes}
+\usepackage{pgfplots}
+\usepackage{fontawesome}
+\usepackage{enumitem, multicol}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage[makeroom]{cancel}
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{alltt}
+\usepackage{pdfpages}
+%\usepackage[dvips]{graphics}
+\textheight9in
+\textwidth17cm
+\oddsidemargin0cm
+\evensidemargin0cm
+\setlength{\topmargin}{-0.8in}
+
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\dx}{\, dx}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\pp}{\mathbf{p}}
+%\newcommand{\null}{\mathrm{null}}
+\newcommand{\row}{\mathrm{row}}
+\newcommand{\col}{\mathrm{col}}
+\newcommand{\nul}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\nullity}{\mathrm{nullity}}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\pagestyle{empty}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{N}{@{}m{0pt}@{}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}m{#1}}
+\newcommand{\babble}[1]{\marginpar{\flushleft\scriptsize\textsf{#1}}}
+
+\oddsidemargin=0in
+\textwidth=5.75in
+\topmargin=-0.5in
+\textheight=9in
+\renewcommand{\marginparwidth}{81pt}
+
+\begin{document}
+\begin{center}
+\textbf{PROBLEM SET \#3}\\
+Khanh Tra (Fay) Nguyen Tran
+\end{center}
+
+\begin{enumerate}
+
+\item
+\textbf{Recently, St.~Olaf hosted a Quidditch tournament with $n$ teams, where each team played every other team exactly once. Thankfully, none of the teams lost all of their games!  Prove that at least two of the teams finished with identical win-loss records.}
+
+There are $n$ Quidditch teams that participated in the St.Olaf tournament. Since each team played every other team exactly once, each team played in $n-1$ games.
+
+Let $k_i \in \mathbb{N}$ be the number of games that the $i^{th}$ team won during the tournament. Since each team only played $n-1$ matches, the maximum value that each $k_i$ can have is $n -1$ or $k_i \leq n-1$. Besides, because none of the teams lost all the games, we have $k_i \geq 1$. Therefore, for every $1 \leq i \leq n$, we have $1 \leq k_i \leq n - 1$ and $k_i \in \mathbb{N}$. So for each $k_i$, we have $k_i \in S=\{1,2,\ldots,n-1\}$ and $|S|=n-1$.
+
+We have $n$ individual teams, but only $n-1$ possible win totals.  According to the Pigeonhole Principle, there must exist at least two teams that have the same winning records. Since every team played exactly $n-1$ games, having the same number of wins guarantees an identical win-loss record.
+
+\vskip 15 pt
+
+\item
+\textbf{Suppose $M$ is a set of nine distinct positive integers, none of which have a prime factor other than $2$, $3$, or $5$.
+Show that $M$ has two {\it different} elements whose product equals a perfect square.}
+
+Since every element in $M$ is a positive integer which does not have prime factors other than $2$, $3$, and $5$, we can write: $x \in M, x = 2^a \times 3^b \times 5^c$ with $a, b, c \in \mathbb{N}$.
+
+Every element in $M$ only has prime factors of $2$, $3$, and $5$, so the product of each pair of two different elements should only be divisible by $2$, $3$, and $5$. We can write the product equals a perfect square in the form $2^{2i}\times 3^{2j} \times 5^{2k}$ with $i,j,k \in \mathbb{N}$ (the square root of this product is $(2^i \times 3^j \times 5^k)$).
+
+We have for $x \in M, x = 2^a \times 3^b \times 5^c$ and $y \in M, y = 2^d \times 3^e \times 5^f$ with $a, b, c, d, e, f \in \mathbb{N}$, $x \times y = 2^{a+d} \times 3^{b+e} \times 5^{c+f}$. To get a product with a perfect square value, $(a + d) \mod 2 = 0$, $(b + e) \mod 2 = 0$, and $(c + f) \mod 2 = 0$, or $a \equiv d \pmod 2$, $b \equiv e \pmod 2$, and $c \equiv f \pmod 2$, or each pair of numbers shares the same parity.
+
+For each element $a = 2^i \times 3^j \times 5^k \in M$, when we consider the parity of the power of each prime factor, we have $2 \times 2 \times 2 = 8$ cases:
+
+\begin{enumerate}
+    \item $i$ is even, $j$ is even, $k$ is even
+    \item $i$ is even, $j$ is even, $k$ is odd
+    \item $i$ is even, $j$ is odd, $k$ is even
+    \item $i$ is even, $j$ is odd, $k$ is odd
+    \item $i$ is odd, $j$ is even, $k$ is even
+    \item $i$ is odd, $j$ is even, $k$ is odd
+    \item $i$ is odd, $j$ is odd, $k$ is even
+    \item $i$ is odd, $j$ is odd, $k$ is odd
+\end{enumerate}
+
+Since we have 9 elements in $M$, according to the Pigeonhole Principle, there must exist at least two elements that share the same parity combination for the prime factors. For example, there exist at least two elements: $x \in M, x = 2^a \times 3^b \times 5^c$ and $y \in M, y = 2^d \times 3^e \times 5^f$ such that $a \equiv d \pmod 2$, $b \equiv e \pmod 2$, and $c \equiv f \pmod 2$. Then $x\times y$ has the sums of corresponding exponents are even, and $x\times y$ is a perfect square number.
+
+\vskip 15 pt
+\item
+\textbf{Suppose that 9 people attended a meeting.  All 9 people were at least 1 year old and none were older than 60.  Show that there are two groups of people (with no members in common) such that the sum of the ages of the members of each group is the same.}\\
+
+Let $A = \{a_1, a_2, \ldots, a_9\}$ be the set of ages of these 9 people attending the meeting. We have for every $i \in \mathbb{N}, 1 \leq i \leq 9$, $1 \leq a_i \leq 60$. 
+
+We need to look for two different subgroups from $A$. Each subgroup must have at least 1 member and at most 8 members. Let $S \subset A$ and $1 \leq |S| \leq 8$. Then we have the total ages of all members in $S$ must be smaller than or equal to $8\times 60 = 480$ and larger than or equal to $1$ ($1 \leq \sum\limits_{s \in S}s \leq 480$).
+
+From the group $A$, we can make a total of $2^9 = 512$ subgroups with the size ranging from 0 to 9. We need to exclude the empty subset and the set itself, so we only consider the proper subgroup that we can compare in this case. Therefore, the number of subgroups from this group that are valid is $521 - \binom{9}{0} - \binom{9}{9}=510$.
+
+We can create $510$ Therefore, there exist at least two subgroups with sizes from 1 to 8 that have the same total sum of ages. 
+
+Let $B = \{b_1, b_2, \ldots, b_k\}$ and $C = \{c_1, c_2, \ldots, c_m\}$ where $B \subset A, C \subset A, B \neq C, |B| + |C| = k + m \leq 9$, and $\sum_{x\in B} x = \sum_{y\in C} y$. 
+
+If $B \cap C = \emptyset$, we prove that there exists two groups of people with no members in common such that the sum of ages of the members of each group is the same.
+
+If $B \cap C \neq \emptyset$, we have $D = B \cap C$. There does not exist the case where either $B \subset C$ since the ages in $C \setminus B$ will need to be 0. This also applies to the case of $C \subset B$. So we have $D \neq B$, $D \neq C$, and $|D| < |B|$ and $|D| < |C|$. From this, we have $B \setminus D$ and $C \setminus D$, which are two non-empty sets of ages and $(B \setminus D) \cap (C \setminus D) = \emptyset$. Because the sums of $B$ and $C$ are equal, if we remove the shared members ($D$) from both groups, the remaining subgroups must also have equal sums.
+
+$$\sum_{x \in B} x - \sum_{z \in D} z = \sum_{y \in C} y - \sum_{z \in D} z$$
+
+These two are the two groups of people with no members in common such that the sum of ages of the members of each group is the same.
+
+Therefore, from 9 people attending the meeting, we always have two groups of people (with no members in common) such that the sum of the ages of the members of each group is the same.
+
+\vskip 15 pt
+
+\item
+\textbf{Prove that the inequality in the Erd\H{o}s-Szekeres Theorem is as good as it can possibly be.
+ In other words, show that there exists a sequence of length $n^2$ that \textit{does not} contain a monotonic (either nondecreasing or nonincreasing) subsequence of length greater than $n$.}
+
+ We consider the sequence $\{1,2, \ldots, n^2\}$. We then split up this sequence into non-decreasing block with length $n$ such as $\{1,2,3, \ldots, n\}, \{n+1, n+2, \ldots, 2n\}, \ldots, \{n^2 - n + 1,n^2 - n + 2,n^2 - n + 3, \ldots, n^2\}$.
+
+We then reverse the order of each of these blocks:
+
+$$\{1,2,3, \ldots, n\} \rightarrow \{n,n-1,n-2, \ldots, 2, 1\} $$
+
+$$\{n+1, n+2, \ldots, 2n\} \rightarrow \{2n,2n -1, 2n-2, \ldots, n + 2, n+1\} $$
+
+$$\ldots$$
+
+$$\{n^2 - n + 1,n^2 - n + 2,n^2 - n + 3, \ldots, n^2\} \rightarrow \{n^2,n^2 - 1, n^2-2, \ldots, n^2 - n + 2, n^2 - n + 1\} $$
+
+Then we combine them together in to a sequence of length $n^2$: 
+$$\{n,n-1,n-2, \ldots, 2, 1, 2n,2n -1, 2n-2, \ldots, n + 2, n+1, \dots, n^2,n^2 - 1, n^2-2, \ldots, n^2 - n + 2, n^2 - n + 1\}$$ 
+
+This sequence, starting with a number $c$, has the pattern of $n$ numbers decreasing then it increases significantly and reaches the number $c + n$ and then keeps going downwards. We wil consider the longest non-decreasing and non-increasing subsequences in this newly created sequence:
+
+- Longest non-decreasing subsequence: Within any block of $n$ length, the numbers are strictly decreasing. Therefore, any non-decreasing subsequence can contain at most one element from each block. Since there are exactly $n$ blocks in total, an increasing subsequence can have a maximum length of $n$.
+
+- Longest non-increasing subsequence: We have the minimum value of any block $i$ is greater than the maximum value of any preceding block $j$ (where $j < i$). For example, the smallest number in the second block is $n+1$, which is strictly greater than the largest number in the first block, which is $n$. Therefore, a decreasing subsequence cannot contain elements from multiple different blocks. It must be entirely a single block. Since each block has exactly $n$ elements, a decreasing subsequence can have a maximum length of $n$.
+
+There will be no subsequence that has length greater than $n$ that is either non-decreasing or non-increasing. So there exists a sequence of length $n^2$ that does not contain a monotonic subsequence of length greater than $n$.
+
+\vskip 15 pt
+
+\item
+\textbf{Let $d$ be any positive integer.  Then it's known that
+$$(d+1)^n=\sum\limits_{k=0}^n \binom{n}{k}d^k$$ 
+Give two proofs of this identity, one using the Binomial Theorem and the other a combinatorial proof.}
+
+\begin{enumerate*}
+    \item Binomial Theorem:
+
+    The Binomial Theorem states that $(x+y)^n=\sum\limits_{k=0}^n\binom{n}{k}x^ky^{n-k}$. Therefore, we have: $(d+1)^n=\sum\limits_{k=0}^n\binom{n}{k}d^k1^{n-k}=\sum\limits_{k=0}^n\binom{n}{k}d^k$.
+
+    \item Combinatorial Proof:
+    
+    We have $(d+1)$ characters in the set $A$ ($|A|= d+ 1$). We need to create a sequence with length $n$ with these characters (repetition is allowed). There are $(d+1)^n$ ways to do this since we have $d+1$ choices for the first character in the sequence, $d+1$ choices for the second character, $\dots$, $d+1$ choices for the last sequence.
+
+    Let $a \in A$ be a character that we can use in the sequence. We can also place $a$ at some spots in the sequence and leave the rest for the other $d$ characters in $A$. Let $k$ be the number of spots in the sequence that we want to save for the other characters in $A$ that are not $a$ ($0 \leq k \leq n$). Then we first need to select $k$ spots in the sequence reserved for other characters in $A \setminus \{a\}$. There are $\binom{n}{k}$ ways to select $k$ random spots in the sequence, so we can fill them up with other characters in $A \setminus \{a\}$. For each of these $k$ spots, we have $d$ choices of characters, so we have $d$ options. For all of these $k$ spots, we have a total of $d^k$ ways to choose a character in $A \setminus \{a\}$ for each spot. Since $0 \leq k \leq n$, the total number of creating a sequence of length $n$ using this method will be $\sum\limits_{k=0}^n\binom{n}{k}d^k$.
+
+    Therefore, $(d+1)^n = \sum\limits_{k=0}^n\binom{n}{k}d^k$.
+
+    
+\end{enumerate*}
+\vskip 15 pt
+
+
+\item
+\textbf{Give a combinatorial proof of the following identity.  For integers $m,n\geq 0$,
+$$\binom{m+n}{l}=\sum\limits_{k=0}^l \binom{n}{k}\binom{m}{l-k}$$ }
+
+\begin{proof}
+    We have two distinct groups of students: group $M$ with $m$ students majoring in Math and group $N$ with $n$ students majoring in Neuroscience ($|M| = m$, $|N| = n$, $m,n \geq 0$). There is no student in these two groups are double majoring in Math and Neuroscience ($M \cap N = \emptyset)$. We need to select exactly $l$ students from these two groups to participate in a spelling bee contest regardless of their majors.
+
+    We have two ways to select $l$ students from these two groups:
+
+\begin{enumerate*}
+    \item   We let these two groups of students to all sit in TOH 280. At this time, there are $m + n$ students in the room waiting for the selection. Then we can randomly select $l$ students from this pool. There are $\binom{m+n}{l}$ ways to do this. 
+    \item   We let the Neuroscience major group sitting in RNS 390 and the Math major group sitting in TOH 184. We decide that we select $k$ students from the Neuroscience group and $l - k$ from the Math group, where $0 \leq k \leq l$. There are $\binom{n}{k}$ ways to randomly select $k$ student from the students in RNS 390 and $\binom{m}{l-k}$ ways to randomly select $l-k$ student from the students in TOH 184. Therefore, we have $\binom{n}{k} \times \binom{m}{l-k}$ ways to select l students from these two groups if we want $k$ Neuroscience majors to join the Spelling bee team. We can adjust (increase or decrease) the number of Neuroscience majors selected as long as it is valid ($0 \leq k \leq l$), then adjust the number of selected Math majors accordingly. Therefore, the total number of ways to select $l$ students from these two groups is $\sum\limits_{k=0}^l\binom{n}{k} \binom{m}{l-k}$.
+\end{enumerate*}
+
+With the same total number of students in the pool we can select from, the number of ways choosing $l$ students randomly is constant. Therefore, the number of ways to choose $l$ students from the two groups following these methods will be the same, or $\binom{m+n}{l} = \sum\limits_{k=0}^l\binom{n}{k} \binom{m}{l-k}$.
+
+\end{proof}
+\vskip 15 pt
+
+\item
+\begin{enumerate}
+\item
+\textbf{By hand, evaluate each of the following sums and write your answer in the form $\frac{m}{n}$.}
+$$\frac{\bf 1}{1}+\frac{\bf 2}{2}+\frac{\bf 1}{3} = \frac{7}{3}$$
+
+$$\frac{\bf 1}{1}+\frac{\bf 3}{2}+\frac{\bf3}{3}+\frac{\bf1}{4} = \frac{15}{4}$$
+
+$$\frac{\bf1}{1}+\frac{\bf4}{2}+\frac{\bf6}{3}+\frac{\bf4}{4}+\frac{\bf1}{5} = \frac{31}{5}$$
+
+$$\frac{\bf1}{1}+\frac{\bf5}{2}+\frac{\bf 10}{3}+\frac{ \bf10}{4}+\frac{\bf5}{5}+\frac{\bf1}{6} = \frac{63}{6}$$
+
+From the result, we have this conjecture:
+
+$$\sum\limits_{k=0}^n\binom{n}{k}\frac{1}{k+1} = \frac{2^{n+1} - 1}{n+1}$$
+
+with $n \geq 1$
+
+$$\frac{\bf 1}{1}+\frac{\bf 2}{2}+\frac{\bf 1}{3}=\frac{\binom{2}{0}}{1}+\frac{\binom{2}{1}}{2}+\frac{\binom{2}{2}}{3} = \sum\limits_{k=0}^2\binom{n}{k}\frac{1}{k+1} = \frac{2^3 - 1}{3}$$
+
+$$\frac{\bf 1}{1}+\frac{\bf 3}{2}+\frac{\bf3}{3}+\frac{\bf1}{4} =\frac{\binom{3}{0}}{1}+\frac{\binom{3}{1}}{2}+\frac{\binom{3}{2}}{3} + \frac{\binom{3}{3}}{4} = \sum\limits_{k=0}^3\binom{n}{k}\frac{1}{k+1} = \frac{2^4 - 1}{4}$$
+
+$$\frac{\bf1}{1}+\frac{\bf4}{2}+\frac{\bf6}{3}+\frac{\bf4}{4}+\frac{\bf1}{5} =\frac{\binom{4}{0}}{1}+\frac{\binom{4}{1}}{2}+\frac{\binom{4}{2}}{3} + \frac{\binom{4}{3}}{4} + \frac{\binom{4}{4}}{5} = \sum\limits_{k=0}^4\binom{n}{k}\frac{1}{k+1} = \frac{2^5 - 1}{5}$$
+
+$$\frac{\bf1}{1}+\frac{\bf5}{2}+\frac{\bf 10}{3}+\frac{ \bf10}{4}+\frac{\bf5}{5}+\frac{\bf1}{6} = \frac{\binom{5}{0}}{1}+\frac{\binom{5}{1}}{2}+\frac{\binom{5}{2}}{3} + \frac{\binom{5}{3}}{4} + \frac{\binom{5}{4}}{5} + \frac{\binom{5}{5}}{6}= \sum\limits_{k=0}^5\binom{n}{k}\frac{1}{k+1} = \frac{2^6 - 1}{6}$$
+
+\item
+\textbf{Use the Binomial Theorem (with $y=1$) and integration (don't forget the constant!) to prove your conjecture.}
+
+Binomial Theorem: $(x+y)^n=\sum\limits_{k=0}^n\binom{n}{k}x^ky^{n-k}$
+
+Let $y = 1$. Then we have: $(x+1)^n=\sum\limits_{k=0}^n\binom{n}{k}x^k1^{n-k}=\sum\limits_{k=0}^n\binom{n}{k}x^k$
+
+Then we integrate both sides with respect to $x$:
+
+\begin{align*}
+    \int (x+1)^n \,dx &= \int\sum\limits_{k=0}^n\binom{n}{k}x^k \,dx \\
+    \frac{(x+1)^{n+1}}{n+1} &= \sum\limits_{k=0}^n\binom{n}{k}\frac{x^{k+1}}{k+1} + C\\
+\end{align*}
+
+We need to find the constant $C$. Let $x = 0$, then we have:
+
+\begin{align*}
+    \frac{(0+1)^{n+1}}{n+1} &= \sum\limits_{k=0}^n\binom{n}{k}\frac{0^{k+1}}{k+1} + C\\
+    \frac{1}{n+1} &= C \text{ (since $\sum\limits_{k=0}^n\binom{n}{k}\frac{0^{k+1}}{k+1} = \sum\limits_{k=0}^n\binom{n}{k}\frac{0}{k+1} = 0$)}\\
+    \text{Therefore, we have: } \frac{(x+1)^{n+1}}{n+1} &= \sum\limits_{k=0}^n\binom{n}{k}\frac{x^{k+1}}{k+1} + \frac{1}{n+1}
+\end{align*}
+
+Let $x=1$, then we have:
+
+\begin{align*}
+    \frac{(1+1)^{n+1}}{n+1} &= \sum\limits_{k=0}^n\binom{n}{k}\frac{1^{k+1}}{k+1} + \frac{1}{n+1}\\
+    \frac{2^{n+1}}{n+1} &= \sum\limits_{k=0}^n\binom{n}{k}\frac{1}{k+1} + \frac{1}{n+1}\\
+    \frac{2^{n+1}-1}{n+1}&= \sum\limits_{k=0}^n\binom{n}{k}\frac{1}{k+1}\\
+\end{align*}
+
+Therefore, the conjecture is proven.
+
+\end{enumerate}
+\vskip 15 pt
+
+\item 
+\textbf{Find some interesting patterns/identities related to the binomial coefficients/Pascal's triangle that we have not discussed.  {\bf Do not use the internet for this at all and try to come up with an idea on your own before discussions with others}. If you can prove it, even better. If not, at least give some numerical evidence and a description that shows what is going on (don't just give a formula you can't prove).  You'll get some points for good attempts, so don't stress on this one and have fun!}
+
+I first printed out few of first lines of Pascal's triangle:
+\newpage
+$$1$$
+$$1 \quad 1$$
+$$1\quad 2\quad 1$$
+$$1\quad 3\quad 3\quad 1$$
+$$1\quad 4\quad 6\quad 4\quad 1$$
+$$1\quad 5 \quad 10\quad 10 \quad 5\quad 1$$
+$$1\quad 6 \quad 15\quad 20 \quad 15\quad 6 \quad 1$$
+
+I started by indexing the rows: the top row is row 0, the next one is row 1, ... While I was investigating the patterns of Pascal's triangle, in a couple of first rows, I realized that the sequence of numbers on each row does have a pattern: $1 = 11^0$, $11 = 11^1$, $121 = 11^2$, $1331 = 11^3$, and $14641 =  11^4$. From this, I realized that the digits on the $i^{th}$ row on Pascal's triangle seem to represent the value of $11^i$. However, everything does not feel right for the $5{th}$ and later rows since the binomial coefficients become multi-digit numbers. For example, for the $5{th}$ row, when we combine the digits together, we have the number $15101051$, which is definitely not a power of 11.
+
+Besides combining the numbers naively, I also tried playing around with the expanded notation, and I did figure out an interesting pattern:
+
+$$1 \times  10^0 = \sum\limits_{i=0}^{0}\binom{0}{i}10^i= 11^0$$
+
+$$1 \times  10^0 + 1 \times 10^1 = 11 = \sum\limits_{i=0}^{1}\binom{1}{i}10^i = 11^1$$
+
+$$1 \times  10^0 + 2 \times 10^1 + 1 \times 10^2 = \sum\limits_{i=0}^{2}\binom{2}{i}10^i = 121 = 11^2$$
+
+$$1 \times  10^0 + 3 \times 10^1 + 3 \times 10^2 + 1 \times 10^3 = \sum\limits_{i=0}^{3}\binom{3}{i}10^i = 1331 = 11^3$$
+
+$$1 \times  10^0 + 4 \times 10^1 + 6 \times 10^2 + 4 \times 10^3 + 1 \times 10^4= \sum\limits_{i=0}^{4}\binom{4}{i}10^i = 14641 = 11^4$$
+
+$$1 \times  10^0 + 5 \times 10^1 + 10 \times 10^2 + 10 \times 10^3 + 5 \times 10^4 + 1 \times 10^5= \sum\limits_{i=0}^{5}\binom{5}{i}10^i = 161051 = 11^5$$
+
+$$1 \times  10^0 + 6 \times 10^1 + 15 \times 10^2 + 20 \times 10^3 + 15 \times 10^4 + 6 \times 10^5 + 1 \times 10^6= \sum\limits_{i=0}^{6}\binom{6}{i}10^i =  1771561 = 11^6$$
+
+I then see the pattern $\sum\limits_{i=0}^{n}\binom{n}{i}10^i = \sum\limits_{i=0}^{n}\binom{n}{i}10^i1^{n-i} = (10 + 1)^n = 11^n$, which is a direct application of the Binomial Theorem.
+
+\end{enumerate}
+
+
+\end{document}
