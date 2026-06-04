@@ -1,0 +1,70 @@
+\documentclass{beamer}  % This is the document class that makes presentations.
+\usepackage{amsmath,amssymb,amsthm,pstricks,pst-node,pst-3d,tikz}
+\usetheme{JuanLesPins}
+\usecolortheme{rose}
+
+\renewcommand{\sc}[1]{\ensuremath \mathcal{#1}}
+\newtheorem{question}{Question}
+\newtheorem{remark}{Remark}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{prop}{Proposition}
+\definecolor{magenta}{rgb}{0.96,0,0.722}
+\definecolor{darkgreen}{rgb}{0,0.60,0}
+\definecolor{cobalt}{rgb}{.239,.569,.251}
+\definecolor{dpink}{rgb}{.78,.082,.522}
+
+
+\title{The Title Goes Here}
+\author{Your Name\\ Affiliation perhaps?\\Other?}
+\date{\null}
+
+\begin{document}
+\begin{frame}
+\maketitle
+\vspace{-.5 in}
+%\begin{center}
+%\includegraphics[height=37mm]{phd.jpeg}
+%\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame} % a new frame
+\frametitle{THIS SHOULD BE YOUR TITLE} %Title at the top
+
+\begin{center}
+This is the sentence I want people to read first.  It is the first line of the first frame.
+\end{center}
+
+\pause  % This command makes the two parts appear one AFTER the other instead of the whole slide at once.
+
+
+\begin{center}
+This is the sentence I want people to read second.  It gets revealed after the first. %because of \pause
+\end{center}
+
+\pause % oooh, a third sentence will arrive soon!
+
+Hey, I have another line now!  It has some math in it, too.
+$$\left[\begin{array}{cc}
+1&2\\
+3&4\end{array}\right]$$
+
+\end{frame}  % This ends the page!
+
+%%%%%%%%%%%%%%%%%%%%%%%%% % I like to separate frames with percent signs.
+
+\begin{frame}  % This starts a brand new frame.
+\frametitle{ TITLE for the second frame}
+
+There is only one part to this slide (no pauses).
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
