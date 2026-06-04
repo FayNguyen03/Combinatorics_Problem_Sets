@@ -1,0 +1,855 @@
+\documentclass[10pt]{article}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{youngtab}
+
+\usepackage{amsmath, amssymb,graphicx,youngtab,tikz}
+\textheight9.25in
+\textwidth17cm
+\oddsidemargin0cm
+\evensidemargin0cm
+\setlength{\topmargin}{-0.8in}
+
+\newcommand{\hs}{\heartsuit}
+\newcommand{\sps}{\spadesuit}
+\newcommand{\cs}{\clubsuit}
+\newcommand{\ds}{\diamondsuit}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\qbinom}[3] {{#1 \brack #2}_{#3}}
+
+\pagestyle{empty}
+
+
+\begin{document}
+\begin{center}
+\textbf{Math 364  \qquad Spring 2026 Take-Home \#2\qquad Due Thursday April 30, 2026 (9 PM)}\\
+\textbf{Tran Khanh Tra (Fay) Nguyen}
+\end{center}
+{\bf{Instructions:}} 
+\begin{itemize}
+\item
+You should show and thoroughly explain all of your work for each prompt.
+\item
+In addition to mathematical correctness, you will be evaluated on the quality and clarity of your writing.  State all assumptions at the beginning and when they are used and state when conclusions are made. Use punctuation and that {\it all} mathematical symbols, letters, and notation are in ``math mode" (i.e. using \$).
+   
+\item
+You may reference theorems from class and theorems that you have correctly proved in homework (if you did it correctly), but all other results must be proved.  One exception to this is if I ask you to do something that has already been done, then you must do it again.  
+\item
+You may use the Overleaf class notes, our Moodle site, and your own notes from class.  You may use {\it Mathematica} if you ever need it.  Just say what you typed into {\it Mathematica} and what output it gave you.  You may not communicate with anyone but me about \textit{anything} related to your exam.  No other human, AI, written, library, or internet sources (other than to look up \LaTeX  \hspace{.005cm} symbols) are allowed.  
+\item
+Consider the pledge after you have completely finished your work then turn in BOTH your LaTeX file and PDF on Moodle labeled LASTNAMETakeHome2.pdf.
+\end{itemize}
+\vskip .1cm
+
+
+\begin{enumerate}
+
+
+%%%%%% PROBLEM 1 %%%%%%%%%%%
+\item (10 points)
+\textbf{Let $d_n$ be the number of tilings of a $1\times n$ board using tiles that are $1\times k$ in size for {\it any odd value} of $k$.}
+\begin{enumerate}
+\item
+\textbf{Calculate $d_n$ for $1\leq n\leq 5$.}
+
+We can only use monominoes ($1 \times 1$ tile - $M$), triominoes ($1 \times 3$ tile - $T$), and pentominoes ($1 \times 5$ tile - $P$) for the tilings.
+
+The possible tilings for the board with size $1 \times n$:
+
+\begin{itemize}
+    \item $n = 1$: $M$ ($d_1 = 1$)
+    \item $n = 2$: $MM$ ($d_2 = 1$)
+    \item $n = 3$: $MMM$, $T$  ($d_3 = 2$)
+    \item $n = 4$: $MMMM$, $TM$, $MT$  ($d_4 = 3$)
+    \item $n = 5$: $MMMMM$, $TMM$, $MTM$, $MMT$, $P$  ($d_5 = 5$)
+\end{itemize}
+
+\item
+\textbf{Conjecture and prove a (closed) formula for $d_n$.}
+
+Now we can only use tiles of size $1 \times k$.
+
+Let $d_n$ with $n \in \mathbb{N}^*$ be the number of tilings of a $1 \times n$ board using only tiles of size $1 \times k$, $k$ is odd (Obviously, we have $d_0 = 1$). 
+
+If $n \equiv 0 \pmod 2$, we have the maximum value of $k$ can be $n-1$. If $n \equiv 1 \pmod 2$, we have the maximum value of $k$ can be $n$. 
+
+Let $d_n$ with $n \in \mathbb{N}^*$ be the number of tilings of a $1 \times n$ board using only tiles of size $1 \times k $, for $ k \in \mathbb{N}^*$, and $1 \leq k \leq n$.
+
+With a $1 \times 1$ board, there is only one way of tiling by placing one tile with size $1 \times 1$ or $d_1 = 1$.
+
+With a $1 \times 2$ board, there is only one way of tiling by placing two tiles with size $1 \times 1$ or $d_2 = 1$.
+
+With a $1 \times n$ board with $n \in \mathbb{N}, n \geq 3$, we consider the starting scenario of starting the tiling with size $1 \times k$, and  we need to do the tiling for the remaining $n-k$ squares of the board. There are $d_{n-k}$ ways to do the tilings for the remaining squares.
+ 
+ If $n \equiv 1 \pmod 2$, the number of tilings of a $1 \times n$ board with odd-length tiles is 
+
+ $$d_n = d_{n-1} + d_{n-3} + \ldots + d_2 + d_0$$
+
+ If $n \equiv 0 \pmod 2$, the number of tilings of a $1 \times n$ board with odd-length tiles is 
+
+ $$d_n = d_{n-1} + d_{n-3} + \ldots + d_3 + d_1$$
+
+Then we consider the number of tilings of a $1 \times (n-2)$ board with $n \in \mathbb{N}, n \geq 3$. With a $1 \times (n-2)$ board with $n \in \mathbb{N}, n \geq 3$, we consider the starting scenario of starting the tiling with size $1 \times k$ ($k$ is odd), and we need to do the tiling for the remaining $n-2-k$ squares of the board. There are $d_{n-2-k}$ ways to do the tilings for the remaining squares. 
+
+If $n \equiv n-2  \equiv 1 \pmod 2$, the number of tilings of a $1 \times (n-2)$ board with odd-length tiles is 
+
+ $$d_{n-2} = d_{n-3} + d_{n-5} + \ldots + d_2 + d_0$$
+
+ If $n \equiv n-2 \equiv 0 \pmod 2$, the number of tilings of a $1 \times n$ board with odd-length tiles is 
+
+  $$d_{n-2} = d_{n-3} + d_{n-5} + \ldots + d_3 + d_1$$
+
+For both cases of parity of $n$, we have:
+
+$$d_n - d_{n-2} = \left(d_{n-1} + d_{n-3} + \ldots\right) - \left(d_{n-3} + d_{n-5} + \ldots \right) = d_{n-1}$$
+
+Therefore, we have: $d_n = d_{n-1} + d_{n-2}$.
+
+We have the recurrence relation of the number of tilings of a board $1\times n$ with the tiles of size $1 \times k$ with $k$ odd is $ d_1=d_2=1, d_n = d_{n-1} + d_{n-2}$ with $n \geq 3$. The order of recurrence is 2.
+
+From the recurrence formula, we have the characteristic equation as $x^2 -x -1=0$. We need to find the characteristic roots $\lambda_1, \lambda_2$, and constants $c_1$ and  $c_2$.
+
+\begin{align*}
+    x^2 -x -1&=0\\
+     x^2 - 2 \times \frac{1}{2} \times x + \frac{1}{4}&=\frac{5}{4}\\
+     \left(x - \frac{1}{2}\right)^2&=\frac{5}{4}\\
+     \text{Solving this equation, we have: }\\
+    x = \frac{1 + \sqrt{5}}{2} &\text{ or } x =\frac{1 - \sqrt{5}}{2}
+\end{align*}
+
+From this, we have $\lambda_1=\frac{1 + \sqrt{5}}{2}, \lambda_2=\frac{1 - \sqrt{5}}{2}$. Since $\lambda_1 \neq \lambda_2$, we can substitute the $\lambda_1, \lambda_2$ into this equation: $d_n = c_1\lambda_1^n +  c_2\lambda_2^n $
+
+To find $c_1, c_2$, we need to substitute $d_1$ and $d_2$ to the corresponding equations. We have:
+
+$$\begin{cases}
+d_1 &= c_1\times(\lambda_1)^1+c_2\times(\lambda_2)^1 \\
+d_2 &= c_1\times(\lambda_1)^2+c_2\times(\lambda_2)^2 \
+\end{cases}$$
+
+Then we substitute the values of $\lambda_1$ and $\lambda_2$ into the equations:
+
+$$\begin{cases}
+1 &=  c_1\times\left(\frac{1 + \sqrt{5}}{2}\right)+c_2\times\left(\frac{1 - \sqrt{5}}{2}\right)  \\
+1 &= c_1\times\left(\frac{1 + \sqrt{5}}{2}\right)^2+c_2\times\left(\frac{1 - \sqrt{5}}{2}\right)^2 
+\end{cases}$$
+
+From these two equations, we can calculate the value of $c_1$ and $c_2$:
+
+$$\begin{cases}
+c_1 = \frac{1}{\sqrt{5}}\\
+c_2 = -\frac{1}{\sqrt{5}}
+\end{cases}$$
+
+Therefore, the closed formula for $d_n$:
+
+$$d_n=\frac{1}{\sqrt{5}}\times \left(\frac{1 + \sqrt{5}}{2}\right)^n -\frac{1}{\sqrt{5}}\times \left(\frac{1 - \sqrt{5}}{2}\right)^n=\frac{1}{\sqrt{5}}\times\left[\left(\frac{1 + \sqrt{5}}{2}\right)^n - \left(\frac{1 - \sqrt{5}}{2}\right)^n \right].$$
+
+  
+\end{enumerate}
+		{\footnotesize \it \textbf{Note:} This is like an older problem, but now you get to use monominoes, triominoes, quintominoes, septominoes,...}\\
+
+\vskip .4cm
+
+
+
+
+%%%%%% PROBLEM 2 %%%%%%%%%%%
+\item ($11+2$ points)
+\begin{enumerate}
+	\item
+	\textbf{Let $p_3(n)$ denote the number of partitions of $n$ in which none of the parts are multiples of 3.  With explanation, find the (ordinary) generating function for $p_3(n)$.}
+
+    For every $n \in \mathbb{N}$, $p_3(n)$ is the number of partitions of $n$ in which none of the parts are multiples of 3. Therefore, these partitions can only have parts that have a remainder of $1$ when divided by $3$ ($3k+1$ with $k \in \mathbb{N}$) or have a remainder of $2$ when divided by $3$ ($3k+2$ with $k \in \mathbb{N}$).
+
+    We consider the generating function for parts equal to a positive integer $m \equiv 1 \pmod 3$, by considering the sum created by the parts equal to $m= 3k+1, k \in \mathbb{N}$, which can start from $0$ and increase by $3k+1$. We represent these choices as the exponents of our variable $x$. The generating function for the parts that are equal to $3k+1$ is the sum of all these possibilities:
+    
+    \begin{align*}
+    f_{3k+1}(x) &= x^0+x^{3k+1} + x^{(3k+1)+(3k+1)} + x^{(3k+1)+(3k+1)+(3k+1)} + \ldots  \\
+    &= x^0+x^{3k+1} + x^{(3k+1)\cdot 2} + x^{(3k+1)\cdot 3} + \ldots  \\
+        &= \sum\limits^{\infty}_{n=0}x^{n\cdot(3k+1)}\\
+        &= \frac{1}{1-x^{3k+1}}
+    \end{align*}
+
+    We consider the generating function for parts equal to a positive integer $m \equiv 2 \pmod 3$, by considering the sum created by the parts equal to $m= 3k+2, k \in \mathbb{N}$,, which can start from $0$ and increase by $3k+2$. We represent these choices as the exponents of our variable $x$. The generating function for the parts that are equal to $3k+2$ is the sum of all these possibilities:
+    
+    \begin{align*}
+    f_{3k+2}(x) &= x^0+x^{3k+2} + x^{(3k+2)+(3k+2)} + x^{(3k+2)+(3k+2)+(3k+2)} + \ldots  \\
+    &= x^0+x^{3k+2} + x^{(3k+2)\cdot 2} + x^{(3k+2)\cdot 3} + \ldots  \\
+        &= \sum\limits^{\infty}_{n=0}x^{n\cdot(3k+2)}\\
+        &= \frac{1}{1-x^{3k+2}}
+    \end{align*}
+    
+    From these, we have the generating function for $p_3(n)$ by multiplying the generating functions of parts equal to $3k+1$ and $3k+2$, $k \in \mathbb{N}$, because multiplying terms from each series adds their exponents. Therefore, we have the generating function $f(x)$ of the number of partitions of $n$ whose parts are not a multiple of $3$: 
+    
+    \begin{align*}
+        f(x) &= \prod\limits^{\infty}_{k=0} f_{3k+1}(x) \cdot \prod\limits^{\infty}_{k=0} f_{3k+2}(x)\\
+        &= \prod\limits^{\infty}_{k=0} \frac{1}{(1-x^{3k+1})} \cdot \prod\limits^{\infty}_{k=0} \frac{1}{ (1-x^{3k+2})}\\
+        &= \prod\limits^{\infty}_{k=0} \frac{1}{(1-x^{3k+1})\cdot (1-x^{3k+2})}
+    \end{align*}
+
+	\item
+\textbf{Let $p_{dd}(n)$ denote the number of partitions of $n$ in which every part occurs no more than twice. With explanation, find the (ordinary) generating functions for $p_{dd}(n)$.}
+
+We consider the generating function for parts equal to $k \in \mathbb{N}^*$ by considering the sum created by the parts that are equal to $k$, which can be either $0$ (no $k$), $k$ (with one and only $k$), and $2k$ (with two $k$'s). We represent these choices as the exponents of our variable $x$. The generating function for parts equal to $k$ is the sum of all these possibilities:
+
+\begin{align*}
+g_{k}(x) &= x^0+x^{k}+x^{k+k}\\
+    &= 1 + x^k +x^{k+k}
+\end{align*}
+
+From these, we have the generating function for $p_{dd}(n)$ by multiplying the generating functions of parts equal to $k, k \in \mathbb{N}^*$, because multiplying terms from each series adds their exponents. Therefore, we have the generating function $p_{dd}(n)$ of the number of partitions of $n$ whose distinct parts occur no more than twice: 
+
+\begin{align*}
+    g(x) = \prod\limits^{\infty}_{k=1} g_{k}(x)&= \prod\limits^{\infty}_{k=1} (1 + x^k + x^{2k}) 
+\end{align*}
+
+	\item
+\textbf{Use a bijective proof to show $p_3(n)=p_{dd}(n)$.}\\
+
+    Let $A$ be the set of partitions of $n$ in which none of the parts are multiples of $3$. Let $B$ be the set of partitions of $n$ in which every part occurs no more than twice. 
+    
+    We will define a function $f: A \mapsto B$.
+    
+    With a partition $\pi \in A$ where no parts are multiples of $3$ or each part is either $3k + 1$ or $3k+2$ with $k \in \mathbb{N}$. When we call the function $f(\pi)$, if there is any part of $m$ in this partition that has an occurrence of at least $3$ times, we sum up every $3$ occurrences of $m$ to create a new part $3m$. We will repeat this process for any part that appears at least $3$ times in $\pi$ until no part in the partition appears more than twice. 
+    
+    Because no part appears more than twice, the result partition $\pi^{'} =f(\pi)$ is a partition of $n$ in which every part occurs no more than twice, or $\pi^{'} \in B$.
+
+    We then define a function $g: B \mapsto A$.
+
+    Let $\pi \in B$ be a partition where no part appears more than twice. When we call the function $g(\pi)$, if there is any part of $m$ that is divisible by $3$ ($m \equiv 0 \pmod 3$), we can divide this part into three parts of $\frac{m}{3}$. We will continue this process for any part that is divisible by $3$ until there are no parts left that are multiples of $3$. Since no parts remain that are multiples of $3$, the partition $\pi^{'} = g(\pi)$ belongs to $A$.
+
+    Because summing every three similar parts of size $m$ into one part of size $3m$ is uniquely reversed by splitting a part of size $3m$ into three identical parts of size $m$, these two functions are the inverse of each other. We have $g(f(\pi)) = \pi$ for all partitions $\pi \in A$, and $f(g(\pi')) = \pi'$ for all partitions $\pi' \in B$. Since $f$ has a well-defined inverse $g$, $f$ is a bijection between $A$ and $B$ or
+    
+    $$|A| = |B|$$
+
+    Therefore, we have $p_3(n)=p_{dd}(n)$.
+    
+		{\footnotesize \it  \textbf{Note:} To prove your proposed map is a bijection, explaining how the inverse map is performed will suffice.}
+
+
+	\item {\bf Extra Credit:} \textbf{Use algebra to show the generating functions found in (a) and (b) are equal.}
+
+    We have $u^3-1 = (u-1)(u^2 + u +1)$. Then we can substitute $u = x^k$ into this equation, and we have $x^{3k}-1=(x^k-1)(x^{2k} + x^k +1)$. Hence, we get: $x^{2k} + x^k +1 = \frac{x^{3k}-1}{x^k-1}$.
+
+    We now can transform the generating function of $p_{dd}(n)$ as:
+
+    \begin{align*}
+        g(x) &= \prod\limits^{\infty}_{k=1} (1 + x^k + x^{2k}) \\
+        &= \prod\limits^{\infty}_{k=1}\frac{x^{3k}-1}{x^k-1} \\
+        &= \prod\limits^{\infty}_{k=1}\frac{x^{3k}-1}{x^k-1} \\
+        &= \frac{(x^3-1)(x^6-1)(x^9-1)\ldots}{(x^1-1)(x^2-1)(x^3-1)(x^4-1)(x^5-1)(x^6-1)(x^7-1)(x^8-1)(x^9-1)\ldots} \\
+        &= \frac{1}{(x^1-1)(x^2-1)(x^4-1)(x^5-1)(x^7-1)(x^8-1)\ldots} \\
+        &= \frac{1}{(x^{3 \cdot 0 + 1}-1)(x^{3 \cdot 0 + 2}-1)(x^{3 \cdot 1 + 1}-1)(x^{3 \cdot 1 + 2}-1)(x^{3 \cdot 2 + 1}-1)(,x^{3 \cdot 2 + 2}-1)\ldots} \\
+        &= \prod\limits^{\infty}_{i=0}\frac{1}{(x^{3 \cdot i + 1}-1)(x^{3 \cdot i + 2}-1)} \\
+        &= \prod\limits^{\infty}_{i=0}\frac{1}{(-1)^2 \cdot (1-x^{3 \cdot i + 1})(1-x^{3 \cdot i + 2})} \\
+        &= \prod\limits^{\infty}_{i=0}\frac{1}{(1-x^{3 \cdot i + 1})(1-x^{3 \cdot i + 2})} \\
+        &= f(x)
+    \end{align*}
+    
+    Therefore, the generating function of $p_{3}(n)$ is equal to the generating function of $p_{dd}(n)$.
+\end{enumerate}
+
+\vskip .4cm
+
+
+
+%%%%%% PROBLEM 3 %%%%%%%%%%%
+\item (12 points)\\
+{\bf Definition:} \textbf{Suppose $\pi$ is a permutation of $\left\{1,2,\ldots,n\right\}$.  A \textbf{ladder} in $\pi$ is a maximal-length string of consecutive numbers which are increasing.  For example, when $n=6$ the permutation $\pi = 513426$ breaks up into three ladders (5, 134, and 26) whereas the permutation $\sigma = 123456$ has only one ladder.}\\
+
+\textbf{We define $L(n,k)$ to be the number of permutations of $\left\{1,2,\ldots,n\right\}$ that have exactly $k$ ladders.} 
+
+\begin{enumerate}
+	\item
+	\textbf{Make a triangle (analogous to Pascal's triangle) where the $k$-th entry in the $n$-th row equals $L(n,k)$ for $n=1,2,3,4$.}\\
+
+$$1$$
+$$1 \quad 1$$
+$$1\quad 4\quad 1$$
+$$1\quad 11\quad 11\quad 1$$
+
+		{\footnotesize \it \textbf{Note:} Since there are $n!$ permutations, make sure each row sums to $n!$.}
+
+
+	\item
+	\textbf{Prove that $L(n,k) = L(n, n-k+1)$. How would this fact make it easier for you to calculate rows 5 and 6 in (a)?}\\  
+
+    With $k \in \mathbb{N}^*$, let $A$ be the set of permutations of $\{1,2,3,\ldots,n\}$, where each permutation has $k$ ladders, and $B$ be the set of permutations of  $\{1,2,3,\ldots,n\}$ which each permutation has $n-k+1$ ladders.
+    
+    We need to define the function $f: A \mapsto B$.
+    
+	Let $\pi \in A$, and $\pi$ has $n$ elements:
+
+    $$\pi = a_1a_2a_3\ldots a_{n-1}a_n$$
+
+    If we have a ladder, it means there exists $i \in \mathbb{N}^*, 1 \leq i \leq n - 1$ where $a_i > a_{i+1}$, and two ladders are created from these two numbers. If there are $k$ ladders, there are $k-1$ indices $i$ that satisfy $a_i > a_{i+1}$, and there are $(n-1) - (k-1) = n - k$ indices $i$ that satisfy $a_i < a_{i+1}$ in this permutation.
+
+    When we call the function $f: A \mapsto B$ with $\pi$, we construct a new permutation of $\{1,2,3,\ldots,n-1,n\}$, $\pi^{'}$ such that:
+
+    $$\pi^{'} = (n+1-a_1)(n+1-a_2)(n+1-a_3)\ldots (n+1-a_{n-1})(n+1-a_n)$$
+
+    Since we have $1 \leq a_i \leq n$, we can conclude that $1 \leq n+1 - a_i \leq n$ and with every $1 \leq i < j\leq n$, $a_i \neq a_j$. Therefore, $\pi^{'}$ is a permutation of $\{1,2,3,\ldots,n-1,n\}$.
+    
+    If $1 \leq i < j \leq n$ and $a_i < a_j$, we have $n+1-a_i > n+1-a_j$, and vice versa. 
+
+    In the permutation $\pi$, there are $k-1$ indices $i$ that satisfy $a_i < a_{i+1}$. Therefore, in the permutation $\pi^{'}$, there are $k-1$ indices $i$ that satisfy $n + 1 - a_i < n + 1 - a_{i+1}$, and there are $(n-1) - (k-1) = n - k$ indices $i$ that satisfy $n + 1 - a_i > n + 1 - a_{i+1}$ in this permutation. Therefore, there are $n-k+1$ ladders in this newly created permutation, or $\pi^{'}$ is a permutation of $\{1,2,3,\ldots,n-1,n\}$ where the number of ladders is $n-k+1$ ($\pi^{'} \in B$).
+
+    Since each $\pi \in A$ is a distinct permutation of $\{1,2,3,\ldots,n-1,n\}$, each combination $\pi=a_1a_2\ldots a_n$ is also distinct, which means every permutation $\pi^{'}=f(\pi)$ is also distinct. Therefore, $f$ is \textbf{one-to-one}.
+
+    Let $\pi \in B$, and $\pi$ has $n$ elements:
+
+    $$\pi = b_1b_2b_3\ldots b_{n-1}b_n$$
+
+    If we have a ladder, it means there exists $i \in \mathbb{N}^*, 1 \leq i \leq n - 1$ where $b_i > b_{i+1}$, and two ladders are created from these two numbers. If there are $n-k+1$ ladders, there are $n-k$ indices $i$ that satisfy $a_i > a_{i+1}$, and there are $(n-1) - (n-k) = k-1$ indices $i$ that satisfy $a_i < a_{i+1}$ in this permutation.
+
+    When we call the function $f(\pi^{'})=\pi$, we have each element $a_i$ of $\pi^{'}$ is $n+1-b_i$. Therefore, we have:
+
+    $$\pi^{'} = (n+1-b_1)(n+1-b_2)(n+1-b_3)\ldots (n+1-b_{n-1})(n+1-b_n)$$
+
+    Since we have $1 \leq b_i \leq n$, we can conclude that $1 \leq n+1 - b_i \leq n$ and with every $1 \leq i < j\leq n$, $b_i < b_j$ or $n+1 - b_i > n+1 - b_{i+1} $ . Therefore, $\pi^{'}$ is also a permutation of $\{1,2,3,\ldots,n-1,n\}$.
+    
+    In the permutation $\pi$, there are $n-k$ indices $i$ that satisfy $b_i < b_{i+1}$. Therefore, in the permutation $\pi^{'}$, there are $n-k$ indices $i$ that satisfy $n + 1 - b_i < n + 1 - b_{i+1}$, and there are $(n-1) - (n-k) = k-1$ indices $i$ that satisfy $n + 1 - b_i > n + 1 - b_{i+1}$ in this permutation. Therefore, there are $k$ ladders in this newly created permutation, or $\pi^{'}$ is a permutation of $\{1,2,3,\ldots,n-1,n\}$ where the number of ladders is $k$ ($\pi^{'} \in A$).
+
+    Therefore, $f$ is $\textbf{onto}$.
+
+    Since $f$ is both onto and one-to-one, $f$ is a bijection. Therefore, we have $|A| = |B|$ or $L(n,k) = L(n, n-k+1)$.
+    
+    When I calculate row $5$, I only need to calculate the value: $L(5,1)= 1, L(5,2),$ and $L(5,3)$ since we have $L(5,1)=L(5,5)$ and $L(5,2)=L(5,4)$.
+
+     When I calculate row $6$, I only need to calculate the value: $L(6,1)= 1, L(6,2),$ and $L(6,3)$ since we have $L(6,1)=L(6,6)$, $L(6,2)=L(6,5)$, and $L(6,3)=L(6,4)$.
+     
+	\item
+	\textbf{Prove that $L(n,k) = (n-k+1)L(n-1,k-1) + kL(n-1,k)$.}\\
+
+    We have $L(n,k)$ is the number of permutations of $n$ that has $k$ ladders, or there are $k-1$ indices $i$ ($1 \leq i \leq n-1$) that satisfy $a_i > a_{i+1}$ in the permutation. We also have $L(n-1,k-1)$ is the number of permutations of $n-1$ that has $k-1$ ladders, or there are $k-2$ indices $i$ ($1 \leq i \leq n-2$) that satisfy $a_i > a_{i+1}$ in the permutation. Finally, we have $L(n-1,k)$ is the number of permutations of $n-1$ that has $k$ ladders, or there are $k-1$ indices $i$ ($1 \leq i \leq n-2$) that satisfy $a_i > a_{i+1}$ in the permutation.
+
+    Let $A$ be the set of permutations of $n$ that has $k$ ladders. Let $B$ be the set of permutations of $n-1$ that has $k-1$ ladders. Let $C$ be the set of permutations of $n-1$ that has $k$ ladders.
+
+    With a permutation $\pi_{n-1} \in C$, there are $k-1$ indices $i$ ($1 \leq i \leq n-2$) that satisfy $a_i > a_{i+1}$ in the permutation. 
+
+    $$\pi_{n-1} = a_1a_2a_3\underbrace{\ldots a_i}_{\text{ladder $A$}}\underbrace{ a_{i+1}\ldots}_{\text{ladder $B$}} a_{n-1}$$
+    
+    The largest element of this permutation is $n-1$. Now we can construct a new permutation of $\{1,2,3,\ldots,n-1,n\}$ $\pi_n$ by adding $n$ to the permutation $\pi_{n-1}$. We can add $n$ between any pair of $a_i, a_{i+1}$ that has $n > a_i > a_{i+1}$:
+
+    $$\pi_{n} = a_1a_2a_3\underbrace{\ldots a_in}_{\text{ladder $A$}}\underbrace{ a_{i+1}\ldots}_{\text{ladder $B$}} a_{n-1}$$
+
+    Since we have $n > a_i$, $n$ belongs to ladder $A$. We also have $n > a_{i+1}$, so ladder $B$ remains the same.
+
+    There are $k-1$ ways to add $n$ between any pair of $a_i, a_{i+1}$ that has $n > a_i > a_{i+1}$. We can also add $n$ at the end of the permutation $\pi_{n-1}$, and the ladders still remain the same.
+
+    $$\pi_{n} = a_1a_2a_3\underbrace{\ldots a_i}_{\text{ladder $A$}}\underbrace{ a_{i+1}\ldots}_{\text{ladder $B$}} a_{n-1}n$$
+
+    Therefore, from each permutation in $C$, there are $(k-1)+1$ ways to construct a new permutation of $\{1,2,3,\ldots,n-1,n\}$ that has $k$ ladders.
+
+    With a permutation $\pi_{n-1} \in B$, there are $k-2$ indices $i$ ($1 \leq i \leq n-2$) that satisfy $a_i > a_{i+1}$ in the permutation. Therefore, there are $n-2 - (k-2)=n-k$ indices $i$ ($1 \leq i \leq n-2$) that satisfy $a_i < a_{i+1}$ in the permutation.
+
+    $$\pi_{n-1} = a_1a_2a_3\underbrace{\ldots a_ia_{i+1}\ldots}_{\text{ladder $A$}} a_{n-1}$$
+    
+    The largest element of this permutation is $n-1$. Now we can construct a new permutation of $\{1,2,3,\ldots,n-1,n\}$ $\pi_n$ by adding $n$ to the permutation $\pi_{n-1}$. We can add $n$ between any pair of $a_i, a_{i+1}$ that has $a_i < a_{i+1} < n$:
+
+     $$\pi_{n} = a_1a_2a_3\underbrace{\ldots a_in}_{\text{ladder $A_1$}}\underbrace{a_{i+1}\ldots}_{\text{ladder $A_2$}}a_{n-1}$$
+
+    Since we have $n > a_i$, $n$ belongs to the ladder that $a_i$ belongs to. However, now we also have $n > a_{i+1}$, so $a_{i+1}$ and the remaining of the original ladder $A$ cannot belong to the ladder that $a_i$ and $n$ belong to. Therefore, we must split the ladder $A$ into two ladders $A_1$ and $A_2$ after adding $n$ between $a_i$ and $a_{i+1}$.
+
+    There are $n-k$ ways to adding $n$ between any pair of $a_i, a_{i+1}$ that has $a_i < a_{i+1} < n$. We can also add $n$ at the beginning of the permutation $\pi_{n-1}$ to create a new ladder.
+
+    $$\pi_{n} = \underbrace{n}_{\text{the first ladder}}a_1a_2a_3\underbrace{\ldots a_ia_{i+1}\ldots}_{\text{ladder $A$}} a_{n-1}$$
+
+    Therefore, from each permutation in $B$, there are $n-k+1$ ways to construct a new permutation of $\{1,2,3,\ldots,n-1,n\}$ that has $k$ ladders.
+
+    Therefore, we can conclude that:
+
+    $$L(n,k) = (n-k+1)L(n-1,k-1) + kL(n-1,k)$$
+    
+	{ \footnotesize \it \textbf{Note:} You do \underline{not} need the result of part (b) for this.}
+
+\end{enumerate}
+
+
+\vskip .5cm
+
+
+
+%%%%%% PROBLEM 4 %%%%%%%%%%%
+\item  (12 points)\\
+\textbf{Suppose $\pi=a_1a_2\cdots a_n$ is a permutation of $\left\{1,2,\ldots,n\right\}$.   Put $\pi$ to the right of a hole in the ground.   Then, follow the following rules, depending on which of three possible situations applies:}
+ \begin{enumerate}
+	\item[(I)]
+	If the entry $x$ of $\pi$ just to the right of the hole is smaller than the top number $y$ in the hole, {\bf insert} $x$ in the hole.
+
+	\item[(II)]
+	If the entry $x$ of $\pi$ just to the right of the hole is larger than the top number $y$ in the hole, {\bf remove} $y$ from the hole and put it to the left.
+
+	\item[(III)]
+	If no entries of $\pi$ remain to the right of the hole, {\bf remove} the top number $y$ from the hole and put it to the left.
+
+\end{enumerate}
+
+\textbf{We are not done until all entries of $\pi$ are to the left of the hole.}
+
+\textbf{Here is an example with $\pi=4213$, where the rule used is shown for each step:}
+\begin{center}.  %Please do not ask how long it took me to draw this in LaTeX.
+\begin{tikzpicture}
+\draw (-2,1) -- (-1.5,1)--(-1.5,0)--(-1,0)--(-1,1)--(-0.5,1);
+\fill (-.9,1) circle(0pt) node[above=1pt]{$4$};
+\fill (-.7,1) circle(0pt) node[above =1pt]{$2$};
+\fill (-.5,1) circle(0pt) node[above =1pt]{$1$};
+\fill (-.3,1) circle(0pt) node[above =1pt]{$3$};%%
+
+\draw (1,1) -- (1.5,1)--(1.5,0)--(2,0)--(2,1)--(2.5,1);
+\fill (2.1,1) circle(0pt) node[above=1pt]{$2$};
+\fill (2.3,1) circle(0pt) node[above =1pt]{$1$};
+\fill (2.5,1) circle(0pt) node[above =1pt]{$3$};
+\fill (1.75,0) circle(0pt) node[above =1pt]{$4$};%%
+
+\draw (4,1) -- (4.5,1)--(4.5,0)--(5,0)--(5,1)--(5.5,1);
+\fill (5.1,1) circle(0pt) node[above=1pt]{$1$};
+\fill (5.3,1) circle(0pt) node[above =1pt]{$3$};
+\fill (4.75,.3) circle(0pt) node[above =1pt]{$2$};
+\fill (4.75,0) circle(0pt) node[above =1pt]{$4$};%%
+
+\draw (7,1) -- (7.5,1)--(7.5,0)--(8,0)--(8,1)--(8.5,1);
+\fill (8.1,1) circle(0pt) node[above=1pt]{$3$};
+\fill (7.75,.6) circle(0pt) node[above =1pt]{$1$};
+\fill (7.75,.3) circle(0pt) node[above =1pt]{$2$};
+\fill (7.75,0) circle(0pt) node[above =1pt]{$4$};%%
+
+\draw (10,1) -- (10.5,1)--(10.5,0)--(11,0)--(11,1)--(11.5,1);
+\fill (11.1,1) circle(0pt) node[above=1pt]{$3$};
+\fill (10.75,.3) circle(0pt) node[above =1pt]{$2$};
+\fill (10.75,0) circle(0pt) node[above =1pt]{$4$};
+\fill (9.8,1) circle(0pt) node[above =1pt]{$1$};%%
+
+\fill (.25,0) circle(0pt) node[above =0pt]{$\underset{(I)}{\longrightarrow}$};
+\fill (3.25,0) circle(0pt) node[above =0pt]{$\underset{(I)}{\longrightarrow}$};
+\fill (6.25,0) circle(0pt) node[above =0pt]{$\underset{(I)}{\longrightarrow}$};
+\fill (9.25,0) circle(0pt) node[above =0pt]{$\underset{(II)}{\longrightarrow}$};
+\fill (12.25,0) circle(0pt) node[above =0pt]{$\underset{(II)}{\longrightarrow}$};%%
+\end{tikzpicture}
+\vskip .5cm
+\begin{tikzpicture}
+\draw (2.5,-1) -- (3,-1)--(3,-2)--(3.5,-2)--(3.5,-1)--(4,-1);
+\fill (3.6,-1) circle(0pt) node[above=1pt]{$3$};
+\fill (3.25,-2) circle(0pt) node[above =1pt]{$4$};
+\fill (2.5,-1) circle(0pt) node[above =1pt]{$2$};
+\fill (2.3,-1) circle(0pt) node[above =1pt]{$1$};%%
+
+\draw (5.5,-1) -- (6,-1)--(6,-2)--(6.5,-2)--(6.5,-1)--(7,-1);
+\fill (6.25,-1.7) circle(0pt) node[above=1pt]{$3$};
+\fill (6.25,-2) circle(0pt) node[above =1pt]{$4$};
+\fill (5.5,-1) circle(0pt) node[above =1pt]{$2$};
+\fill (5.3,-1) circle(0pt) node[above =1pt]{$1$};%%
+
+\draw (8.5,-1) -- (9,-1)--(9,-2)--(9.5,-2)--(9.5,-1)--(10,-1);
+\fill (8.7,-1) circle(0pt) node[above=1pt]{$3$};
+\fill (9.25,-2) circle(0pt) node[above =1pt]{$4$};
+\fill (8.5,-1) circle(0pt) node[above =1pt]{$2$};
+\fill (8.3,-1) circle(0pt) node[above =1pt]{$1$};%%
+
+\draw (11.5,-1) -- (12,-1)--(12,-2)--(12.5,-2)--(12.5,-1)--(13,-1);
+\fill (11.7,-1) circle(0pt) node[above=1pt]{$3$};
+\fill (11.9,-1) circle(0pt) node[above =1pt]{$4$};
+\fill (11.5,-1) circle(0pt) node[above =1pt]{$2$};
+\fill (11.3,-1) circle(0pt) node[above =1pt]{$1$};%%
+
+\fill (4.75,-2) circle(0pt) node[above =0pt]{$\underset{(I)}{\longrightarrow}$};
+\fill (7.75,-2) circle(0pt) node[above =0pt]{$\underset{(III)}{\longrightarrow}$};
+\fill (10.75,-2) circle(0pt) node[above =0pt]{$\underset{(III)}{\longrightarrow}$};
+\fill (13.75,-1.5) circle(0pt) node[above =0pt]{{\it done!}};%%
+\end{tikzpicture}
+\end{center}
+
+
+{\bf Definition:}  A permutation is \textbf{orderable} if the above process results in $1,2,\ldots,n$ occurring in order to the left of the hole.\\
+
+
+\textbf{Let $a_n$ be the number of orderable permutations of $\left\{1,2,\ldots,n\right\}$.}
+
+\begin{enumerate}
+	\item
+	\textbf{Do the above process for all six permutations of $\left\{1,2,3\right\}$.  Which ones are orderable?}
+
+    \emph{Note:} In each table, the sequence of numbers under Left/Right of the Hole is printed out from left to right while the sequence of numbers under In the Hole is printed out from the top to bottom.
+
+    
+    We consider applying this process to every permutation of the set $\{1,2,\ldots, n\}$ with:
+    \begin{itemize}
+        \item $n=1$: $1$
+        \begin{itemize}
+            \item Case $\pi = 1$ (orderable):
+                \begin{align*}
+                    \begin{tabular}{|c|c|c|c|c|}
+                        \hline
+                         \text{Step}& \text{Situation} & \text{Left of the Hole} & \text{In the Hole} & \text{Right of the Hole}\\
+                         \hline
+                         0& \text{start} &  &  & 1\\
+                         \hline
+                         1& \text{I} &  & 1 & \\
+                         \hline
+                         2& \text{III} & 1 &  & \\
+                         \hline
+                    \end{tabular}
+                \end{align*}
+        \end{itemize}
+        Therefore, $a_1 = 1$.
+        \item $n=2$: $12$, $21$
+            \begin{itemize}
+                \item Case $\pi = 12$ (orderable):
+                    \begin{align*}
+                        \begin{tabular}{|c|c|c|c|c|}
+                            \hline
+                             \text{Step}& \text{Situation} & \text{Left of the Hole} & \text{In the Hole} & \text{Right of the Hole}\\
+                             \hline
+                             0& \text{start} &  &  & 12\\
+                             \hline
+                             1& \text{I} &  & 1 & 2\\
+                             \hline
+                             2& \text{II} & 1 &  & 2\\
+                             \hline
+                             3& \text{I} & 1 & 2 & \\
+                             \hline
+                             4& \text{III} & 12 &  & \\
+                             \hline
+                        \end{tabular}
+                    \end{align*}
+                \item Case $\pi = 21$ (orderable):
+                    \begin{align*}
+                        \begin{tabular}{|c|c|c|c|c|}
+                            \hline
+                             \text{Step}& \text{Situation} & \text{Left of the Hole} & \text{In the Hole} & \text{Right of the Hole}\\
+                             \hline
+                             0& \text{start} &  &  & 21\\
+                             \hline
+                             1& \text{I} &  & 2 & 1\\
+                             \hline
+                             2& \text{I} & & 12 & \\
+                             \hline
+                             3& \text{III} & 1 & 2 & \\
+                             \hline
+                             4& \text{III} & 12 &  & \\
+                             \hline
+                        \end{tabular}
+                    \end{align*}
+            \end{itemize}
+            Therefore, $a_2 = 2$.
+        \item $n=3$: $123$, $132$, $213$, $231$, $312$, $321$
+            \begin{itemize}
+                \item Case $\pi = 123$ (orderable):
+                    \begin{align*}
+                        \begin{tabular}{|c|c|c|c|c|}
+                            \hline
+                             \text{Step}& \text{Situation} & \text{Left of the Hole} & \text{In the Hole} & \text{Right of the Hole}\\
+                             \hline
+                             0& \text{start} &  &  & 123\\
+                             \hline
+                             1& \text{I} &  & 1 & 23\\
+                             \hline
+                             2& \text{II} & 1 &  & 23\\
+                             \hline
+                             3& \text{I} & 1 & 2 & 3\\
+                             \hline
+                             4& \text{II} & 12 &  & 3\\
+                             \hline
+                             5& \text{I} & 12 & 3 & \\
+                             \hline
+                             6& \text{III} & 123 &  & \\
+                             \hline
+                        \end{tabular}
+                    \end{align*}
+                \item Case $\pi = 132$ (orderable):
+                    \begin{align*}
+                        \begin{tabular}{|c|c|c|c|c|}
+                            \hline
+                             \text{Step}& \text{Situation} & \text{Left of the Hole} & \text{In the Hole} & \text{Right of the Hole}\\
+                             \hline
+                             0& \text{start} &  &  & 132\\
+                             \hline
+                             1& \text{I} &  & 1 & 32\\
+                             \hline
+                             2& \text{II} &1 &  & 32\\
+                             \hline
+                             3& \text{I} & 1 & 3 & 2\\
+                             \hline
+                             4& \text{I} & 1 & 23 & \\
+                             \hline
+                             5& \text{III} & 12 & 3 & \\
+                             \hline
+                             6& \text{III} & 123 &  & \\
+                             \hline
+                        \end{tabular}
+                    \end{align*}
+                \item Case $\pi = 213$ (orderable):
+                    \begin{align*}
+                        \begin{tabular}{|c|c|c|c|c|}
+                            \hline
+                             \text{Step}& \text{Situation} & \text{Left of the Hole} & \text{In the Hole} & \text{Right of the Hole}\\
+                             \hline
+                             0& \text{start} &  &  & 213\\
+                             \hline
+                             1& \text{I} &  & 2 & 13\\
+                             \hline
+                             2& \text{II} & & 12 & 3\\
+                             \hline
+                             3& \text{II} & 1 & 2 & 3\\
+                             \hline
+                             4& \text{II} & 12 &  & \\
+                             \hline
+                             5& \text{I} & 12 & 3 & \\
+                             \hline
+                             6& \text{III} & 123 &  & \\
+                             \hline
+                        \end{tabular}
+                    \end{align*}
+                    \item Case $\pi = 231$:
+                    \begin{align*}
+                        \begin{tabular}{|c|c|c|c|c|}
+                            \hline
+                             \text{Step}& \text{Situation} & \text{Left of the Hole} & \text{In the Hole} & \text{Right of the Hole}\\
+                             \hline
+                             0& \text{start} &  &  & 231\\
+                             \hline
+                             1& \text{I} &  & 2 & 31\\
+                             \hline
+                             2& \text{II} &2 &  & 31\\
+                             \hline
+                             3& \text{I} & 2 & 3 & 1\\
+                             \hline
+                             4& \text{I} & 2 & 13  & \\
+                             \hline
+                             5& \text{III} & 21 & 3 & \\
+                             \hline
+                             6& \text{III} & 213 &  & \\
+                             \hline
+                        \end{tabular}
+                    \end{align*}
+                    \item Case $\pi = 312$ (orderable):
+                    \begin{align*}
+                        \begin{tabular}{|c|c|c|c|c|}
+                            \hline
+                             \text{Step}& \text{Situation} & \text{Left of the Hole} & \text{In the Hole} & \text{Right of the Hole}\\
+                             \hline
+                             0& \text{start} &  &  & 312\\
+                             \hline
+                             1& \text{I} &  & 3 & 12\\
+                             \hline
+                             2& \text{I} & & 13 & 2\\
+                             \hline
+                             3& \text{II} & 1 & 3 & 2\\
+                             \hline
+                             4& \text{I} & 1 & 23  & \\
+                             \hline
+                             5& \text{III} & 12 & 3 & \\
+                             \hline
+                             6& \text{III} & 123 &  & \\
+                             \hline
+                        \end{tabular}
+                    \end{align*}
+                    \item Case $\pi = 321$ (orderable):
+                    \begin{align*}
+                        \begin{tabular}{|c|c|c|c|c|}
+                            \hline
+                             \text{Step}& \text{Situation} & \text{Left of the Hole} & \text{In the Hole} & \text{Right of the Hole}\\
+                             \hline
+                             0& \text{start} &  &  & 321\\
+                             \hline
+                             1& \text{I} &  & 3 & 21\\
+                             \hline
+                             2& \text{I} & & 23 & 1\\
+                             \hline
+                             3& \text{I} &  & 123 & \\
+                             \hline
+                             4& \text{III} & 1 & 23  & \\
+                             \hline
+                             5& \text{III} & 12 & 3 & \\
+                             \hline
+                             6& \text{III} & 123 &  & \\
+                             \hline
+                        \end{tabular}
+                    \end{align*}
+            \end{itemize}
+            Therefore, $a_3 = 5$.
+    \end{itemize}
+
+	\item
+	\textbf{Prove that $a_n$ satisfies the same recurrence relation as the Catalan numbers.}
+
+    The recurrence relation of the Catalan numbers is
+
+    $$C_n = \sum_{k=1}^nC_{k-1}C_{n-k}.$$
+
+    For $n=0$, the only permutation of the empty set is the empty permutation itself, so $a_0 = 1$. 
+
+    Let $a_n$ be the number of orderable permutations of $\{1,2,3,\ldots,n-1,n\}$.
+    
+    For each orderable permutation $\pi$ of $n$, the largest possible number in this permutation is $n$. We then assume that $n$ is located at the $k^{th}$ position in the permutation $\pi$. We can split this permutation into three parts:
+
+    $$\pi = \underbrace{\pi_1\pi_2\pi_3\ldots \pi_{k-1}}_{\text{permutation of set $A$ ($k-1$ numbers)}}n \underbrace{\pi_{k+1}\ldots \pi_n}_{\text{permutation of set $B$ ($n-k$ numbers)}}$$
+
+    We then put $\pi_n$ to the right of this hole and run the process to get the new permutation and get the permutation of $\{1,2,3,\ldots,n-1,n\}$ that is in order:
+
+    $$\pi^{'}_{n} = 1,2,3,\dots,k-1, k,k+1,\ldots, n-1,n$$
+    
+    Because $n$ is the largest possible number in $\pi$, it cannot be placed into the hole (situation I) if there is any other number currently in the hole. Therefore, the hole must be completely empty when $n$ is moved into it. This implies that every element in $A$ must be fully processed (moved into the hole - situation I - and then moved out to the left side of the ground - situation II) before $n$ is the leftmost entry on the ground to they right of the hole. 
+
+    Besides, because every element in $A$ is processed before $n$, and every element in $B$ is processed after $n$, all elements in $A$ will be to the left of all elements in $B$ in the final process result. In order to make the final sequence to be occurring in order, every element in $A$ must be strictly smaller compared to every element in $B$. Therefore, we have:
+
+    \begin{itemize}
+        \item $A = \{1, 2, \ldots, k-1\}$
+        \item $B = \{k, k+1, \ldots, n-1\}$
+    \end{itemize}
+
+    Then we have:
+    
+    $$\pi^{'}_{n} = \underbrace{1,2,3,\dots,k-1}_{\text{$A'$: permutation of $A$}}, \underbrace{k,k+1,\ldots, n-1}_{\text{$B'$: permutation of $B$}},n$$
+    
+    If we want $\pi^{'}$ to be in order at the end of this process, we need to ensure that the final permutations $A'$ of $A$ and $B'$ of $B$ are also in order. Therefore, the set $A$ and $B$ must also be orderable. 
+
+    With $k-1$ elements in $A$, there are $a_{k-1}$ permutations of set $A$ that satisfy this. 
+
+     We create a new set $B^{''} = \{b \mid \text{for every $a \in B$}, b = a - (k-1)\}$. Therefore, we have $B^{''} = \{1, 2, 3, \ldots, n - k\}$. With $n-k$ elements in $B^{''}$, there are $a_{n-k}$ permutations of set $B^{''}$ that satisfy this. Therefore, there are $a_{n-k}$ permutations of set $B$ that satisfy this. 
+
+     Therefore, with $n$ being located at the $k^{th}$ position in the permutation $\pi$, there are a total of $a_{k-1}a_{n-k}$ permutations of $\pi$ that are orderable.
+
+     Since $k$ can be anywhere from $1$ to $n$, we have the total number of orderable permutations of the set $\{1,2,3,\ldots, n-1,n\}$:
+
+     $$a_n = \sum\limits^{n}_{k=1}a_{k-1}a_{n-k}$$
+
+     Therefore, this number satisfies the same recurrence relation as the Catalan numbers.
+
+     
+	\item
+	\textbf{Prove that $a_n$ is equal to the Catalan number $C_n$ using a bijective proof.}
+
+    Let $\mathcal{C}_{nn}$ be the set of lattice paths that go from $(0,0)$ to $(n,n)$ and do not go above the line $y=x$. We have $C_{n} = |\mathcal{C}_{nn}|$. Each lattice path that goes from $(0,0)$ to $(n,n)$ has $2n$ steps: $n$ UP steps and $n$ RIGHT steps.
+
+    Let $A$ be the set of orderable permutations of $n$, so we have $a_n = |A|$. 
+    
+    For each permutation $\pi \in A$, we do the process mentioned above by moving the numbers in the permutation into the hole ($n$ steps, situation I) and then removing the numbers from the hole to the left side of the hole ($n$ steps, situation II or III). Therefore, there are exactly $2n$ steps we need to take for each permutation to move every number from the right side to the left side of the hole. 
+    
+    We can only remove a number from the hole if there is at least one number in it. This means at any point in time, the number of steps taken that fall under situation I (insertions) is greater than or equal to the number of steps taken that fall under either situation II or III (removals).
+    
+    We define a function $f: A \to \mathcal{C}_{nn}$ by drawing a lattice path from $(0,0)$ to $(n,n)$ using the sorting process of an orderable permutation $\pi$:
+    \begin{itemize}
+        \item Every time we add a number into the hole (situation I), we draw a RIGHT step.
+        \item Every time we remove a number from the hole (situation II or III), we draw an UP step.
+    \end{itemize}
+    
+    Because the number of steps falling under situation I is never smaller than the number of steps falling under situation II or III, the $x$-coordinate will always be greater than or equal to the $y$-coordinate. The resulting lattice path will never cross above the line $y=x$. Therefore, this path validly belongs to $\mathcal{C}_{nn}$.
+    
+    To prove this is a bijection, we define the inverse function $g: \mathcal{C}_{nn} \to A$ by constructing the starting permutation from a lattice path $P \in \mathcal{C}_{nn}$:
+    \begin{itemize}
+        \item Because the permutation $\pi$ is orderable, we have the final permutation on the left of the hole is exactly $1, 2, 3, \ldots, n$.
+        \item Every UP step represents a removal step in the permutation process. Because of the ordered output, the $i^{th}$ UP step must correspond exactly to the removal of the number $i$.
+        \item Every RIGHT step corresponds to a number being inserted from the permutation on the right side. In any valid lattice path, every UP step corresponds to a preceding RIGHT step. 
+        \item By matching the $n$ UP steps to their specific RIGHT steps, we know which number was inserted at each RIGHT step. Reading these insertions in the ascending order gives us the permutation $\pi \in A$.
+    \end{itemize}
+    
+    Because we can perfectly map every orderable permutation to a valid path, and uniquely construct the permutation from the path, these two functions are the inverse of each other. We can conclude that $f$ is a bijection. 
+    
+    Therefore, we have:
+    $$|A| = |\mathcal{C}_{nn}|$$
+    
+    Therefore, $a_n$ is equal to the Catalan number $C_n$.
+    
+    {\footnotesize \it  \textbf{Note:} To prove your proposed map is a bijection, explaining how the inverse map works will suffice.}
+\end{enumerate}
+
+
+\vskip .5cm
+
+
+%%%%%% PROBLEM 5 %%%%%%%%%%%
+\item  (12 points)\\ 
+
+\textbf{For integers $m,k\geq 0$, define $q_{m,k}(x)$ to be the generating function for partitions with {\it at most} $k$ parts, whose largest part is {\it at most} $m$.  So in $q_{m,k}(x)$, the coefficient of $x^n$ is the number of partitions of $n$ which have at most $k$ parts and whose largest part is at most $m$.}\\  
+
+\textbf{Example:} The partitions with at most $k=2$ parts whose largest part is at most $m=3$ are:
+\begin{center}
+\begin{tabular}{cccccccccc}
+ the empty partition($\emptyset$)&1&2&11&3&21&31&22&32&33
+ \end{tabular}
+\end{center}
+Therefore, we get $$q_{3,2}(x) =1+x+2x^2+2x^3+2x^4+x^5+x^6.$$
+
+\begin{enumerate}
+	\item
+	\textbf{Show that for all $m\geq 0$, $q_{m,0}(x) =q_{0,m}(x)=1$.}\\
+    We let $q_{m,0}(x)$ be the generating function for partitions with no part whose largest part is at most $m$. The only partition that satisfies this rule is the empty partition $\emptyset$, which is the partition of $0$. For the part $0$ of the partition, the generating function of the sum of this part contributing to $q_{m,0}(x)$ is $x^0 = 1$. Therefore, we have: $q_{m,0}(x)=1$.
+
+    We have $q_{0,m}(x)$ be the generating function for partitions with at most $m$ parts whose largest part is at most $0$. Since integer partitions use strictly positive integers, the only way to have all parts be $\leq 0$ is to have no parts. Therefore, the only partition that satisfies this rule is the empty partition $\emptyset$, which is the partition of $0$. For the part $0$ of the partition, the generating function of the sum of this part contributing to $q_{0,m}(x)$ is $x^0 = 1$. Therefore, we have: $q_{0,m}(x)=1$.
+    
+
+	\item
+	\textbf{For  $m,k\geq 1$, prove   $$q_{m,k}(x)=q_{m,k-1}(x)+x^k\cdot q_{m-1,k}(x)$$}
+        We have $q_{m,k}(x)$ be the generating function for partitions with at most $k$ parts whose largest part is at most $m$, $q_{m,k-1}(x)$ be the generating function for partitions with at most $k-1$ parts whose largest part is at most $m$, and $q_{m-1,k}(x)$ be the generating function for partitions with at most $k$ parts whose largest part is at most $m-1$.
+
+        Let $\pi$ be a partition with at most $k$ parts whose largest part is at most $m$. We consider two distinct cases of the number of parts:
+
+        \begin{itemize}
+            \item $\pi$ has less than $k$ parts, so $\pi$ has at most $k-1$ parts, and the largest possible part is $m$. Therefore, the generating function of the partitions of this case is $q_{m,k-1}$. 
+            
+            \item $\pi$ has exactly $k$ parts and it is a partition of $n$. We have:
+
+            $$\pi = \pi_1\pi_2\ldots\pi_k$$
+
+            The largest possible value of $\pi_i$ in this partition is $m$. We then create a new partition by subtracting $1$ from each part of the partition:
+
+            $$\pi^{'} = (\pi_1-1)(\pi_2-1)\ldots(\pi_k-1)$$
+
+            Since the largest possible part in $\pi$ has the value of $m$, the largest possible part in $\pi^{'}$ has the value of $m-1$. Therefore, $\pi^{'}$ is a partition with at most $k$ parts (since it has $k$ parts) whose largest part is at most $m-1$. 
+
+            However, $\pi^{'}$ is a partition of $n-k$. Therefore, we need to add $k$ to $\pi^{'}$ to become a partition of $n$. The generating function of $k$ is $x^k$. The generating function of $\pi^{'}$ is $q_{m-1,k}$.
+            
+         \end{itemize}
+        Therefore, we have:
+
+        $$q_{m,k}(x)=q_{m,k-1}(x)+x^k\cdot q_{m-1,k}(x)$$
+        
+	\item
+	\textbf{Give a combinatorial argument that explains why $q_{m,k}(1)=\binom{m+k}{m}$.}\\
+
+    We have $q_{m,k}(x) = a_0 \cdot x^0 + a_1 \cdot x^1 + a_2 \cdot x^2 + a_3 \cdot x^3 + \ldots$ with $a_n$ being the number of partitions with at most $k$ parts whose largest part is at most $m$. Therefore, we have $q_{m,k}(1) = a_0 \cdot 1^0 + a_1 \cdot 1^1 + a_2 \cdot 1^2 + a_3 \cdot 1^3 + \ldots=a_0  + a_1  + a_2 + a_3 + \ldots$ or the total number of partitions with at most $k$ parts whose largest part is at most $m$.
+
+    Every partition that has at most $k$ parts whose largest part is at most $m$ has a Ferrers Diagram that can fit entirely into the $k \times m$ rectangle:
+
+    $$\young(~~~~~,~~~~~,~~~~~,~~~~~,~~~~~)$$
+    
+    For example, we have partition $\pi = \pi_1\pi_2\ldots \pi_{k^{'}}$ where $k^{'} \leq k$ and $\pi_i \leq m$ with $1 \leq i \leq k^{'}$. We mark the boxes that belong to the Ferrers diagram of this partition in this rectangle with $X$:
+
+     $$\young(XXXX~,XXX~~,XX~~~,XX~~~,X~~~~)$$
+
+     We can always draw a lattice path going from the bottom-left corner to the top-right corner of the rectangle and tracing the outer boundary of the Ferrers diagram of the current partition. Therefore, there is a one-to-one relation between the partitions that fit into this rectangle and the lattice paths from $(0,0)$ to $(m,k)$.
+     
+     Therefore, the number of partitions that fit into this rectangle is the number of lattice paths that go from the bottom left corner $(0,0)$ to the top right corner $(k,m)$. Each lattice path needs to go RIGHT for $m$ times and go UP for $k$ times, so there are a total of $k+m$ steps in this lattice path. Therefore, there are $\binom{m+k}{m}$ lattice paths from the bottom left corner $(0,0)$ to the top right corner $(k,m)$, or $\binom{m+k}{m}$ partitions that fit into this rectangle. 
+
+     Hence,  the total number of partitions with at most $k$ parts whose largest part is at most $m$ is $\binom{m+k}{m}$ or $q_{m,k}(1) = \binom{m+k}{m}$.
+
+	{\footnotesize \it  \textbf{Note:} The notation means we have evaluated $q_{m,k}(x)$ at $x=1$.}\\
+		{\footnotesize \it  \textbf{Hint:} What, in our course, has $\binom{m+k}{m}$ counted?}
+
+\end{enumerate}
+
+
+%%%%%%% END OF PROBLEMS  - PLEDGE BELOW %%%%%%%%%%%%
+
+\vskip .7cm
+
+\newpage
+\end{enumerate}
+\vskip .1in
+%\pagebreak
+\setlength{\fboxrule}{2pt}
+\setlength{\fboxsep}{6pt}
+\noindent%
+\hrulefill \\
+\indent \it ``I pledge my honor that during this examination I have neither given nor received assistance not explicitly approved by the professor and that I have seen no dishonest work.''\\
+\rm\vskip0.2cm\noindent
+\noindent\hbox {Signed: Tran Khanh Tra (Fay) Nguyen}
+\vskip0.1in\noindent
+I have intentionally not signed the pledge. \hspace{3mm} \fbox{ }
+\hspace{3mm} (Check only if
+appropriate.)\\
+\vskip .1cm
+\noindent \hrulefill
+
+\end{document}

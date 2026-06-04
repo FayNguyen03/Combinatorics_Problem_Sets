@@ -1,0 +1,398 @@
+ \documentclass[10pt]{article}
+\usepackage{amsmath, amssymb,graphicx,tikz,wasysym,youngtab,comment}
+
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{textcomp}
+\usepackage{mdwlist}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{amsmath, array, graphicx}
+\usepackage{tikz}
+\usepackage{todonotes}
+\usepackage{pgfplots}
+\usepackage{fontawesome}
+\usepackage{enumitem, multicol}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage[makeroom]{cancel}
+\usepackage{booktabs}
+\usepackage{comment}
+\usepackage{alltt}
+\usepackage{pdfpages}
+\usepackage{youngtab}
+%\usepackage[dvips]{graphics}
+\textheight9in
+\textwidth17cm
+\oddsidemargin0cm
+\evensidemargin0cm
+\setlength{\topmargin}{-0.8in}
+
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\bi}{\begin{itemize}}
+
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\dx}{\, dx}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\pp}{\mathbf{p}}
+%\newcommand{\null}{\mathrm{null}}
+\newcommand{\row}{\mathrm{row}}
+\newcommand{\col}{\mathrm{col}}
+\newcommand{\nul}{\mathrm{null}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\nullity}{\mathrm{nullity}}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\pagestyle{empty}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{N}{@{}m{0pt}@{}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}m{#1}}
+\newcommand{\babble}[1]{\marginpar{\flushleft\scriptsize\textsf{#1}}}
+
+\oddsidemargin=0in
+\textwidth=5.75in
+\topmargin=-0.5in
+\textheight=9in
+\renewcommand{\marginparwidth}{81pt}
+
+\begin{document}
+\begin{center}
+Math 364 \quad Spring 2026 \quad Problem Set \# 7\\
+Khanh Tra (Fay) Nguyen Tran
+\end{center}
+
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item
+\textbf{With explanation, find the generating function $f(x)$ (written as a product) for the number of partitions of $n$ whose parts are all odd.}
+
+For every $n \in \mathbb{N}$, $a_n$ is the number of partitions of $n$ whose parts are all odd.
+
+We consider the generating function for parts equal to an odd integer $2k+1, k \in \mathbb{N}$ by considering the sum created by the parts that are equal to $2k+1$, which can start from $0$ and increase by $2k+1$. We represent these choices as the exponents of our variable $x$. The generating function for the parts that are equal to $2k+1$ is the sum of all these possibilities:
+
+\begin{align*}
+f_{2k+1}(x) &= x^0+x^{2k+1} + x^{(2k+1)+(2k+1)} + x^{(2k+1)+(2k+1)+(2k+1)} + \ldots  \\
+&= x^0+x^{2k+1} + x^{(2k+1)\cdot 2} + x^{(2k+1)\cdot 3} + \ldots  \\
+    &= \sum\limits^{\infty}_{n=0}x^{n\cdot(2k+1)}\\
+    &= \frac{1}{1-x^{2k+1}}
+\end{align*}
+
+From these, we have the generating function for $\{a_n\}$ by multiplying the generating functions of parts equal to $2k+1, k \in \mathbb{N}$, because multiplying terms from each series adds their exponents. Therefore, we have the generating function $f(x)$ of the number of partitions of $n$ whose parts are all odd: 
+
+\begin{align*}
+    f(x) = \prod\limits^{\infty}_{k=0} f_{2k+1}(x)&= \prod\limits^{\infty}_{k=0} \frac{1}{1-x^{2k+1}}
+\end{align*}
+\vskip .25cm
+
+\item
+\textbf{With explanation, find the generating function $g(x)$ (written as a product) for the number of partitions of $n$ whose parts are distinct.}
+
+For every $n \in \mathbb{N}$, $b_n$ is the number of partitions of $n$ whose parts are distinct.
+
+We consider the generating function for parts equal to $k \in \mathbb{N}^*$ by considering the sum created by the parts that are equal to $k$, which can be either $0$ (no $k$) or $k$ (with one and only $k$). We represent these choices as the exponents of our variable $x$. The generating function for parts equal to $k$ is the sum of all these possibilities:
+
+\begin{align*}
+g_{k}(x) &= x^0+x^{k}\\
+    &= 1 + x^k
+\end{align*}
+
+From these, we have the generating function for $\{b_n\}$ by multiplying the generating functions of parts equal to $k, k \in \mathbb{N}^*$, because multiplying terms from each series adds their exponents. Therefore, we have the generating function $g(x)$ of the number of partitions of $n$ whose parts are distinct: 
+
+\begin{align*}
+    g(x) = \prod\limits^{\infty}_{k=1} g_{k}(x)&= \prod\limits^{\infty}_{k=1} (1 + x^k) 
+\end{align*}
+
+\vskip .25cm
+
+\item
+\textbf{Using algebra, show that $f(x)$ and $g(x)$ are equal.}
+
+The generating function $f(x)$ of the number of partitions of $n$ whose parts are all odd: 
+
+$$f(x)= \prod\limits^{\infty}_{k=0} \frac{1}{1-x^{2k+1}}$$
+
+The generating function $g(x)$ of the number of partitions of $n$ whose parts are distinct: 
+
+$$g(x) =\prod\limits^{\infty}_{k=1} (1 + x^k) $$
+
+Since $y \in \mathbb{N}, 1-x^{2y} = (1-x^y)(1+x^y)$, we have:
+\begin{align*}
+    g(x) &=\prod\limits^{\infty}_{k=1} (1 + x^k)\\
+    &= \prod\limits^{\infty}_{k=1} \frac{1-x^{2k}}{1-x^k}\\
+    &= \frac{1-x^{2}}{1-x^1} \cdot \frac{1-x^{4}}{1-x^2} \cdot \frac{1-x^{6}}{1-x^3} \cdot \frac{1-x^{8}}{1-x^4} \cdot \frac{1-x^{10}}{1-x^5}  \ldots
+\end{align*}
+
+We can see that for $k\in\mathbb{N}^*$, we have $1-x^{2k}$ in both the numerator and the denominator. We can cancel these out, and we have:
+
+\begin{align*}
+    g(x)
+    &= \frac{1}{1-x^1} \cdot \frac{1}{1-x^3} \cdot \frac{1}{1-x^5}  \ldots \\
+    &=  \prod\limits^{\infty}_{k=0} \frac{1}{1-x^{2k+1}}\\
+    &= f(x)
+\end{align*}
+
+Therefore, we have the generating function $g(x)$ of the number of partitions of $n$ whose parts are distinct, and the generating function $f(x)$ of the number of partitions of $n$ whose parts are all odd are equal. 
+
+\end{enumerate}
+ 
+\vskip 1cm
+
+ 
+ 
+\item
+\textbf{In the generating function for partitions, the power of $x$ keeps track of the number that is being partitioned. Sometimes it is important to keep track of even more than that. For instance, suppose we wish to talk about the number of partitions of $n$ into $k$ parts, something we have already denoted by $p(n, k)$. If we want to find a generating function for $p(n, k)$, we need a way to track both $n$ and $k$. We use a second variable, $y$, to do this.  So, we seek to find $f(x,y) = \ds\sum\limits_{k=0}^{\infty}\sum\limits_{n=0}^{\infty} p(n,k)y^kx^n$.}
+ 
+ \begin{enumerate}
+\item
+\textbf{Find the all the terms of $f(x,y)$ where $0\leq n\leq 5$ {\it and} $0\leq k\leq 5$.}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{c | c c c c c c }
+    $n \setminus k$ & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5}  \\
+    \hline
+    \textbf{0} & 1 & & & & &  \\
+    \textbf{1} & 0 & 1 & & & &  \\
+    \textbf{2} & 0 & 1 & 1 & & &  \\
+    \textbf{3} & 0 & 1 & 1 & 1 & &  \\
+    \textbf{4} & 0 & 1 & 2 & 1 & 1 & \\
+    \textbf{5} & 0 & 1 & 2 & 2 & 1 & 1 \\
+    \end{tabular}
+\end{center}
+\vskip .25cm
+
+\item
+ \textbf{Find, with explanation, the generating function $f(x,y)$ (as an infinite product).}
+
+We consider the generating function for the parts that are equal to the integer $j, j \in \mathbb{N}^*$ by considering the sum created by the parts that are equal to $j$, which can start from $0$ and increase by $j$. We represent these choices as the exponents of our variable $x$. However, because we also need to keep track of the total number of parts, we introduce a second variable $y$, whose exponent represents the frequency (the number of occurrences) of the integer $j$ in the partition. Therefore, the generating functions for parts of every possible $j$:
+
+\begin{align*}
+f_{j}(x,y) &= y^0\cdot x^0+y^1 \cdot x^{j} + y^2 \cdot x^{j+j} + y^3 \cdot x^{j+j+j} + \ldots  \\
+&= y^0\cdot x^{0\cdot j}+y^1 \cdot x^{1\cdot j} + y^2 \cdot x^{2\cdot j} + y^3 \cdot x^{3 \cdot j} + y^4 \cdot x^{4 \cdot j} + \ldots  \\
+&= \sum\limits^{\infty}_{m=0}x^{j\cdot m}y^m\\
+&= \sum\limits^{\infty}_{m=0}(x^jy)^m\\
+    &= \frac{1}{1-x^jy}
+\end{align*}
+
+From these, we have the generating function for the number of partitions of $n$ into $k$ parts by multiplying the generating functions of every part equal to $j, j \in \mathbb{N}^*$, because multiplying terms from each series adds their exponents. Therefore, we have the generating function $f(x,y)$ for the number of partitions of $n$ into $k$ parts: 
+
+\begin{align*}
+    f(x,y) = \prod\limits^{\infty}_{j=1} f_{j}(x,y)&= \prod\limits^{\infty}_{j=1} \frac{1}{1-x^jy}
+\end{align*}
+\vskip .25cm
+
+ \end{enumerate}
+ 
+ \vskip 1cm
+ 
+ 
+ \item
+\textbf{We say a partition $\lambda$ is {\bf symmetric} if $\lambda$ is equal to its own conjugate (i.e. $\lambda^*=\lambda$).}
+ \begin{enumerate}
+\item \textbf{Find all the symmetric partitions of $13$.}
+
+A partition is symmetric if the Ferrers diagram of the partition is symmetric across the main diagonal, or the first row (the largest part) is equal to the number of parts in the partition. Therefore, we can find the symmetric partitions of $13$ using this property.
+
+\begin{itemize}
+    \item Partition $\{7,1,1,1,1,1,1\}$
+$$\young(~~~~~~~,~,~,~,~,~,~)$$
+    \item Partition $\{5,3,3,1,1\}$
+    $$\young(~~~~~,~~~,~~~,~,~)$$
+    \item Partition $\{4,4,3,2\}$
+    $$
+    \young(~~~~,~~~~,~~~,~~)
+    $$
+\end{itemize}
+\vskip .25cm
+
+\item \textbf{Find all of the symmetric partitions (for any integer, not a fixed value of $n$)  whose largest part is 4.}\\
+
+From a), we can conclude that the symmetric partitions of any integer $n$ whose largest part is 4 must have $4$ parts. These are the valid symmetric partitions:
+
+\begin{itemize}
+    \item Partition $\{4,1,1,1\}$ of $7$
+    $$\young(~~~~,~,~,~)$$
+    \item Partition $\{4,2,1,1\}$ of $8$
+    $$\young(~~~~,~~,~,~)$$
+    \item Partition $\{4,3,2,1\}$ of $10$
+    $$\young(~~~~,~~~,~~,~)$$
+    \item Partition $\{4,4,2,2\}$ of $12$
+    $$\young(~~~~,~~~~,~~,~~)$$
+    \item Partition $\{4,3,3,1\}$ of $11$
+    $$\young(~~~~,~~~,~~~,~)$$
+    \item Partition $\{4,4,3,2\}$ of $13$
+    $$\young(~~~~,~~~~,~~~,~~)$$
+    \item Partition $\{4,4,4,3\}$ of $15$
+    $$\young(~~~~,~~~~,~~~~,~~~)$$
+    \item Partition $\{4,4,4,4\}$ of $16$
+    $$\young(~~~~,~~~~,~~~~,~~~~)$$
+\end{itemize}
+
+{\footnotesize Note: This should be is a finite list - there is more than one and less than 15.}
+\vskip .25cm
+
+
+\item \textbf{Find a formula for the total number of symmetric partitions (for any integer, not a fixed value of $n$) whose largest part is $k$.} \\
+{ \footnotesize Note: You just found the answer for $k=4$ in part (b).}
+
+We have: $p(n \mid \text{symmetric})=p(n \mid \text{odd parts distinct})$, or the number of symmetric partitions of $n$ is equal to the number of partitions of $n$ whose parts are all distinct and odd. 
+
+When we illustrate a symmetric partition of $n$ with the largest part being $k$ on a Ferrers diagram, we must ensure that:
+
+\begin{itemize}
+    \item The first row must have $k$ boxes.
+    \item The number of rows and columns must be equal to $k$.
+    \item For $i \in \mathbb{N}, 1 \leq i \leq k$, we have the number of boxes on the $i^{th}$ row and the number of boxes on the $i^{th}$ column must be equal, so when we transpose the diagram over the main diagonal, we still have the same diagram.
+\end{itemize}
+
+Consequently, the symmetric partition of the largest $n$ with the largest part being $k$ will be when $n = k \cdot k$, or the square of $k$ boxes on each side. 
+
+$$\young(1~~~~,~2~~~,~~3~~,~~~\ldots~,~~~~k)$$
+
+When we consider the main diagonal of this square, we first put a number from $1$ to $k$ to each box on the diagonal from the top to the bottom (the box at $(1,1)$ is box $1$). Then we can see an interesting pattern: 
+
+\begin{itemize}
+    \item We consider the box with number $1$. Then we look at the $l-$shape created by this box, the boxes on the same row and on the right side of this box, and the boxes on the same column and below this box. This shape has a total of $k + k -1=2k-1$ boxes.
+    \item We consider the box with number $2$. Then we look at the $l-$shape created by this box, the boxes on the same row and on the right side of this box, and the boxes on the same column and below this box. This shape has a total of $(k-1) + (k-1) -1=2k-3$ boxes.
+    \item \ldots
+    \item The last box of this diagonal is the box with number $k$. This shape only has 1 box.
+\end{itemize}
+
+    This is exactly a sequence of odd integers from $2k-1$ to $1$. Therefore, the number of symmetric partitions of $n$ with the largest part equal to $k$ is equal to the number of partitions of $n$ with the parts being distinct, odd integers that are smaller than or equal to $2k - 1$, and there is always one part equal to $2k-1$. There are $\frac{2k-1-1}{2} + 1 = k$ odd integers from $1$ to $2k-1$, so we can create unique partitions by including or excluding the odd integer from $1$ to $2k-3$. Therefore, there are a total of $2^{k-1}$ partitions of $n$ whose parts are all distinct and odd with exactly one part equal to $2k-1$, or there are a total of $2^{k-1}$ symmetric partitions of $n$ with the largest part equal to $k$.
+
+\vskip .25cm
+
+
+\item  \textbf{Find, with explanation, the generating function for the number of symmetric partitions of $n$.}
+
+We have: $p(n \mid \text{symmetric})=p(n \mid \text{odd parts distinct})$, or the number of symmetric partitions of $n$ is equal to the number of partitions of $n$ whose parts are all distinct and odd. 
+
+Let $a_n$ be the number of symmetric partitions of $n$. We have $a_n$, which is also the number of partitions of $n$ whose parts are all distinct and odd. Therefore, the generating function for the number of symmetric partitions of $n$ is also the generating function for the number of partitions of $n$ whose parts are all distinct and odd (each part is an odd integer and an odd integer can only appear at most once in the partition).
+
+We consider the generating function for the distinct part that is equal to an odd integer $2k+1, k \in \mathbb{N}$ by considering the sum created by that part, which can be either $0$ (with no $2k+1$) and or $2k+1$. We represent these choices as the exponents of our variable $x$. The generating function for the parts are equal to $2k+1$ is the sum of all these possibilities:
+
+\begin{align*}
+f_{2k+1}(x) &= x^0+x^{2k+1}\\
+&=1+ x^{2k+1}
+\end{align*}
+
+From these, we have the generating function for $\{a_n\}$ by multiplying the generating functions of every part equal to $2k+1, k \in \mathbb{N}$, because multiplying terms from each series adds their exponents. Therefore, we have the generating function $f(x)$ of the number of partitions of $n$ whose parts are all odd and distinct: 
+
+\begin{align*}
+    f(x) = \prod\limits^{\infty}_{k=0} f_{2k+1}(x)&= \prod\limits^{\infty}_{k=0} (1+x^{2k+1})
+\end{align*}
+
+\end{enumerate}
+
+  \vskip 1cm
+
+
+\item
+\textbf{Use partitions to explain why the following identity is true:
+$$\prod\limits_{\ell=1}^{\infty} \frac{1}{1-x^{\ell}} \,\,=\,\, 1+\sum\limits_{k=1}^{\infty} \frac{x^{k^2}}{ \left[ (1-x)(1-x^2)\cdots(1-x^k)\right]^2}$$}
+
+{\footnotesize HINT: Explain why the coefficient of $x^n$ on the left side is equal to the coefficient of $x^n$ on the right side (for all $n$). Discussing the left side is not that difficult. Then think about what each part of the right side is doing.  It's a sum, so the $k$ value must be allowed to be different values for a fixed value of $n$.}
+
+For every $n \in \mathbb{N}$, $a_n$ is the number of partitions of $n$.
+
+We consider the generating function for the parts that are equal to $l \in \mathbb{N}^*$ by considering the sum created by the parts that are equal to $\ell$, which can start from $0$ (with no $\ell$), and increase by $\ell$. We represent these choices as the exponents of our variable $x$. The generating function for the parts equal to $\ell$ is the sum of all these possibilities:
+
+\begin{align*}
+f_{l}(x) &= x^0+x^{\ell}+x^{\ell+\ell}+x^{\ell+\ell+\ell}+\ldots\\
+    &= x^0+x^{\ell}+x^{2\ell}+x^{3\ell}+\ldots\\
+    &= \sum\limits_{n=0}^\infty x^{\ell n}\\
+    &= \frac{1}{1-x^\ell}
+\end{align*}
+
+From these, we have the generating function for $\{a_n\}$ by multiplying the generating functions of every part equal to $\ell, \ell \in \mathbb{N}^*$, because multiplying terms from each series adds their exponents. Therefore, we have the generating function $f(x)$ of the number of partitions of $n, n \in \mathbb{N}$: 
+
+\begin{align*}
+    f(x) = \prod\limits^{\infty}_{\ell=1} f_{\ell}(x)&= \prod\limits^{\infty}_{\ell=1} \frac{1}{1-x^\ell}
+\end{align*}
+
+For the right side, we let $k$ be the number of boxes on the main diagonal ($k \in \mathbb{N}$). If $k = 0$, we have an empty partition for the case when $n=0$.
+
+When $k \geq 1$, we then consider the square $k \cdot k$ created along this diagonal. For example, we consider the partition $\{6,5,5,2,1,1\}$ of $19$, and we mark the boxes on the main diagonal with $X$:
+
+$$\young(X~~~~~,~X~~~,~~X~~,~~,~,~)$$
+
+We then mark all of the boxes of the squared created along the main diagonal with $X$:
+
+$$\young(XXX~~~,XXX~~,XXX~~,~~,~,~)$$
+
+Now we split the Ferrers diagram into three parts:
+$$\young(XXXAAA,XXXAA,XXXAA,BB,B,B)$$
+\begin{itemize}
+    \item The $k \times k$ square created along the main diagonal, containing $k^2$ boxes. The generating function for this is $x^{k^2}$.
+    
+    \item The part $A$ containing the remaining boxes on the right side of this square. Let $a$ be the number of boxes in $A$, so $A$ is the Ferrers diagram of a partition of $a$.
+    
+    Since there are $k$ rows in the square, $A$ can have at most $k$ rows. Therefore, this partition has at most $k$ parts.
+
+    Let $n_a$ be the number of partitions of $a$ that have at most $k$ parts. Since we have $p(n,k)=p'(n,k)$ (Problem set 6), we have $n_a$ equal to the number partitions of $a$ whose largest part can be at most $k$.
+
+     We consider the generating function for the part that is equal to an integer $i, i \in \mathbb{N}^*, i \leq k$ by considering the sum created by that part, which can start from $0$ (with no $i$) and increase by $i$. We represent these choices as the exponents of our variable $x$. The generating function for the parts are equal to $i$ is the sum of all these possibilities:
+
+    \begin{align*}
+        f_{i}(x) &= x^0+x^{i} +x^{i + i} + x^{i+i+i}+x^{i+i+i+i} + \ldots\\
+        &=1+ x^{i} + x^{2i} + x^{3i} + \ldots\\
+        &= \sum\limits_{m=0}^\infty x^{mi}\\
+        &= \frac{1}{1-x^i}
+    \end{align*}
+
+    From these, we have the generating function for $\{n_a\}$ by multiplying the generating functions of every part equal to $i, i \in \mathbb{N}^*, i \leq k$ together, because multiplying terms from each series adds their exponents. Therefore, we have the generating function $f(x)$ of the number of partitions of $n$ whose the largest part can be $k$ is:  
+    
+    \begin{align*}
+        f(x) = \prod\limits^{k}_{i=1} f_{i}(x)&= \prod\limits^{k}_{i=1} \frac{1}{1-x^{i}}
+    \end{align*}
+    
+    Therefore, the generating function for the number of partitions we can fit in $A$ is $\prod\limits^{k}_{i=1} \frac{1}{1-x^{i}}$.
+    
+    \item The part $B$ containing the remaining boxes below this square. Let $b$ be the number of boxes in $B$, so $B$ is the Ferrers diagram of a partition of $b$.
+    
+    Since there are $k$ columns in the square, $B$ can have at most $k$ columns, which means the largest part of this partition must be smaller or equal to $k$.
+
+    Let $n_b$ be the number of partitions of $b$ that the largest part of this partition must be smaller or equal to $k$. 
+    
+     We already know that the generating function for $\{n_b\}$ is
+    \begin{align*}
+        g(x) =\prod\limits^{k}_{j=1} \frac{1}{1-x^{j}}
+    \end{align*}
+    Therefore, the generating function of number of partitions we can fit in $B$ is $\prod\limits^{k}_{j=1} \frac{1}{1-x^{j}}$.
+    
+\end{itemize}
+
+
+
+Since $A$ and $B$ are independent, with any $k \in\mathbb{N}^*$, the generating function for the number of partitions that has $k$ boxes on the main diagonal of their Ferrers diagram is:
+\begin{align*}
+    \frac{x^{k^2}}{\prod\limits^{k}_{i=1} (1-x^{i}) \cdot\prod\limits^{k}_{j=1} (1-x^{j})} = \frac{x^{k^2}}{\left[ (1-x)(1-x^2)\dots(1-x^k)\right]^2}
+\end{align*}
+
+Because every partition of $n$ has a $k\cdot k$ diagonal square, $k \geq 0$, we can find the number of partitions of all $n\in\mathbb{N}$ by summing the number of partitions that have $k$ boxes on the main diagonal of their Ferrers diagram with every $k \in \mathbb{N}$. For $k=0$, the number of partition that has $k$ box on the diagonal is $1$. Therefore, we have the total number of partitions of all $n \in \mathbb{N}$:
+
+$$ 1 + \sum\limits_{k=1}^{\infty} \frac{x^{k^2}}{ \left[ (1-x)(1-x^2)\dots(1-x^k)\right]^2}.$$
+
+Since both sides of the equation generate the exact total number of partitions for every integer $n$, we can conclude that:
+
+\begin{align*}
+    \prod\limits_{\ell=1}^{\infty} \frac{1}{1-x^{\ell}} =1 + \sum\limits_{k=1}^{\infty} \frac{x^{k^2}}{ \left[ (1-x)(1-x^2)\dots(1-x^k)\right]^2}
+\end{align*}
+\vskip .25cm
+
+
+\end{enumerate}
+
+\end{document}

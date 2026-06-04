@@ -1,0 +1,710 @@
+ \documentclass[10pt]{article}
+ \usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amsthm}
+\usepackage{amsmath, amssymb,graphicx,youngtab,tikz}
+\textheight9in
+\textwidth17cm
+\oddsidemargin0cm
+\evensidemargin0cm
+\setlength{\topmargin}{-0.8in}
+
+\newcommand{\hs}{\heartsuit}
+\newcommand{\sps}{\spadesuit}
+\newcommand{\cs}{\clubsuit}
+\newcommand{\ds}{\diamondsuit}
+
+%\newcommand{\ds}{\displaystyle}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+
+
+\begin{document}
+\begin{center}
+\textbf{MATH 364  \qquad Khanh Tra (Fay) Nguyen Tran}
+\end{center}
+{\bf{Instructions:}} 
+\begin{itemize}
+\item
+You should show and thoroughly explain all of your work for each prompt.
+\item
+In addition to mathematical correctness, you will be evaluated on the {\bf quality, clarity, and mathematical appropriateness} of your writing:
+Make sure you state assumptions at the beginning and when they are used.  Make sure to explicitly state conclusions when they are made and at the end of a proof.  Make sure to use (correct) punctuation and vary your word choices. Make sure {\it all} mathematical symbols, letters, and notation are in ``math mode" (i.e. using \$). Please include space after each problem (about an inch).  Make sure to use English to start all sentences and to explain moves (there should never be arrows connecting ideas).
+
+\item
+You may ONLY use: your own notes,  the Overleaf class notes, and our Moodle site.  You may also use {\it Mathematica} if you ever need it.  Just say what you typed into {\it Mathematica} and what output it gave you (or, even include a screenshot).
+
+\item
+You may reference theorems from class and theorems that you have correctly proved in homework (if you did it correctly), but all other results must be proved.  
+\item
+You may not communicate with anyone but me about \textit{anything} related to your exam.  No other human, written, library, AI or internet sources (other than to look up \LaTeX  \hspace{.005cm} symbols) are allowed.  
+\item
+Any use of AI will automatically make you ineligible for out-of-class exams and the group final project.
+\item
+Consider the pledge after you have completely finished your work then turn everything in as a PDF on Moodle labeled LASTNAMETakeHome1.pdf.
+\end{itemize}
+\vskip .2cm
+
+
+{\bf{Let the fun begin!:}} 
+
+\begin{enumerate}
+
+
+%%%%%%%%%%%%%% Problem #1
+\item
+\textbf{In a standard American 52-card deck of cards, the values of the cards (from low to high) are A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K and the four suits are clubs ($\cs$), diamonds ($\ds$), hearts ($\hs$), and spades ($\sps$).}
+\begin{enumerate}
+\item
+\textbf{How many ways can you pick 10 cards so that six of the cards have consecutive values (and are all in a single suit) and the other four cards form a four-of-a-kind?}\\
+{\footnotesize Note: One example would be Q$\hs$ Q$\sps$ Q$\ds$ Q$\cs$  A$\hs$ 2$\hs$  3$\hs$  4$\hs$  5$\hs$  6$\hs$.}
+
+We first start working with the set of 6 cards that have the same suit and consecutive values. We need to choose one suit for this set of cards. There are 4 suits, so there are $\binom{4}{1} = 4$ ways to choose a suit for this set. 
+
+A suit has 13 values, which are A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, and K. To select a set of 6 consecutive cards from these, we can only choose sets where the first card is from A to 8. If we choose a sequence starting from 9, for example, we cannot have a 6-card sequence since we only have 4 other cards to add to the sequence (10, J, Q, K). Therefore, we have $\binom{8}{1} = 8$ ways to choose a set of 6 consecutive cards from each suit.
+
+Then we consider the four cards that form a four-of-a-kind. Since a four-of-a-kind consists of four cards with the same value with different suits (e.g. Q$\hs$ Q$\sps$ Q$\ds$ Q$\cs$). Obviously, we cannot create a four-of-a-kind with a value already included in the $6$ consecutive cards created above. Therefore, there are only $13 - 6 = 7$ values left we can choose from to create a four-of-a-kind. There are $\binom{7}{1}=7$ ways to create a four-of-a-kind from the remaining available cards.
+
+In total, there are $4 \times 8 \times 7 = 224$ ways to pick 10 cards so that six of the cards have consecutive values and are all in a single suit, and the other four cards form a four-of-a-kind.
+
+\item
+\textbf{How many ways can you pick FIVE cards so that you have no hearts, no clubs, at least one spade, at least one diamond, and where the value of every spade is lower than the value of every diamond?}
+
+According to the order of cards, we consider J as $11$, Q as $12$, K as $13$, and A as $1$.
+
+We need to pick $5$ cards so we have no $\hs$, no $\cs$, at least $1$ $\ds$, and at least $1$ $\sps$ where the value of every $\sps$ is lower than the value of every $\ds$. 
+
+Let $x$ be the number of $\sps$ card(s) included in these $5$ cards, so $5-x$ is the number of $\ds$ card(s) picked. We have $1 \leq 5-x$, so we have $1 \leq x \leq 4$.
+
+Let $y$ be the value of the highest $\sps$ card included in these $5$ cards. Since we need to at least pick one $\ds$ card, the highest value a $\sps$ card we can pick is Q (or $12$). When we pick $x$ $\sps$ cards and the highest one has the value $y$, the remaining $x-1$ $\sps$ cards must be from A (or 1) to $y-1$. There are $\binom{y-1}{x-1}$ ways to pick $x-1$ $\sps$ cards following this rule. At the same time, we can only pick the $5-x$ $\ds$ cards that have values from $y+1$ to K (or 13). There are $\binom{13 - y}{5-x}$ ways to pick $5-x$ $\ds$ cards following this rule.
+
+Therefore, the number of ways to pick five cards so that we have no hearts, no clubs, at least one spade, at least one diamond, and where the value of every spade is lower than the value of every diamond:
+\begin{align*}
+    S = \sum\limits_{x=1}^4\sum\limits_{y=1}^{12}\binom{y-1}{x-1}\binom{13-y}{5-x} 
+\end{align*}
+
+Let $j = y - 1$, then we have $0 \leq j \leq 11$. Then we have: 
+
+\begin{align*}
+    S &= \sum\limits_{x=1}^4\sum\limits_{j=0}^{11}\binom{j}{x-1}\binom{12-j}{5-x} \\
+    &= \sum\limits_{x=1}^4 \left( \sum\limits_{j=0}^{11}\binom{j}{x-1}\binom{12-j}{5-x}+\binom{12}{x-1}\binom{12-12}{5-x} \right) \text{ (we have $5-x \geq 1$ so $\binom{0}{5-x}=0$)}\\
+     &= \sum\limits_{x=1}^4 \sum\limits_{j=0}^{12}\binom{j}{x-1}\binom{12-j}{5-x}\\
+\end{align*}
+
+Let $k = x - 1$  then $0 \leq k \leq 3$ and $5-x = 4-k$. Then we have:
+
+\begin{align*}
+    S &= \sum\limits_{k=0}^3 \sum\limits_{j=0}^{12}\binom{j}{k}\binom{12-j}{4-k}
+\end{align*}
+
+Consider the set of numbers $\{0,1,2,\ldots,n\}$ with size $n+1$. There are $\binom{n+1}{m+1}$ ways to choose a subset of this set with size $m+1$ randomly. However, we can do this in a more complicated way: 
+
+Let the $(r+1)^{th}$ smallest element be $j$ of every subset with size $m+1$ ($r \leq m$). Then:
+
+- We must choose $r$ elements from the first $j$ elements $\{0,1,\ldots,j-1\}$ of the original group. There are $\binom{j}{r}$ ways to do this.
+
+- We then include the element $j$ itself, so now it becomes the $(r+1)^{th}$ smallest element of the subset.
+
+- We then choose the remaining $m-r$ elements from $\{j+1,j+2,\ldots,n\}$ ($n-j$ elements). There are $\binom{n - j}{m-r}$ ways to do this.
+
+Now we have a subset of size $r + 1 +m -r = m+1$. Therefore, with every  $0 \leq j \leq n$, the number of subsets of size $m+1$ which have the $(r+1)^{th}$ smallest element is $j$ is $\binom{j}{r}\binom{n-j}{m-r}$.
+
+Therefore, when we consider all of the possible value $j \in \{0,1,2,\ldots,n\}$, we have the total number of subsets of size $m+1$ that follow this rule: $\sum_{j=0}^{n}\binom{j}{r}\binom{n-j}{m-r}$.
+
+Since every subset with size $m+1$ has exactly one ${(r+1})^{th}$ smallest element, this counts every subset size $m+1$ once. Therefore, we have:
+
+$$\sum_{j=0}^{n}\binom{j}{r}\binom{n-j}{m-r}=\binom{n+1}{m+1}$$
+
+From this, we have $\sum\limits_{j=0}^{12}\binom{j}{k}\binom{12-j}{4-k} = \binom{13}{5}$. Therefore, we have:
+
+$$S = \sum\limits_{k=0}^3\binom{13}{5} = 4 \times 1287 = 5148$$
+
+The number of ways we can pick five cards so we have no $\hs$, no $\cs$, at least one $\ds$, and at least one $\sps$ such that every $\sps$ is lower than the value of every $\ds$ is $5148$.
+\end{enumerate}
+\vskip 1in  %please change the length to 1in when done
+
+%%%%%%%%%%%%%% Problem #2
+\item
+\textbf{The candy dish in my office is stocked with LOTS of Reese's, Twix, KitKats, and Snickers (and nothing else).  How many ways can Dave steal 10 pieces of candy from the dish without taking exactly two of any particular kind?}
+
+If Dave steals 10 pieces of candy from the dish randomly, using the Stars and bars method, we can conclude that there are $\binom{10+4-1}{4-1} = \binom{13}{3}$ combinations of candies he could pick up. 
+
+Let $A_1$ be the set of combinations of 10 candies Dave could steal from the dish, taking exactly two of Reese's. Dave needs to choose the remaining $8$ pieces of candies from $3$ options (Twix, KitKats, Snickers). Using the Stars and bars method, we can conclude that there are $\binom{8+3-1}{3-1} = \binom{10}{2}$ combinations of candies he could pick up. 
+
+Let $A_2$ be the set of combinations of 10 candies Dave could steal from the dish, taking exactly two of the Twix. Dave needs to choose the remaining $8$ pieces of candies from $3$ options (Reese's, KitKats, Snickers). Using the Stars and bars method, we can conclude that there are $\binom{8+3-1}{3-1} = \binom{10}{2}$ combinations of candies he could pick up. 
+
+Let $A_3$ be the set of combinations of 10 candies Dave could steal from the dish, taking exactly two of the Kit Kats. Dave needs to choose the remaining $8$ pieces of candies from $3$ options (Reese's, Twix, Snickers). Using the Stars and bars method, we can conclude that there are $\binom{8+3-1}{3-1} = \binom{10}{2}$ combinations of candies he could pick up. 
+
+Let $A_4$ be the set of combinations of 10 candies Dave could steal from the dish, taking exactly two of the Snickers. Dave needs to choose the remaining $8$ pieces of candies from $3$ options (Reese's, Twix, Kit Kats). Using the Stars and bars method, we can conclude that there are $\binom{8+3-1}{3-1} = \binom{10}{2}$ combinations of candies he could pick up. 
+
+If Dave picks exactly two pieces for every candy type, he can only have a total of 8 pieces, so he cannot get 10 candies. Therefore, we have $| A_1 \cap A_2 \cap A_3 \cap A_4 | = 0$.
+
+Now, we consider the case when Dave picks exactly two pieces for two candy types. With the remaining 6 pieces of candies, for each piece of candy, there are 2 options left for Dave to pick up. Using the Stars and bars method, we can conclude that there are $\binom{6+2-1}{2-1} = \binom{7}{1} = 7$ combinations of candies he could pick up. Therefore, we have $| A_1 \cap A_2 | = | A_1 \cap A_3 | = | A_1 \cap A_4 | = | A_2 \cap A_3 | = | A_2 \cap A_4 | = | A_3 \cap A_4 | = 7$.
+
+We consider the case when Dave picks exactly two pieces for three candy types. Dave can only pick the remaining 4 pieces of candies from one type, or there is only $1$ combination of candies he could pick up. Therefore, we have $| A_1 \cap A_2 \cap A_3 | =| A_1 \cap A_2 \cap A_4 |= | A_1 \cap A_3 \cap A_4| = | A_2 \cap A_3 \cap A_4 |= 1$.
+
+Thus, we have the number of ways Dave can steal 10 pieces of candy from the dish without taking exactly two of any particular kind: 
+
+\begin{align*}  
+\binom{13}{3} - |A_1 \cup A_2 \cup A_3 \cup A_4| &= \binom{13}{3} - \Big[ (|A_1| + |A_2| + |A_3| + |A_4|) \\
+&\quad - (| A_1 \cap A_2 | + | A_1 \cap A_3 | + | A_1 \cap A_4 | + | A_2 \cap A_3 | +| A_2 \cap A_4 | + | A_3 \cap A_4 |) \\
+&\quad + (| A_1 \cap A_2 \cap A_3| + | A_1 \cap A_2 \cap A_4 | + | A_1 \cap A_3 \cap A_4| + |A_2 \cap A_3 \cap A_4|) \\
+&\quad - | A_1 \cap A_2 \cap A_3 \cap A_4 |  \Big] \\ 
+&= \binom{13}{3} - \left( 4 \times \binom{10}{2} -  6 \times 7 + 1 \times 4 - 0 \right)  \\ 
+&= 286 - (180 - 42 + 4 - 0) \\
+&= 286 - 142 \\
+&= 144 
+\end{align*}
+\vskip 1in  %please change the length to 1in when done
+
+%%%%%%%%%%%%%% Problem #3
+\item
+\textbf{Bridge is a game played by four players in two competing partnerships, with partners sitting opposite of one another around a table.  There are $4n$ players in a room with $n$ tables. How many ways can the $4n$ people compete in $n$ games ($1$ game total per person with $1$ game at each table)?}\\
+{\footnotesize {\bf NOTE:} The particular table a four-some plays at is not important.  But, partners DO matter.  For example Ryota/Jill vs.~Tina/Dave is different than Ryota/Dave vs.~Jill/Tina.}
+
+There are four players joining every game. Therefore, $4n$ players play in $n$ games.
+
+We first consider the number of ways to make teams of two players. We first choose two people from the group of initial $4n$ players, and there are $\binom{4n}{2}$ ways to do this. After that, we have $4n - 2$ players left to pair up. Then we choose two people for the second groups, and there are $\binom{4n -2}{2}$ ways to do this. We follow this strategy to pair up players into $2n$ groups, and the number of ways to do this:
+
+\begin{align*}
+    \binom{4n}{2} \times \binom{4n-2}{2} \times \binom{4n-4}{2} \times \ldots \times \binom{2}{2} &=\frac{(4n)!}{2! \times (4n - 2)!} \times \frac{(4n-2)!}{2! \times (4n - 4)!} \times \frac{(4n-4)!}{2! \times (4n - 6)!} \\ &\times \frac{(4n-6)!}{2! \times (4n - 8)!} \ldots \times \frac{4!}{2! \times 2!} \times \frac{2!}{2! \times 0!} \\
+    &=\underbrace{\frac{(4n)!}{2 \times 2 \times \ldots \times 2}}_\text{$2n$ times} \\
+    &=\frac{(4n)!}{2^{2n}} 
+\end{align*}
+
+However, this calculation overcounts because it distinguishes between the order in which the pairs are formed (e.g., whether Tina and Adam are chosen as the very first pair or the very last). If we don't consider the order of selecting a pair, the actual number of ways to pair up teams after we cancel out the number of permutations of order of $2n$ teams: $$\frac{(4n)!}{2^{2n} \times (2n)!}$$
+
+After this pairing-up stage, we have $2n$ teams. We need to find a way to assign these teams to the $n$ tables, and each table represents a game between two teams.
+
+We now pair $2n$ teams into $n$ games or assign these teams to $n$ tables. We now assign each team a number from $1$ to $2n$. We watch to find the number of ways we can pair these $2n$ teams. We don't care about the order of choosing a pair of teams. We first choose a random team, then there are $2n-1$ team options left for us to choose the opponent for this team. We pair them up, and we have a game. We continue to choose a random team from the remaining $2n-2$ teams, and there are $2n - 3$ options for us to choose the opponent for this team. Following this pattern, the total number of ways to assign these teams to $n$ tables: 
+
+\begin{align*}
+(2n-1)\times (2n-3) \times (2n-5) \times \ldots \times 3 \times 1 &= \frac{(2n)!}{2n \times (2n-2)\times (2n-4) \times (2n-6) \times \ldots \times 4 \times 2} \\
+&=\frac{(2n)!}{2 \times n \times 2 \times (n-1) \times 2 \times (n-2) \times 2 \times (n-3) \times \ldots \times 2 \times 2 \times 2 \times 1} \\
+&=\frac{(2n)!}{2^n \times n!} \\
+\end{align*}
+
+Therefore, the number of ways the $4n$ people compete in $n$ Bridge games is $$\frac{(2n)!}{2^{n} \times n!} \times \frac{(4n)!}{2^{2n} \times (2n)!} = \frac{(4n)!}{2^{3n} \times n!}$$.
+
+\vskip 1in  %please change the length to 1in when done
+
+%%%%%%%%%%%%%% Problem #4
+\item
+\textbf{Consider the rectangular region $R$ in the $xy$-plane with corner points at $(0,0), (m,0), (m,n)$, and $(0,n)$, where $m$ and $n$ are positive integers.}
+\begin{center}
+\begin{tikzpicture}[scale=.90]
+\begin{scope}[color=black,line width=1pt]
+	 \draw (0,0) -- (6,0) -- (6,3) -- (0,3) -- cycle;
+ \end{scope}
+
+\fill (3,1.75) circle(0pt) node[below=0pt]{$R$};
+\fill (0,0) circle(2pt) node[below=3pt]{$(0,0)$};
+\fill (6,0) circle(2pt) node[below=3pt]{$(m,0)$};
+\fill (0,3) circle(2pt) node[above=3pt]{$(0,n)$};
+\fill (6,3) circle(2pt) node[above=3pt]{$(m,n)$};
+\end{tikzpicture}
+\end{center}
+{\footnotesize {\bf NOTE:} The border of a rectangle is allowed to overlap the border of $R$.}
+
+\begin{enumerate}
+\item
+\textbf{Find the number of rectangles, with sides parallel to the sides of $R$, which are contained in $R$ and whose corners have integer coordinates.}\\
+
+\begin{center}
+\begin{tikzpicture}
+    \fill (0,0) circle(2pt) node[below=3pt]{$(0,0)$};
+    \fill (7,0) circle(2pt) node[below=3pt]{$(m,0)$};
+    \fill (0,5) circle(2pt) node[above=3pt]{$(0,n)$};
+    \fill (7,5) circle(2pt) node[above=3pt]{$(m,n)$};
+    \draw[step=1cm, black, very thin] (0,0) grid (7,5);
+\end{tikzpicture}
+\end{center}
+
+We first divide the regions into a grid with $m \times n$ squares with a side length of 1. These squares have the corner coordinates as $(x,y)$ with $0 \leq x \leq m$ and $0 \leq y \leq n$. Therefore,  we can consider the rectangles in this grid is determined by two distinct $x-$coordinates and $y-$coordinates. These rectangles have four corner coordinates: $(x_1,y_1), (x_1,y_2), (x_2,y_1), (x_2,y_2)$ with integers $x_1, x_2, y_1, y_2$, $0 \leq x_1, x_2 \leq m$, $0 \leq y_1, y_2 \leq n$. 
+
+To count the number of rectangles with sides parallel to the sides of $R$, we first find the number of ways to assign a value to $x_1,x_2,y_1, y_2$. Let $(x_1,y_1)$ be the bottom left corner coordinate and $(x_2,y_2)$ be the top right corner coordinate. 
+
+For $x_1$, it can go from 0 to $m-1$, increasing by 1, so there are $m$ ways to choose this value (since if $x_1 = m$, we cannot find a possible value for $x_2$). When we choose a value $0 \leq a \leq m - 1$ for $x_1$, the possible values for $x_2$ can only be from $a + 1$ to $m$. Therefore, the number of ways we can choose $x_1$ and $x_2$ accordingly:
+
+$$\sum\limits_{x_1=0}^{m-1}(m-x_1)= m + (m-1) + (m-2) + \ldots + 2 + 1 = \frac{(m+1)m}{2}$$
+
+For $y_1$, it can go from 0 to $n-1$, increasing by 1, so there are $n$ ways to choose this value (since if $y_1 = n$, we cannot find a possible value for $y_2$). When we choose a value $0 \leq b \leq n - 1$ for $y_1$, the possible values for $y_2$ can only be from $b + 1$ to $n$. Therefore, the number of ways we can choose $y_1$ and $y_2$ accordingly:
+
+$$\sum\limits_{y_1=0}^{n-1}(n-y_1)= n + (n-1) + (n-2) + \ldots + 2 + 1 = \frac{(n+1)n}{2}$$
+
+In conclusion, the total number of ways to choose $x_1, x_2, y_1, y_2$ or the number of rectangles, with sides parallel to the sides of $R$:
+
+$$\frac{(m+1)m}{2} \times \frac{(n+1)n}{2} = \frac{(n^2+n)(m^2+m)}{4}$$
+
+\item
+\textbf{How many of the regions from part (a) will have no corners in common with the corners of $R$?}
+
+The four corner coordinates of the region $R$ are $(0,0), (0,n), (m,0),$ and $(m,n)$.
+
+- Let $A_1$ be the set of rectangles that $(x_1,y_1)=(0,0)$ or the bottom left corner point is overlapped with the bottom left corner point of region $R$. We can choose a value for $x_2$ such that $x_2 \in \mathbb{N}, 1 \leq x_2 \leq m$, so we have $m$ options for $x_2$. We can choose a value for $y_2$ such that $y_2 \in \mathbb{N}, 1 \leq y_2 \leq n$, so we have $n$ options for $y_2$. Therefore, there are $m \times n $ rectangles in this set, or $|A_1|=m\times n$.
+
+
+- Let $A_2$ be the set of rectangles that $(x_1,y_2)=(0,n)$ or the top left corner point is overlapped with the top left corner point of region $R$. We can choose a value for $x_2$ such that $x_2 \in \mathbb{N}, 1 \leq x_2 \leq m$, so we have $m$ options for $x_2$. We can choose a value for $y_1$ such that $y_1 \in \mathbb{N}, 0 \leq y_1 \leq n - 1$, so we have $n$ options for $y_1$. Therefore, there are $m \times n$ rectangles in this set, or $|A_2|=m\times n$.
+
+
+- Let $A_3$ be the set of rectangles that $(x_2,y_1)=(m,0)$ or the bottom right corner point is overlapped with the bottom right corner point of region $R$. We can choose a value for $x_1$ such that $x_1 \in \mathbb{N}, 0 \leq x_1 \leq m-1$, so we have $m$ options for $x_1$. We can choose a value for $y_2$ such that $y_2 \in \mathbb{N}, 1 \leq y_2 \leq n$, so we have $n$ options for $y_2$. Therefore, there are $m \times n$ rectangles in this set, or $|A_3|=m\times n$.
+
+
+- Let $A_4$ be the set of rectangles that $(x_2,y_2)=(m,n)$ or the top right corner point is overlapped with the top right corner point of region $R$. We can choose a value for $x_1$ such that $x_1 \in \mathbb{N}, 0 \leq x_1 \leq m-1$, so we have $m$ options for $x_1$. We can choose a value for $y_1$ such that $y_1 \in \mathbb{N}, 0 \leq y_1 \leq n-1$, so we have $n$ options for $y_1$. Therefore, there are $m \times n$ rectangles in this set, or $|A_4|=m\times n$.
+
+
+- We consider the set $A_1 \cap A_2$ that contains rectangles that the bottom left corner point is overlapped with the bottom left corner point of region $R$ $(x_1,y_1)=(0,0)$ and the top left corner point is overlapped with the top left corner point of region $R$ $(x_1,y_2)=(0,n)$. There are $m$ possible values for $x_2$ $(1 \leq x_2 \leq m)$ to create a rectangle. Therefore, there are $m$ rectangles in this set, or $|A_1 \cap A_2| = m$.
+
+
+- We consider the set $A_1 \cap A_3$ that contains rectangles that the bottom left corner point is overlapped with the bottom left corner point of region $R$ $(x_1,y_1)=(0,0)$ and the bottom right corner point is overlapped with the bottom right corner point of region $R$ $(x_2,y_1)=(m,0)$. There are $n$ possible value for $y_2$ $(1 \leq y_2 \leq n)$ to create a rectangle. Therefore, there are $n$ rectangles in this set, or $|A_1 \cap A_3| = n$.
+
+
+- We consider the set $A_1 \cap A_4$ that contains rectangles that the bottom left corner point is overlapped with the bottom left corner point of region $R$ $(x_1,y_1)=(0,0)$ and the top right corner point is overlapped with the top right corner point of region $R$ $(x_2,y_2)=(m,n)$. There is only one rectangle that can satisfy this: the rectangle $R$. Therefore, $|A_1 \cap A_4| = 1$.
+
+
+- We consider the set $A_2 \cap A_3$ that contains rectangles that the top left corner point is overlapped with the top left corner point of region $R$ $(x_1,y_2)=(0,n)$ and the bottom right corner point is overlapped with the bottom right corner point of region $R$ $(x_2,y_1)=(m,0)$. There is only one rectangle that can satisfy this: the rectangle $R$. Therefore, $|A_2 \cap A_3| = 1$.
+
+
+- We consider the set $A_2 \cap A_4$ that contains rectangles that the top left corner point is overlapped with the top left corner point of region $R$ $(x_1,y_2)=(0,n)$ and the top right corner point is overlapped with the top right corner point of region $R$ $(x_2,y_2)=(m,n)$. There are $n$ possible value for $y_1$ $(0 \leq y_1 \leq n-1)$ to create a rectangle. Therefore, there are $n$ rectangles in this set, or $|A_2 \cap A_4| = n$.
+
+
+- We consider the set $A_3 \cap A_4$ that contains rectangles that the bottom right corner point is overlapped with the bottom right corner point of region $R$ $(x_2,y_1)=(m,0)$ and the top right corner point is overlapped with the top right corner point of region $R$ $(x_2,y_2)=(m,n)$. There are $m$ possible value for $x_1$ $(0 \leq x_1 \leq m-1)$ to create a rectangle. Therefore, there are $m$ rectangles in this set, or $|A_3 \cap A_4| = m$.
+
+- We consider the intersection of every $A_i, A_j, A_k$ where $i,j,k \in \mathbb{N}^*, 1 \leq i \leq j \leq k \leq 4$: $A_i \cap A_j \cap A_k$. For each intersection, the rectangle shares three corners with $R$, so it must be $R$ itself. Therefore, $|A_i \cap A_j \cap A_k| = 1$.
+
+- We consider the set $A_1 \cap A_2 \cap A_3 \cap A_4$. Obviously, the rectangle in this set has to have $(x_1,y_1)=(0,0), (x_2,y_1)=(m, 0), (x_1,y_2)=(0, n), (x_2,y_2)=(m, n)$. There is only one rectangle that can satisfy this: the rectangle $R$. Therefore, $|A_1 \cap A_2 \cap A_3 \cap A_4| = 1$.
+
+
+Therefore, the number of regions that have corners in common with the corners of $R$ is:
+
+\begin{align*}
+    |A_1 \cup A_2 \cup A_3 \cup A_4|&=|A_1|+|A_2|+|A_3|+|A_4| - (|A_1 \cap A_2|+|A_1 \cap A_3|+|A_1 \cap A_4|+|A_2 \cap A_3|+\\&|A_2 \cap A_4|+|A_3 \cap A_4|) + \binom{4}{3} \times 1 - |A_1 \cap A_2 \cap A_3 \cap A_4|\\
+    &= 4mn - (m+n+1+1+n+m) + 4 - 1 = 4mn -2m -2n +1
+\end{align*}
+
+Therefore, the number of rectangles that have sides parallel to the sides of $R$ and have no corners in common with the corners of $R$ is:
+
+$$\frac{(n^2+n)(m^2+m)}{4} - 4mn + 2m + 2n -1$$
+
+\end{enumerate}
+
+\vskip 1in  %please change the length to 1in when done
+
+
+
+
+
+%%%%%%%%%%%%%% Problem #5
+\item
+\begin{enumerate}
+\item
+\textbf{Prove that, for $n\geq 2$,
+$$\binom{n}{1}+3\binom{n}{3}+5\binom{n}{5}+\cdots \, = \, 2\binom{n}{2}+4\binom{n}{4}+6\binom{n}{6}+\cdots$$}
+
+\begin{proof}
+    We need to prove that with $n \geq 2$:
+    $$\sum\limits_{k=1}^{\infty}(2k-1)\binom{n}{2k-1} = \sum\limits_{k=1}^{\infty}2k\binom{n}{2k}$$
+
+    We have:
+\begin{align*}
+    (x-1)^n &= \binom{n}{0}x^0(-1)^n + \binom{n}{1}x^1(-1)^{n-1}  + \binom{n}{2}x^2(-1)^{n-2} + \binom{n}{3}x^3(-1)^{n-3} + \ldots  \\ & +\binom{n}{n-1}x^{n-1}(-1)^{1} + \binom{n}{n}x^{n}(-1)^0\\
+    &= (-1)^n + \binom{n}{1}x^1(-1)^{n-1}  + \binom{n}{2}x^2(-1)^{n-2} + \binom{n}{3}x^3(-1)^{n-3} + \ldots + \\ & + \binom{n}{n-1}x^{n-2} - \binom{n}{n-1}x^{n-1}+ \binom{n}{n}x^{n}\\
+\end{align*}
+
+Then we take the derivative of both sides with respect to $x$:
+\begin{align*}
+    n(x-1)^{n-1} &= \binom{n}{1}(-1)^{n-1}  + 2\binom{n}{2}x(-1)^{n-2} + 3\binom{n}{3}x^2(-1)^{n-3} + \ldots + \\ & + (n-2)\binom{n}{n-1}x^{n-3} - (n-1)\binom{n}{n-1}x^{n-2}+ n\binom{n}{n}x^{n-1}
+\end{align*}
+
+Let $x = 1$ then we have:
+
+\begin{align}
+    \binom{n}{1}(-1)^{n-1}  + 2\binom{n}{2}(-1)^{n-2} + 3\binom{n}{3}(-1)^{n-3} + \ldots + (n-2)\binom{n}{n-1} - (n-1)\binom{n}{n-1} + n\binom{n}{n} = 0
+\end{align}
+
+If $n \geq 2, n \equiv 0 \pmod 2$, let $n = 2k$ with $k \in \mathbb{N}^*$. Then from $(1)$, we have:
+
+\begin{align*}
+    \binom{n}{1}(-1)^{2k-1}  + 2\binom{n}{2}(-1)^{2k-2} + 3\binom{n}{3}(-1)^{2k-3} + \ldots + (n-2)\binom{n}{n-1} - (n-1)\binom{n}{n-1} + n\binom{n}{n} &= 0 \\
+    -\binom{n}{1} + 2\binom{n}{2} - 3\binom{n}{3} +  4\binom{n}{4} + \ldots + (n-2)\binom{n}{n-1} - (n-1)\binom{n}{n-1} + n\binom{n}{n} &= 0 \\
+      2\binom{n}{2} +  4\binom{n}{4} + \ldots + (n-2)\binom{n}{n-2} + n\binom{n}{n} = \binom{n}{1} + 3\binom{n}{3} + \ldots + (n-1)\binom{n}{n-1}
+\end{align*}
+
+Then we have $\binom{n}{k} = 0$ with $k > n$, so we can conclude that:
+
+\begin{align*}
+      2\binom{n}{2} +  4\binom{n}{4} + \ldots + (n-2)\binom{n}{n-2} + (n)\binom{n}{n} + (n+2)\binom{n}{n+2} + (n+4)\binom{n}{n+4} + \ldots 
+      & \\= \binom{n}{1} + 3\binom{n}{3} + \ldots + (n-3)\binom{n}{n-3} + (n-1)\binom{n}{n-1} + (n+1)\binom{n}{n+1} + (n+3)\binom{n}{n+3} + \ldots
+\end{align*}
+
+If $n \geq 2, n \equiv 1 \pmod 2$, let $n = 2k + 1$ with $k \in \mathbb{N}^*$. Then from $(1)$, we have:
+
+\begin{align*}
+    \binom{n}{1}(-1)^{2k}  + 2\binom{n}{2}(-1)^{2k-1} + 3\binom{n}{3}(-1)^{2k-2} + \ldots + (n-2)\binom{n}{n-1} - (n-1)\binom{n}{n-1} + n\binom{n}{n} &= 0 \\
+    \binom{n}{1} - 2\binom{n}{2} + 3\binom{n}{3} -  4\binom{n}{4} + \ldots + (n-2)\binom{n}{n-1} - (n-1)\binom{n}{n-1} + n\binom{n}{n} &= 0 \\
+      2\binom{n}{2} +  4\binom{n}{4} + \ldots + (n-3)\binom{n}{n-3} + (n-1)\binom{n}{n-1} = \binom{n}{1} + 3\binom{n}{3} + \ldots + (n-2)\binom{n}{n-2} + n\binom{n}{n}
+\end{align*}
+
+Then we have $\binom{n}{k} = 0$ with $k > n$, so we can conclude that:
+
+\begin{align*}
+      2\binom{n}{2} +  4\binom{n}{4} + \ldots + (n-3)\binom{n}{n-3} + (n-1)\binom{n}{n-1} + (n+1)\binom{n}{n+1} + (n+3)\binom{n}{n+3} + \ldots 
+      & \\= \binom{n}{1} + 3\binom{n}{3} + \ldots + (n-2)\binom{n}{n-2} + (n)\binom{n}{n} + (n+2)\binom{n}{n+2} + \ldots
+\end{align*}
+
+Therefore, we can conclude that with every $n \geq 2$:
+
+$$\binom{n}{1}+3\binom{n}{3}+5\binom{n}{5}+\cdots \, = \, 2\binom{n}{2}+4\binom{n}{4}+6\binom{n}{6}+\cdots$$
+
+\end{proof}
+\item
+\textbf{What is the {\it value} of the sum on each side of the equation in (a)?  Explain.}
+\end{enumerate}
+
+We have: 
+
+$$k\binom{n}{k} = k \times \frac{n!}{k!(n-k)!}=n \times \frac{(n-1)!}{(k-1)!(n-k)!} = n\times\binom{n-1}{k-1}$$
+
+Let $S = \binom{n}{1}+3\binom{n}{3}+5\binom{n}{5}+\cdots \, = \, 2\binom{n}{2}+4\binom{n}{4}+6\binom{n}{6}+\cdots$. Then we have 
+
+\begin{align*}
+    2S &= \binom{n}{1}+2\binom{n}{2}+3\binom{n}{3}+4\binom{n}{4} + 5\binom{n}{5}+\cdots\\
+    &= n\binom{n-1}{0}+n\binom{n-1}{1}+n\binom{n-1}{2}+n\binom{n-1}{3}+ n\binom{n-1}{4}+\cdots\\
+    &= n \left[ \binom{n-1}{0}+\binom{n-1}{1}+\binom{n-1}{2}+\binom{n-1}{3}+ \binom{n-1}{4}+\cdots \right]\\
+    &= n \times 2^{n-1}\\
+    S&= n \times 2^{n-2}
+\end{align*}
+
+Therefore, we have the sum on each side of the equation is $n \times 2^{n-2}$.
+
+{\footnotesize \it HINT: One approach (for both (a) and (b)) would be to play around with the Binomial Theorem.}
+
+\vskip 1in  %please change the length to 1in when done
+
+%%%%%%%%%%%%%% Problem #6
+\item
+\textbf{Three busy professors (Adam, Francesca, and Tina) need to grade a test.  Let $a_n$ be the number of ways for the three professors to grade $n$ problems so that Adam grades an even number of problems, Francesca grades an odd number of problems, and Tina grades at least one problem.}
+\begin{enumerate}
+\item
+\textbf{With explanation, find a generating function for $\left\{a_n\right\}$.}
+
+For every $n \in \mathbb{N}$, $a_n$ is the number of ways for the three professors to grade $n$ problems.
+
+Let $s_A$ be the number of problems Professor Adam grades, $s_F$ be the number of problems Professor Francesca grades, and $s_T$ be the number of problems Professor Tina grades.
+
+We first consider the generating function for the number of problems Professor Adam grades, $s_A$. This integer should be an even number, so it can start from $0$ (grading no problem) and increase by $2$. We represent these choices as the exponents of our variable $x$. The generating function for the first integer is the sum of all these possibilities:
+
+\begin{align*}
+f_{s_A} &= x^0 + x^2 + x^4 + x^6 + \ldots  \\
+    &= \frac{1}{1-x^2} \\
+\end{align*}
+
+We then consider the generating function for the number of problems Professor Francesca grades, $s_F$. This integer should be an odd number, so it can start from $1$ and increase by $2$. We represent these choices as the exponents of our variable $x$. The generating function for the first integer is the sum of all these possibilities:
+
+\begin{align*}
+f_{s_F} &= x^1 + x^3 + x^5 + \ldots  \\
+    &= x(x^0 + x^2 + x^4 + \ldots ) \\
+    &= \frac{x}{1-x^2} \\
+\end{align*}
+
+Lastly, we consider the generating function for the number of problems Professor Tina grades, $s_T$. This integer should be at least $1$, so it can start from $1$ and increase by $1$. We represent these choices as the exponents of our variable $x$. The generating function for the first integer is the sum of all these possibilities:
+
+\begin{align*}
+f_{s_T} &= x^1 + x^2 + x^3 + \ldots  \\
+    &= x(x^0 + x^1 + x^2 + \ldots ) \\
+    &= \frac{x}{1-x} \\
+\end{align*}
+
+To find $a_n$ or the number of ways for the three professors to grade $n$ problems, we multiply the individual generating functions of the number of problems each professor grades together, because multiplying terms from each series adds their exponents ($x^{s_A} \times x^{s_F} \times x^{s_T} = x^{s_A + s_F + s_T}$), which effectively counts every valid combination of number of problems each professor can grade that can sum up to $n$. From these, we have the generating function for $\{a_n\}$ is:
+
+\begin{align*}
+f_{s_A} \times f_{s_F} \times f_{s_T} &= \frac{1}{1-x^2} \times \frac{x}{1-x^2} \times \frac{x}{1-x}\\
+&= \frac{x^2}{(1-x^2)^2 \times (1-x)} \\
+&= \frac{x^2}{(1-x)^2 \times (1+x)^2 \times (1-x)}\\
+&= \frac{x^2}{(1-x)^3 \times (1+x)^2}
+\end{align*}
+\item
+\textbf{Use this generating function to find a closed formula for $a_n$.  Make sure your formula works for the first few values of $n$.}
+
+We have:
+
+$$A(x) = \sum\limits_{n=0}^{\infty}a_nx^n=\frac{x^2}{(1-x)^3(1+x)^2}$$ 
+
+We have $a_n$ is the coefficient of $x^n$ in $\frac{x^2}{(1-x)^3(1+x)^2}$.
+
+We first need to decompose this generating function into partial fractions:
+
+$$\frac{A}{1-x} + \frac{B}{(1-x)^2} + \frac{C}{(1-x)^3} + \frac{D}{1+x} + \frac{E}{(1+x)^2}$$
+
+I used Mathematica to decompose the generating function (Mathematica: $Apart[x^2 / ((1 - x)^3 * (1 + x)^2)]$):
+
+$$\frac{x^2}{(1-x)^3(1+x)^2} = \frac{1}{4(1-x)^3}-\frac{1}{4(1-x)^2}-\frac{1}{16(1-x)}+\frac{1}{8(x+1)^2}-\frac{1}{16(x+1)}$$
+
+We have:
+
+$$\frac{1}{(1-x)^k}=\sum\limits_{n=0}^{\infty}\binom{n+k-1}{n}x^n=\sum\limits_{n=0}^{\infty}\binom{n+k-1}{k-1}x^n$$
+
+and
+
+$$\frac{1}{(1+x)^k}=\sum\limits_{n=0}^{\infty}\binom{n+k-1}{n}x^n(-1)^n=\sum\limits_{n=0}^{\infty}\binom{n+k-1}{k-1}x^n(-1)^n$$
+
+Applying these two formulas to the equation above, we have:
+
+\begin{align*}
+    \frac{x^2}{(1-x)^3(1+x)^2} &= \frac{1}{4(1-x)^3}-\frac{1}{4(1-x)^2}-\frac{1}{16(1-x)}+\frac{1}{8(x+1)^2}-\frac{1}{16(x+1)} \\
+    &= \frac{1}{4} \times \sum\limits_{n=0}^{\infty}\binom{n+3-1}{3-1}x^n - \frac{1}{4}\times \sum\limits_{n=0}^{\infty}\binom{n+2-1}{2-1}x^n -\frac{1}{16} \times \sum\limits_{n=0}^{\infty}\binom{n+1-1}{1-1}x^n \\ & + \frac{1}{8} \times \sum\limits_{n=0}^{\infty}\binom{n+2-1}{2-1}x^n(-1)^n - \frac{1}{16} \times \sum\limits_{n=0}^{\infty}\binom{n+1-1}{1-1}x^n(-1)^n \\
+    &= \frac{1}{4} \times \sum\limits_{n=0}^{\infty}\binom{n+2}{2}x^n - \frac{1}{4}\times \sum\limits_{n=0}^{\infty}\binom{n+1}{1}x^n -\frac{1}{16} \times \sum\limits_{n=0}^{\infty}\binom{n}{0}x^n \\ & + \frac{1}{8} \times \sum\limits_{n=0}^{\infty}\binom{n+1}{1}x^n(-1)^n - \frac{1}{16} \times \sum\limits_{n=0}^{\infty}\binom{n}{0}x^n(-1)^n \\
+    &= [\frac{1}{4} \times \sum\limits_{n=0}^{\infty}\binom{n+2}{2} - \frac{1}{4}\times \sum\limits_{n=0}^{\infty}\binom{n+1}{1} -\frac{1}{16} \times \sum\limits_{n=0}^{\infty}\binom{n}{0}\\ & + \frac{1}{8} \times \sum\limits_{n=0}^{\infty}\binom{n+1}{1}(-1)^n - \frac{1}{16} \times \sum\limits_{n=0}^{\infty}\binom{n}{0}(-1)^n]\times x^n
+\end{align*}
+
+Since $a_n$ is the coefficient of $x^n$ in $\frac{x^2}{(1-x)^3(1+x)^2}$, we have:
+
+\begin{align*}
+a_n &= \frac{1}{4} \times \binom{n+2}{2} - \frac{1}{4}\times \binom{n+1}{1} -\frac{1}{16} \times \binom{n}{0}+ \frac{1}{8} \times \binom{n+1}{1}(-1)^n - \frac{1}{16} \times \binom{n}{0}(-1)^n \\
+&= \frac{1}{4} \times \frac{(n+2)(n+1)}{2} - \frac{1}{4}\times (n+1) -\frac{1}{16} + \frac{1}{8} \times (n+1)(-1)^n - \frac{1}{16} \times (-1)^n \\
+&= \frac{1}{4} \times \frac{(n+2)(n+1)}{2} - \frac{1}{4}\times (n+1) -\frac{1}{16} + \frac{1}{8} \times (n+1)(-1)^n - \frac{1}{16} \times (-1)^n \\
+&= \frac{2n^2+2n-1}{16}+\frac{2n+1}{16}(-1)^n
+\end{align*}
+
+We consider the parity of $n$:
+
+\[a_n=\begin{cases}
+\frac{2n^2+4n}{16} & \text{ if } n \equiv 0 \pmod2\\
+\frac{2n^2-2}{16} & \text{ if } n \equiv 1 \pmod2\\
+\end{cases}\]
+\end{enumerate}
+
+We will test this formula with the first few values of $n$:
+
+- If $n=0$, obviously, we don't have any way to assign problems to these professors. Therefore, $a_0 = \frac{2\times 0^2+4\times 0}{16} = 0$.
+
+- If $n=1$, we don't have any way to assign problems to these professors, since both Prof. Francesca and Prof. Tina need to grade at least 1 problem, so the total number of problems must be larger than 2. Therefore, $a_1 = 0 = \frac{2\times 1^2-2}{16}$.
+
+- If $n=2$, there is only one way to assign problems to Professors: we must assign one problem to Prof. Francesca and one problem to Prof. Tina (still a 0 for Prof. Adam). Therefore, $a_2 = 1 = \frac{2\times 2^2+4\times 2}{16}$.
+
+- If $n=3$, there is also only one way to assign problems to Professors: we must assign one problem to Prof. Francesca and two problems to Prof. Tina (still a 0 for Prof. Adam). Therefore, $a_3 = 1 = \frac{2\times 3^2-2}{16}$.
+
+- If $n=4$, there are three ways to assign problems to Professors: we can assign one problem to Prof. Francesca, one problem to Prof. Tina, and two problems to Prof. Adam (finally, he got one!). We can also assign one problem to Prof. Francesca and three problems to Prof. Tina, or three problems to Prof. Francesca and one problem to Prof. Tina. Therefore, $a_4 = 3 = \frac{2\times 4^2+4\times 4}{16}$.
+
+- If $n=5$, there are three ways to assign problems to Professors: we can assign one problem to Prof. Francesca, two problems to Prof. Tina, and two problems to Prof. Adam. We can assign two problems to Prof. Tina and three problems to Prof. Francesca or four problems to Prof. Tina and one problem to Prof. Francesca. Therefore, $a_5 = 3 = \frac{2\times 5^2-2}{16}$.
+
+\vskip 1in  %please change the length to 1in when done
+
+%%%%%%%%%%%%%% Problem #7
+\item
+\textbf{We want to make a Taylor Swift friendship bracelet with at least $3$ beads on it, but we have only three colors of beads to choose from.  We will call a bracelet ``Taylor-approved" if adjacent beads are never the same color.  For example, there are 18 Taylor-approved bracelets with $4$ beads as shown below:}
+
+\begin{center}
+\begin{tikzpicture}
+
+\begin{scope}[color=red]
+	 \fill (0,0) circle(4pt);%
+	  \fill (0,.4) circle(4pt);%
+	  \fill (1,.4) circle(4pt);%
+	  	    
+ \fill (2,0) circle(4pt);%
+	  \fill (2,.4) circle(4pt);%
+	     \fill (4,0) circle(4pt);%    
+	   \fill (5.2,.2) circle(4pt);%
+	   \fill (6.2,.2) circle(4pt);%
+	    \fill (5.8,.2) circle(4pt);%
+	    \fill (6.8,.2) circle(4pt);%
+	   \fill (8.2,.2) circle(4pt);%
+	    \fill (7.8,.2) circle(4pt);%    
+	   \fill (.2,1.2) circle(4pt);%
+	    \fill (-.2,1.2) circle(4pt);%
+	    \fill (.8,1.2) circle(4pt);%
+	   \fill (2.2,1.2) circle(4pt);%
+	    \fill (1.8,1.2) circle(4pt);%
+	     \fill (4,1) circle(4pt);%
+	   \fill (5.2,1.2) circle(4pt);%
+	     \fill (6,1) circle(4pt);%
+	  \fill (6,1.4) circle(4pt);%
+	  \fill (7,1.4) circle(4pt);%
+	       \fill (8,1) circle(4pt);%
+	  \fill (8,1.4) circle(4pt);%
+	     \end{scope}
+	     
+	 \begin{scope}[color=blue]
+	  \fill (1,0) circle(4pt);
+	   \fill (2.2,.2) circle(4pt);
+	  \fill (3,0) circle(4pt);
+	  \fill (3,.4) circle(4pt);
+	    \fill (4,.4) circle(4pt);
+	    \fill (5,0) circle(4pt);
+	  \fill (5,.4) circle(4pt);
+	    \fill (7.2,.2) circle(4pt);
+	    \fill (8,0) circle(4pt);
+	    	 \fill (0,1) circle(4pt);
+	  \fill (0,1.4) circle(4pt);
+	  \fill (1,1) circle(4pt);
+	  \fill (1,1.4) circle(4pt);
+	   \fill (2,1.4) circle(4pt);
+	     \fill (3.2,1.2) circle(4pt);
+	    \fill (2.8,1.2) circle(4pt);
+	     \fill (4.2,1.2) circle(4pt);
+	    \fill (3.8,1.2) circle(4pt);
+	    \fill (4.8,1.2) circle(4pt);
+	       \fill (6.2,1.2) circle(4pt);
+	    \fill (5.8,1.2) circle(4pt);
+	       \fill (7.2,1.2) circle(4pt);
+	    \fill (6.8,1.2) circle(4pt);
+	     \fill (7.8,1.2) circle(4pt);	
+	     
+	         \end{scope}
+	     
+	 \begin{scope}[color=green]
+	     	   \fill (8.2,1.2) circle(4pt);
+		    \fill (.2,.2) circle(4pt);
+	    \fill (-.2,.2) circle(4pt);
+	     \fill (1.2,.2) circle(4pt);
+	    \fill (.8,.2) circle(4pt);
+	     \fill (1.8,.2) circle(4pt);
+	   \fill (3.2,.2) circle(4pt);
+	    \fill (2.8,.2) circle(4pt);
+	     \fill (4.2,.2) circle(4pt);
+	    \fill (3.8,.2) circle(4pt);
+	       \fill (4.8,.2) circle(4pt);  
+	     \fill (6,0) circle(4pt);
+	  \fill (6,.4) circle(4pt);
+	      \fill (7,0) circle(4pt);
+	  \fill (7,.4) circle(4pt);
+	    \fill (8,.4) circle(4pt);
+	       \fill (1.2,1.2) circle(4pt);
+	        \fill (2,1) circle(4pt);
+	         \fill (3,1) circle(4pt);
+	  \fill (3,1.4) circle(4pt);
+	   \fill (4,1.4) circle(4pt);
+	     \fill (5,1) circle(4pt);
+	  \fill (5,1.4) circle(4pt);
+	  	       \fill (7,1) circle(4pt);
+	 \end{scope}        
+
+\end{tikzpicture}
+\end{center}
+
+
+\begin{enumerate}
+\item
+\textbf{For $n\geq 0$, let $c_n$ be ``the number of Taylor-approved bracelets with $n+3$ beads."  Thus, we have $c_1=18$.  What is $c_0$?  Find (with proof) a recurrence relation for $c_n$.}
+
+{\footnotesize \it HINT: Break the bracelet at the top,  into a chain of beads.}
+
+We have $c_0$, the number of Taylor-approved bracelets with $3$ beads. In this case, if we break the bracelet into a chain of beads, the bead in the first position must have a different color from the one in the second position, and also the one in the third position (so when we make them into a bracelet, the ones at the start and at the end of the bracelet don't have the same color). Therefore, all three beads must have different colors. Because there are exactly three available colors, each bracelet uses all three colors exactly once. Since when we compute $c_1$, we count 18 distinct 4-bead bracelets, and we consider the bracelet having fixed bead positions around the circle. Therefore, the number of bracelets is the number of ways to arrange the three colors or $3!=6$, so $c_0=6$. These bracelets can be:
+
+$$Blue-Red-Green$$
+$$Blue-Green-Red$$
+$$Red-Blue-Green$$
+$$Red-Green-Blue$$
+$$Green-Blue-Red$$
+$$Green-Red-Blue$$
+
+Let $A_m$ be the set of bead chains of length $m$ that have every pair of adjacent beads with different colors and the first and last beads having different colors. Let $B_m$ be the set of bead chains of length $m$ that have every pair of adjacent beads having different colors and the first and last beads having the same color. Thus, we have: $c_n=|A_{n+3}|$. 
+
+When we try to identify the set $A_{m+1}$, we can add one new bead at the end of either every chain in $A_m$ or every chain in $B_m$ in a way that satisfies the rule:
+
+- Every pair of adjacent beads has different colors
+
+- The first and last bead in the chain must have different colors.
+
+If we add a new bead to a chain in $A_m$, the new bead must have a different color from the last bead and the first bead of the chain (these two beads have different colors) to create a Taylor-approved $(m+1)$-bead chain. Therefore, for each bead chain in $A_m$, there is only one way to create a new Taylor-approved bead chain. Additionally, there is also one way to create a new bead chain that we can add to $B_{m+1}$ (by adding a new bead that has the same color as the first bead of the original chain).
+
+If we add a new bead to a chain in $B_m$, the new bead only needs to differ from the first bead to create a Taylor-approved $(m+1)$-bead chain. Therefore, for each bead chain in $B_m$, there are two ways to create a new Taylor-approved bead chain. There is no way to create a new bead chain that we can add to $B_{m+1}$.
+
+Therefore, after this adding step, we have:
+
+$$|A_{m+1}|=|A_m|+2\times|B_m|$$
+
+$$|B_{m+1}|=|A_m| \text{, so }  |B_{m}|=|A_{m-1}|$$
+
+Therefore, we have:
+
+$$|A_{m+1}|=|A_m|+2\times|A_{m-1}|$$
+
+or 
+
+$$c_{m-2}=c_{m-3}+2\times c_{m-4}$$
+
+We need to make sure that $m-4 \geq 0$, so $m \geq 4$.
+
+Let $n=m-2, n \geq 2$, then we have:
+
+$$c_{n}=c_{n-1}+2\times c_{n-2}$$
+
+Following this pattern, we can identify the recurrent relation of $c_n, n \geq 0$:
+
+\[c_n=\begin{cases}
+6 & n =0\\
+18 &  n=1\\
+c_{n-1} + 2c_{n-2} & n \geq 2\\
+\end{cases}\]
+
+\item
+\textbf{Use your recurrence relation from (a) to find a closed formula for $c_n$.}
+
+We have the recurrence relation: $c_n = c_{n-1} + 2c_{n-2}$ with $n \geq 2$. The order of recurrence is 2.
+
+From the recurrence formula, we have the characteristic equation: $x^2 -x -2=0$. We need to find the characteristic roots $\lambda_1, \lambda_2$, and constants $a_1, a_2$.
+
+\begin{align*}
+    x^2 -x -2&=0\\
+    (x-2)(x+1)&=0\\
+    x = 2 \text{ or } x =-1
+\end{align*}
+
+From this, we have $\lambda_1=2, \lambda_2=-1$. Since $\lambda_1 \neq \lambda_2$, we have: $c_n = \lambda_1a_1^n +  \lambda_2a_2^n $
+
+To find $a_1, a_2$, we need to use $c_0$ and $c_1$, the base cases. We have:
+
+\begin{align*}
+    c_0 &= a_1\times(\lambda_1)^0+a_2\times(\lambda_2)^0 \\
+    a_1 +a_2 &= 6
+\end{align*}
+
+and 
+
+\begin{align*}
+    c_1 &= a_1\times(\lambda_1)^1+a_2\times(\lambda_2)^1 \\
+    2a_1 - a_2 &= 18
+\end{align*}
+
+From these two equations, we have:
+
+\[\begin{cases}
+a_1 = 8\\
+a_2 = -2
+\end{cases}\]
+
+Therefore, the closed formula of this recurrence relation:
+
+\begin{align*}
+c_n&= 2^n\times8 - 2(-1)^n\\
+&= 2^{n+3} - 2(-1)^n\\
+\end{align*}
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%% NO MORE PROBLEMS ONLY PLEDGE %%%%%%%%%%%%%%%%
+
+
+\newpage
+{\bf Only do this after you have finished the exam and are ready to turn it in.  Please read it carefully - I take this very, very seriously.}
+\end{enumerate}
+%\pagebreak
+\setlength{\fboxrule}{2pt}
+\setlength{\fboxsep}{6pt}
+\noindent%
+\hrulefill \\
+\indent {\it ``I pledge my honor that during this examination \textbf{I have neither given nor received assistance not explicitly approved} by the professor and that \textbf{I have seen no dishonest work.}}''\\
+\rm\vskip0.2cm\noindent
+\noindent\hbox {Signed: Khanh Tra (Fay) Nguyen Tran}
+\vskip0.1in\noindent
+I have intentionally not signed the pledge. \hspace{3mm} \fbox{ }
+\hspace{3mm} (Check only if
+appropriate.)\\
+\vskip .1cm
+\noindent \hrulefill
+
+
+
+\end{document}
